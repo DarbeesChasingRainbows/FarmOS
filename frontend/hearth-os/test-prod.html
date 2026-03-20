@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Hearth OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        margin: 0;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+    <script>
+      console.log("App script running!");
+    </script>
+    <link rel="stylesheet" href="/assets/client-entry-Ci3YNkgr.css?__frsh_c=" />
+  </head>
+  <body class="bg-stone-50 text-stone-900">
+    <div class="flex min-h-screen">
+      <nav
+        class="w-64 min-h-screen bg-stone-900 text-stone-100 flex flex-col border-r border-stone-800"
+      >
+        <div class="px-6 py-5 border-b border-stone-800">
+          <h1 class="text-xl font-bold tracking-tight text-amber-400">
+            🔥 Hearth OS
+          </h1>
+          <p class="text-xs text-stone-500 mt-1 uppercase tracking-widest">
+            FarmOS Kitchen
+          </p>
+        </div>
+        <ul class="flex-1 py-4 px-3 space-y-1">
+          <li>
+            <a
+              href="/"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 bg-amber-600/20 text-amber-300 shadow-sm"
+              data-current="true"
+              aria-current="page"
+            ><span class="text-lg">🏠</span>Dashboard</a>
+          </li>
+          <li>
+            <a
+              href="/batches"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 text-stone-400 hover:bg-stone-800 hover:text-stone-200"
+            ><span class="text-lg">🍞</span>Batches</a>
+          </li>
+          <li>
+            <a
+              href="/cultures"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 text-stone-400 hover:bg-stone-800 hover:text-stone-200"
+            ><span class="text-lg">🧫</span>Cultures</a>
+          </li>
+          <li>
+            <a
+              href="/hives"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 text-stone-400 hover:bg-stone-800 hover:text-stone-200"
+            ><span class="text-lg">🐝</span>Hives</a>
+          </li>
+        </ul>
+        <div class="px-6 py-4 border-t border-stone-800">
+          <p class="text-xs text-stone-600">Sovereign • Offline-First</p>
+        </div>
+      </nav>
+      <main class="flex-1 overflow-y-auto">
+        <div class="p-8">
+          <div class="mb-8">
+            <h1 class="text-3xl font-extrabold text-stone-800 tracking-tight">
+              Good morning, Steward
+            </h1>
+            <p class="text-stone-500 mt-1">
+              Here&#39;s what&#39;s happening across the Hearth today.
+            </p>
+          </div>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10"
+          >
+            <a
+              href="/batches"
+              class="bg-white rounded-xl border border-stone-200 shadow-sm p-5 flex items-center gap-4 hover:shadow-md hover:border-amber-200 transition group cursor-pointer"
+            ><div
+                class="w-12 h-12 rounded-lg bg-linear-to-br from-amber-500 to-amber-600 flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition"
+              >
+                🍞
+              </div><div>
+                <p class="text-2xl font-bold text-stone-800">4</p>
+                <p
+                  class="text-xs text-stone-500 uppercase tracking-wider font-medium"
+                >
+                  Active Batches
+                </p>
+              </div><span
+                class="ml-auto text-stone-300 group-hover:text-amber-500 transition text-lg"
+              >→</span></a><a
+              href="/cultures"
+              class="bg-white rounded-xl border border-stone-200 shadow-sm p-5 flex items-center gap-4 hover:shadow-md hover:border-amber-200 transition group cursor-pointer"
+            ><div
+                class="w-12 h-12 rounded-lg bg-linear-to-br from-red-500 to-red-600 flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition"
+              >
+                🧫
+              </div><div>
+                <p class="text-2xl font-bold text-stone-800">1</p>
+                <p
+                  class="text-xs text-stone-500 uppercase tracking-wider font-medium"
+                >
+                  Need Feeding
+                </p>
+              </div><span
+                class="ml-auto text-stone-300 group-hover:text-amber-500 transition text-lg"
+              >→</span></a><a
+              href="/hives"
+              class="bg-white rounded-xl border border-stone-200 shadow-sm p-5 flex items-center gap-4 hover:shadow-md hover:border-amber-200 transition group cursor-pointer"
+            ><div
+                class="w-12 h-12 rounded-lg bg-linear-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition"
+              >
+                🐝
+              </div><div>
+                <p class="text-2xl font-bold text-stone-800">6</p>
+                <p
+                  class="text-xs text-stone-500 uppercase tracking-wider font-medium"
+                >
+                  Hives
+                </p>
+              </div><span
+                class="ml-auto text-stone-300 group-hover:text-amber-500 transition text-lg"
+              >→</span></a><a
+              href="/hives"
+              class="bg-white rounded-xl border border-stone-200 shadow-sm p-5 flex items-center gap-4 hover:shadow-md hover:border-amber-200 transition group cursor-pointer"
+            ><div
+                class="w-12 h-12 rounded-lg bg-linear-to-br from-blue-500 to-blue-600 flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition"
+              >
+                📋
+              </div><div>
+                <p class="text-2xl font-bold text-stone-800">2d ago</p>
+                <p
+                  class="text-xs text-stone-500 uppercase tracking-wider font-medium"
+                >
+                  Last Inspection
+                </p>
+              </div><span
+                class="ml-auto text-stone-300 group-hover:text-amber-500 transition text-lg"
+              >→</span></a>
+          </div>
+          <section class="mb-10">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-bold text-stone-800">
+                Active Fermentations
+              </h2><a
+                href="/batches/new"
+                class="text-sm text-amber-600 hover:text-amber-800 font-semibold transition"
+              >+ New Batch</a>
+            </div>
+            <!--frsh:island:BatchStatusCards:0:-->
+            <div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button
+                  type="button"
+                  class="bg-white rounded-xl border shadow-sm p-4 hover:shadow-md transition block text-left w-full cursor-pointer border-stone-200 hover:border-amber-200"
+                >
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-lg">🍞</span><span
+                      class="text-[10px] uppercase tracking-widest font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full"
+                    >BulkFerment</span>
+                  </div>
+                  <h3 class="font-bold text-stone-800 text-sm">SD-2024-03-A</h3>
+                  <p class="text-xs text-stone-400 mt-0.5">Started Mar 1</p>
+                  <div
+                    class="mt-3 pt-2 border-t border-stone-100 flex items-baseline gap-1"
+                  >
+                    <span class="text-2xl font-mono font-bold text-emerald-600"
+                    >4.2</span><span
+                      class="text-[10px] text-stone-400 uppercase"
+                    >pH</span>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  class="bg-white rounded-xl border shadow-sm p-4 hover:shadow-md transition block text-left w-full cursor-pointer border-stone-200 hover:border-amber-200"
+                >
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-lg">🍞</span><span
+                      class="text-[10px] uppercase tracking-widest font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full"
+                    >Proofing</span>
+                  </div>
+                  <h3 class="font-bold text-stone-800 text-sm">SD-2024-03-B</h3>
+                  <p class="text-xs text-stone-400 mt-0.5">Started Feb 28</p>
+                  <div
+                    class="mt-3 pt-2 border-t border-stone-100 flex items-baseline gap-1"
+                  >
+                    <span class="text-2xl font-mono font-bold text-amber-600"
+                    >3.9</span><span
+                      class="text-[10px] text-stone-400 uppercase"
+                    >pH</span>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  class="bg-white rounded-xl border shadow-sm p-4 hover:shadow-md transition block text-left w-full cursor-pointer border-stone-200 hover:border-amber-200"
+                >
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-lg">🫖</span><span
+                      class="text-[10px] uppercase tracking-widest font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full"
+                    >Primary</span>
+                  </div>
+                  <h3 class="font-bold text-stone-800 text-sm">KB-MAR-01</h3>
+                  <p class="text-xs text-stone-400 mt-0.5">Started Feb 25</p>
+                  <div
+                    class="mt-3 pt-2 border-t border-stone-100 flex items-baseline gap-1"
+                  >
+                    <span class="text-2xl font-mono font-bold text-amber-600"
+                    >3.2</span><span
+                      class="text-[10px] text-stone-400 uppercase"
+                    >pH</span>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  class="bg-white rounded-xl border shadow-sm p-4 hover:shadow-md transition block text-left w-full cursor-pointer border-stone-200 hover:border-amber-200"
+                >
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-lg">🫖</span><span
+                      class="text-[10px] uppercase tracking-widest font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full"
+                    >Secondary</span>
+                  </div>
+                  <h3 class="font-bold text-stone-800 text-sm">KB-MAR-02</h3>
+                  <p class="text-xs text-stone-400 mt-0.5">Started Feb 20</p>
+                  <div
+                    class="mt-3 pt-2 border-t border-stone-100 flex items-baseline gap-1"
+                  >
+                    <span class="text-2xl font-mono font-bold text-red-600"
+                    >2.8</span><span
+                      class="text-[10px] text-stone-400 uppercase"
+                    >pH</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <!--/frsh:island-->
+          </section>
+          <section>
+            <h2 class="text-xl font-bold text-stone-800 mb-4">
+              Recent Activity
+            </h2>
+            <div
+              class="bg-white rounded-xl border border-stone-200 shadow-sm divide-y divide-stone-100"
+            >
+              <a
+                href="/cultures"
+                class="px-5 py-3 flex items-center gap-4 hover:bg-stone-50 transition cursor-pointer block group"
+              ><span class="text-xs text-stone-400 w-28 shrink-0 font-medium"
+                >Today 8:15 AM</span><span class="text-sm text-stone-700 flex-1"
+                >Fed 'Gertrude' sourdough starter</span><span
+                  class="text-stone-300 group-hover:text-amber-500 transition"
+                >→</span></a><a
+                href="/batches"
+                class="px-5 py-3 flex items-center gap-4 hover:bg-stone-50 transition cursor-pointer block group"
+              ><span class="text-xs text-stone-400 w-28 shrink-0 font-medium"
+                >Yesterday</span><span class="text-sm text-stone-700 flex-1"
+                >Kombucha KB-MAR-02 moved to Secondary</span><span
+                  class="text-stone-300 group-hover:text-amber-500 transition"
+                >→</span></a><a
+                href="/hives"
+                class="px-5 py-3 flex items-center gap-4 hover:bg-stone-50 transition cursor-pointer block group"
+              ><span class="text-xs text-stone-400 w-28 shrink-0 font-medium"
+                >Feb 27</span><span class="text-sm text-stone-700 flex-1"
+                >Inspected Hive #3 — queen present, healthy brood</span><span
+                  class="text-stone-300 group-hover:text-amber-500 transition"
+                >→</span></a><a
+                href="/batches"
+                class="px-5 py-3 flex items-center gap-4 hover:bg-stone-50 transition cursor-pointer block group"
+              ><span class="text-xs text-stone-400 w-28 shrink-0 font-medium"
+                >Feb 26</span><span class="text-sm text-stone-700 flex-1"
+                >Started sourdough batch SD-2024-03-A</span><span
+                  class="text-stone-300 group-hover:text-amber-500 transition"
+                >→</span></a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <!--frsh:island:ToastProvider:1:-->
+    <!--/frsh:island-->
+    <script type="module" nonce="e0867e0099b641c294d1da3c8bc8f34c">
+      import { boot } from "/assets/client-entry-DIeHdAeA.js";
+      import BatchStatusCards from "/assets/fresh-island__BatchStatusCards-CZR2I5JC.js";
+      import ToastProvider from "/assets/fresh-island__ToastProvider-D3Kaz6ia.js";
+      boot(
+        { BatchStatusCards, ToastProvider },
+        '[[1,4],{"slots":2,"props":3},[],{},{"slots":5,"props":6},[],{}]',
+      );
+    </script>
+  </body>
+</html>

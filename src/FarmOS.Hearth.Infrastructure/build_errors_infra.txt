@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  Restored C:\Work\FarmOS\src\FarmOS.Hearth.Infrastructure\FarmOS.Hearth.Infrastructure.csproj (in 320 ms).
+  4 of 5 projects are up-to-date for restore.
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Infrastructure\FarmOS.Hearth.Infrastructure.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.SharedKernel\FarmOS.SharedKernel.csproj]
+  FarmOS.SharedKernel -> C:\Work\FarmOS\src\FarmOS.SharedKernel\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+  FarmOS.Hearth.Domain -> C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.Hearth.Domain.dll
+  FarmOS.Hearth.Rules -> C:\Work\FarmOS\src\FarmOS.Hearth.Rules\bin\Debug\net10.0\FarmOS.Hearth.Rules.dll
+  FarmOS.Hearth.Application -> C:\Work\FarmOS\src\FarmOS.Hearth.Application\bin\Debug\net10.0\FarmOS.Hearth.Application.dll
+C:\Work\FarmOS\src\FarmOS.Hearth.Infrastructure\HearthEventStore.cs(66,13): error CS1739: The best overload for 'AppendAsync' does not have a parameter named 'serialize' [C:\Work\FarmOS\src\FarmOS.Hearth.Infrastructure\FarmOS.Hearth.Infrastructure.csproj]
+
+Build FAILED.
+
+C:\Work\FarmOS\src\FarmOS.Hearth.Infrastructure\HearthEventStore.cs(66,13): error CS1739: The best overload for 'AppendAsync' does not have a parameter named 'serialize' [C:\Work\FarmOS\src\FarmOS.Hearth.Infrastructure\FarmOS.Hearth.Infrastructure.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:11.19

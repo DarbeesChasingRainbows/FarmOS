@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- YARP removed — routing is handled by Caddy. This project is now auth-api only. -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FarmOS.SharedKernel\FarmOS.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>

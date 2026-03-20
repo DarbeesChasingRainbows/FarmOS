@@ -1,0 +1,33 @@
+Check tests/e2e/mushrooms.test.tsx
+[0m[38;5;245m------- pre-test output -------[0m
+[31mΓ£ù[39m Build failed in 805ms
+Uncaught error from ./tests/e2e/mushrooms.test.tsx [0m[31mFAILED[0m
+[0m[38;5;245mrunning 0 tests from ./tests/e2e/mushrooms.test.tsx[0m
+
+[0m[1m[37m[41m ERRORS [0m
+
+./tests/e2e/mushrooms.test.tsx (uncaught error)
+[0m[1m[31merror[0m: (in promise) Error: [31m[vite]: Rollup failed to resolve import "@microsoft/signalr" from "C:\Work\FarmOS\frontend\hearth-os\islands\IoTLiveFeed.tsx".
+This is most likely unintended because it can break your application at runtime.
+If you do want to externalize this module explicitly add it to
+`build.rollupOptions.external`[39m
+        throw new Error(
+[0m[31m              ^[0m
+    at [0m[1m[3mviteLog[0m ([0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mnode_modules/.deno/vite@7.3.1/node_modules/vite/dist/node/chunks/config.js[0m:[0m[33m43705[0m:[0m[33m15[0m)
+    at [0m[1m[3monRollupLog[0m ([0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mnode_modules/.deno/vite@7.3.1/node_modules/vite/dist/node/chunks/config.js[0m:[0m[33m43749[0m:[0m[33m8[0m)
+    at [0m[1m[3monLog[0m ([0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mnode_modules/.deno/vite@7.3.1/node_modules/vite/dist/node/chunks/config.js[0m:[0m[33m43390[0m:[0m[33m7[0m)
+    at [0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mnode_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/es/shared/node-entry.js[0m:[0m[33m26456[0m:[0m[33m7[0m
+    at [0m[1m[3mObject.logger [as onLog][0m ([0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mnode_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/es/shared/node-entry.js[0m:[0m[33m29178[0m:[0m[33m5[0m)
+    at [0m[1m[3mModuleLoader.handleInvalidResolvedId[0m ([0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mnode_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/es/shared/node-entry.js[0m:[0m[33m27483[0m:[0m[33m20[0m)
+    at [0m[1m[3mModuleLoader.resolveDynamicImport[0m ([0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mnode_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/es/shared/node-entry.js[0m:[0m[33m27595[0m:[0m[33m52[0m)
+    at async [0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mnode_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/es/shared/node-entry.js[0m:[0m[33m27405[0m:[0m[33m26[0m
+This error was not caught from a test and caused the test runner to fail on the referenced module.
+It most likely originated from a dangling promise, event/timeout handler or top-level code.
+
+[0m[1m[37m[41m FAILURES [0m
+
+./tests/e2e/mushrooms.test.tsx (uncaught error)
+
+[0m[31mFAILED[0m | 0 passed | 1 failed [0m[38;5;245m(80ms)[0m
+
+error: Test failed

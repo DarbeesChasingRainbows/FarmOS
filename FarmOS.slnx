@@ -1,0 +1,39 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FarmOS.Apiary.API/FarmOS.Apiary.API.csproj" />
+    <Project Path="src/FarmOS.Apiary.Application/FarmOS.Apiary.Application.csproj" />
+    <Project Path="src/FarmOS.Apiary.Domain/FarmOS.Apiary.Domain.csproj" />
+    <Project Path="src/FarmOS.Apiary.Infrastructure/FarmOS.Apiary.Infrastructure.csproj" />
+    <Project Path="src/FarmOS.Assets.API/FarmOS.Assets.API.csproj" />
+    <Project Path="src/FarmOS.Assets.Application/FarmOS.Assets.Application.csproj" />
+    <Project Path="src/FarmOS.Assets.Domain/FarmOS.Assets.Domain.csproj" />
+    <Project Path="src/FarmOS.Assets.Infrastructure/FarmOS.Assets.Infrastructure.csproj" />
+    <Project Path="src/FarmOS.Commerce.API/FarmOS.Commerce.API.csproj" />
+    <Project Path="src/FarmOS.Commerce.Application/FarmOS.Commerce.Application.csproj" />
+    <Project Path="src/FarmOS.Commerce.Domain/FarmOS.Commerce.Domain.csproj" />
+    <Project Path="src/FarmOS.Commerce.Infrastructure/FarmOS.Commerce.Infrastructure.csproj" />
+    <Project Path="src/FarmOS.Flora.API/FarmOS.Flora.API.csproj" />
+    <Project Path="src/FarmOS.Flora.Application/FarmOS.Flora.Application.csproj" />
+    <Project Path="src/FarmOS.Flora.Domain/FarmOS.Flora.Domain.csproj" />
+    <Project Path="src/FarmOS.Flora.Infrastructure/FarmOS.Flora.Infrastructure.csproj" />
+    <Project Path="src/FarmOS.Flora.Domain.Tests/FarmOS.Flora.Domain.Tests.csproj" />
+    <Project Path="src/FarmOS.Flora.API.Tests/FarmOS.Flora.API.Tests.csproj" />
+    <Project Path="src/FarmOS.Gateway/FarmOS.Gateway.csproj" />
+    <Project Path="src/FarmOS.Hearth.API/FarmOS.Hearth.API.csproj" />
+    <Project Path="src/FarmOS.Hearth.API.Tests/FarmOS.Hearth.API.Tests.csproj" />
+    <Project Path="src/FarmOS.Hearth.Application/FarmOS.Hearth.Application.csproj" />
+    <Project Path="src/FarmOS.Hearth.Application.Tests/FarmOS.Hearth.Application.Tests.csproj" />
+    <Project Path="src/FarmOS.Hearth.Domain/FarmOS.Hearth.Domain.csproj" />
+    <Project Path="src/FarmOS.Hearth.Domain.Tests/FarmOS.Hearth.Domain.Tests.csproj" />
+    <Project Path="src/FarmOS.Hearth.Infrastructure/FarmOS.Hearth.Infrastructure.csproj" />
+    <Project Path="src/FarmOS.Ledger.API/FarmOS.Ledger.API.csproj" />
+    <Project Path="src/FarmOS.Ledger.Application/FarmOS.Ledger.Application.csproj" />
+    <Project Path="src/FarmOS.Ledger.Domain/FarmOS.Ledger.Domain.csproj" />
+    <Project Path="src/FarmOS.Ledger.Infrastructure/FarmOS.Ledger.Infrastructure.csproj" />
+    <Project Path="src/FarmOS.Pasture.API/FarmOS.Pasture.API.csproj" />
+    <Project Path="src/FarmOS.Pasture.Application/FarmOS.Pasture.Application.csproj" />
+    <Project Path="src/FarmOS.Pasture.Domain/FarmOS.Pasture.Domain.csproj" />
+    <Project Path="src/FarmOS.Pasture.Infrastructure/FarmOS.Pasture.Infrastructure.csproj" />
+    <Project Path="src/FarmOS.SharedKernel/FarmOS.SharedKernel.csproj" />
+  </Folder>
+</Solution>

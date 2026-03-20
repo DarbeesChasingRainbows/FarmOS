@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Application.Tests\FarmOS.Hearth.Application.Tests.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.SharedKernel\FarmOS.SharedKernel.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+  FarmOS.SharedKernel -> C:\Work\FarmOS\src\FarmOS.SharedKernel\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+  FarmOS.Hearth.Rules -> C:\Work\FarmOS\src\FarmOS.Hearth.Rules\bin\Debug\net10.0\FarmOS.Hearth.Rules.dll
+  FarmOS.Hearth.Domain -> C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.Hearth.Domain.dll
+  FarmOS.Hearth.Application -> C:\Work\FarmOS\src\FarmOS.Hearth.Application\bin\Debug\net10.0\FarmOS.Hearth.Application.dll
+C:\Work\FarmOS\src\FarmOS.Hearth.Application.Tests\SanitationHandlerTests.cs(48,19): error CS1061: 'object' does not contain a definition for 'Surface' and no accessible extension method 'Surface' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application.Tests\FarmOS.Hearth.Application.Tests.csproj]
+
+Build FAILED.
+
+C:\Work\FarmOS\src\FarmOS.Hearth.Application.Tests\SanitationHandlerTests.cs(48,19): error CS1061: 'object' does not contain a definition for 'Surface' and no accessible extension method 'Surface' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application.Tests\FarmOS.Hearth.Application.Tests.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:02.67

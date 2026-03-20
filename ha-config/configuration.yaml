@@ -1,0 +1,84 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# ── Mock Sensors for farmOS Dashboard ──
+template:
+  - sensor:
+      - name: "Barn Temperature"
+        state: >
+          {{ (range(180, 240) | random) / 10.0 + (now().minute % 1 * 0) }}
+        unit_of_measurement: "°C"
+        device_class: temperature
+      - name: "Greenhouse Humidity"
+        state: >
+          {{ range(40, 80) | random + (now().minute % 1 * 0) }}
+        unit_of_measurement: "%"
+        device_class: humidity
+      - name: "Soil Moisture A1"
+        state: >
+          {{ range(50, 95) | random + (now().minute % 1 * 0) }}
+        unit_of_measurement: "%"
+        device_class: moisture
+      - name: "Tractor Battery"
+        state: >
+          {{ (range(110, 130) | random) / 10.0 + (now().minute % 1 * 0) }}
+        unit_of_measurement: "V"
+        device_class: voltage
+      - name: "Main Gate Backup"
+        state: >
+          {{ range(50, 100) | random + (now().minute % 1 * 0) }}
+        unit_of_measurement: "%"
+        device_class: battery
+      - name: "Irrigation Pump"
+        state: >
+          {{ range(1000, 1500) | random + (now().minute % 1 * 0) }}
+        unit_of_measurement: "W"
+        device_class: power
+      - name: "Cistern Level"
+        state: >
+          {{ range(20, 100) | random + (now().minute % 1 * 0) }}
+        unit_of_measurement: "%"
+
+      # ── IoT Sensor Grid: Cold Storage ──
+      - name: "Freezer Temperature"
+        state: >
+          {{ (range(-80, 50) | random) / 10.0 + (now().minute % 1 * 0) }}
+        unit_of_measurement: "°F"
+        device_class: temperature
+      - name: "Fridge Temperature"
+        state: >
+          {{ (range(340, 440) | random) / 10.0 + (now().minute % 1 * 0) }}
+        unit_of_measurement: "°F"
+        device_class: temperature
+
+      # ── IoT Sensor Grid: Apothecary Shed ──
+      - name: "Apothecary Shed Temperature"
+        state: >
+          {{ (range(680, 820) | random) / 10.0 + (now().minute % 1 * 0) }}
+        unit_of_measurement: "°F"
+        device_class: temperature
+      - name: "Apothecary Shed Humidity"
+        state: >
+          {{ range(35, 72) | random + (now().minute % 1 * 0) }}
+        unit_of_measurement: "%"
+        device_class: humidity
+
+      # ── IoT Sensor Grid: Fermentation Chamber ──
+      - name: "Fermentation Chamber Temperature"
+        state: >
+          {{ (range(700, 800) | random) / 10.0 + (now().minute % 1 * 0) }}
+        unit_of_measurement: "°F"
+        device_class: temperature
+      - name: "Fermentation Chamber Humidity"
+        state: >
+          {{ range(60, 85) | random + (now().minute % 1 * 0) }}
+        unit_of_measurement: "%"
+        device_class: humidity

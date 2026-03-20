@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\FarmOS.SharedKernel\FarmOS.SharedKernel.csproj" />
+    <ProjectReference Include="..\FarmOS.Hearth.Domain\FarmOS.Hearth.Domain.csproj" />
+    <ProjectReference Include="..\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.*" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

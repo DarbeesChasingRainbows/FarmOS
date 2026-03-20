@@ -1,0 +1,6 @@
+@FarmOS.Commerce.API_HostAddress = http://localhost:5140
+
+GET {{FarmOS.Commerce.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

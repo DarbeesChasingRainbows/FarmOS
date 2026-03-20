@@ -1,0 +1,15 @@
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\bin\Debug\net10.0\FarmOS.Commerce.Domain.deps.json
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\bin\Debug\net10.0\FarmOS.Commerce.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\bin\Debug\net10.0\FarmOS.Commerce.Domain.pdb
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\bin\Debug\net10.0\FarmOS.SharedKernel.pdb
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\FarmOS.Commerce.Domain.csproj.AssemblyReference.cache
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\FarmOS.Commerce.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\FarmOS.Commerce.Domain.AssemblyInfoInputs.cache
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\FarmOS.Commerce.Domain.AssemblyInfo.cs
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\FarmOS.Commerce.Domain.csproj.CoreCompileInputs.cache
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\FarmOS.C.FC8FCBFC.Up2Date
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\FarmOS.Commerce.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\refint\FarmOS.Commerce.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\FarmOS.Commerce.Domain.pdb
+C:\Work\FarmOS\src\FarmOS.Commerce.Domain\obj\Debug\net10.0\ref\FarmOS.Commerce.Domain.dll

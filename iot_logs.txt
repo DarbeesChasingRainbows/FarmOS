@@ -1,0 +1,44 @@
+iot-api-1  | warn: Microsoft.AspNetCore.Hosting.Diagnostics[15]
+iot-api-1  |       Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+iot-api-1  | info: Microsoft.Hosting.Lifetime[14]
+iot-api-1  |       Now listening on: http://[::]:8080
+iot-api-1  | info: Microsoft.Hosting.Lifetime[0]
+iot-api-1  |       Application started. Press Ctrl+C to shut down.
+iot-api-1  | info: Microsoft.Hosting.Lifetime[0]
+iot-api-1  |       Hosting environment: Development
+iot-api-1  | info: Microsoft.Hosting.Lifetime[0]
+iot-api-1  |       Content root path: /app
+iot-api-1  | fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+iot-api-1  |       An unhandled exception has occurred while executing the request.
+iot-api-1  |       ArangoDBNetStandard.ApiErrorException: collection or view not found: name: iot_events
+iot-api-1  |          at ArangoDBNetStandard.CursorApi.CursorApiClient.PostCursorAsync[T](PostCursorBody postCursorBody, CursorHeaderProperties headerProperties, CancellationToken token)
+iot-api-1  |          at FarmOS.SharedKernel.Infrastructure.ArangoEventStore.GetAllEventsAsync(String collectionName, Int64 fromPosition, Int32 batchSize, CancellationToken ct) in /source/src/FarmOS.SharedKernel/Infrastructure/ArangoEventStore.cs:line 164
+iot-api-1  |          at FarmOS.IoT.Infrastructure.IoTProjection.LoadAllStatesAsync(Int32 batchSize, CancellationToken ct) in /source/src/FarmOS.IoT.Infrastructure/IoTProjection.cs:line 39
+iot-api-1  |          at FarmOS.IoT.Infrastructure.IoTProjection.GetAllDevicesAsync(CancellationToken ct) in /source/src/FarmOS.IoT.Infrastructure/IoTProjection.cs:line 60
+iot-api-1  |          at FarmOS.IoT.Application.Queries.Handlers.IoTQueryHandlers.Handle(GetAllDevicesQuery request, CancellationToken cancellationToken) in /source/src/FarmOS.IoT.Application/Queries/Handlers/IoTQueryHandlers.cs:line 18
+iot-api-1  |          at FarmOS.IoT.API.IoTEndpoints.<>c.<<MapIoT>b__0_0>d.MoveNext() in /source/src/FarmOS.IoT.API/IoTEndpoints.cs:line 18
+iot-api-1  |       --- End of stack trace from previous location ---
+iot-api-1  |          at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+iot-api-1  |          at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+iot-api-1  | fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+iot-api-1  |       An unhandled exception has occurred while executing the request.
+iot-api-1  |       ArangoDBNetStandard.ApiErrorException: collection or view not found: name: iot_events
+iot-api-1  |          at ArangoDBNetStandard.CursorApi.CursorApiClient.PostCursorAsync[T](PostCursorBody postCursorBody, CursorHeaderProperties headerProperties, CancellationToken token)
+iot-api-1  |          at FarmOS.SharedKernel.Infrastructure.ArangoEventStore.GetAllEventsAsync(String collectionName, Int64 fromPosition, Int32 batchSize, CancellationToken ct) in /source/src/FarmOS.SharedKernel/Infrastructure/ArangoEventStore.cs:line 164
+iot-api-1  |          at FarmOS.IoT.Infrastructure.IoTProjection.LoadAllStatesAsync(Int32 batchSize, CancellationToken ct) in /source/src/FarmOS.IoT.Infrastructure/IoTProjection.cs:line 39
+iot-api-1  |          at FarmOS.IoT.Infrastructure.IoTProjection.GetAllDevicesAsync(CancellationToken ct) in /source/src/FarmOS.IoT.Infrastructure/IoTProjection.cs:line 60
+iot-api-1  |          at FarmOS.IoT.Application.Queries.Handlers.IoTQueryHandlers.Handle(GetAllDevicesQuery request, CancellationToken cancellationToken) in /source/src/FarmOS.IoT.Application/Queries/Handlers/IoTQueryHandlers.cs:line 18
+iot-api-1  |          at FarmOS.IoT.API.IoTEndpoints.<>c.<<MapIoT>b__0_0>d.MoveNext() in /source/src/FarmOS.IoT.API/IoTEndpoints.cs:line 18
+iot-api-1  |       --- End of stack trace from previous location ---
+iot-api-1  |          at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+iot-api-1  |          at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+iot-api-1  | warn: Microsoft.AspNetCore.Hosting.Diagnostics[15]
+iot-api-1  |       Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+iot-api-1  | info: Microsoft.Hosting.Lifetime[14]
+iot-api-1  |       Now listening on: http://[::]:8080
+iot-api-1  | info: Microsoft.Hosting.Lifetime[0]
+iot-api-1  |       Application started. Press Ctrl+C to shut down.
+iot-api-1  | info: Microsoft.Hosting.Lifetime[0]
+iot-api-1  |       Hosting environment: Development
+iot-api-1  | info: Microsoft.Hosting.Lifetime[0]
+iot-api-1  |       Content root path: /app

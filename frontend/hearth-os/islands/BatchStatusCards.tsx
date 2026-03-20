@@ -1,0 +1,245 @@
+import { useSignal } from "@preact/signals";
+import Tooltip, { InfoIcon } from "../components/Tooltip.tsx";
+import RecordPHForm from "./RecordPHForm.tsx";
+import { showToast } from "../utils/toastState.ts";
+import ConfirmDialog from "./ConfirmDialog.tsx";
+
+interface Batch {
+  id: string;
+  code: string;
+  type: "sourdough" | "kombucha";
+  phase: string;
+  ph: number;
+  startedAt: string;
+}
+
+const phaseDescriptions: Record<string, string> = {
+  BulkFerment:
+    "Dough is fermenting at room temp. Stretch & fold every 30min. Target: 25-50% volume increase.",
+  Proofing:
+    "Shaped dough rising in banneton. Ready when poke test springs back slowly (~1-2h).",
+  Primary:
+    "SCOBY is converting sugar to acids. Don't disturb. Takes 7-14 days.",
+  Secondary:
+    "Flavoring stage. Carbonation builds in sealed bottles (2-4 days at room temp).",
+  Complete: "Batch is finished. Ready for consumption or storage.",
+};
+
+export default function BatchStatusCards() {
+  const batches = useSignal<Batch[]>([
+    {
+      id: "a1b2c3d4",
+      code: "SD-2024-03-A",
+      type: "sourdough",
+      phase: "BulkFerment",
+      ph: 4.2,
+      startedAt: "Mar 1",
+    },
+    {
+      id: "e5f6g7h8",
+      code: "SD-2024-03-B",
+      type: "sourdough",
+      phase: "Proofing",
+      ph: 3.9,
+      startedAt: "Feb 28",
+    },
+    {
+      id: "k1l2m3n4",
+      code: "KB-MAR-01",
+      type: "kombucha",
+      phase: "Primary",
+      ph: 3.2,
+      startedAt: "Feb 25",
+    },
+    {
+      id: "o5p6q7r8",
+      code: "KB-MAR-02",
+      type: "kombucha",
+      phase: "Secondary",
+      ph: 2.8,
+      startedAt: "Feb 20",
+    },
+  ]);
+
+  const selectedId = useSignal<string | null>(null);
+  const confirmAdvance = useSignal(false);
+  const advancingId = useSignal<string | null>(null);
+
+  const phColor = (ph: number) => {
+    if (ph >= 4.0) return "text-emerald-600";
+    if (ph >= 3.0) return "text-amber-600";
+    return "text-red-600";
+  };
+
+  const typeIcon = (type: string) => type === "sourdough" ? "🍞" : "🫖";
+
+  const toggleCard = (id: string) => {
+    selectedId.value = selectedId.value === id ? null : id;
+  };
+
+  const handleAdvance = async (batch: Batch) => {
+    advancingId.value = batch.id;
+    confirmAdvance.value = false;
+    try {
+      const { HearthAPI } = await import("../utils/farmos-client.ts");
+      const nextPhase = batch.type === "sourdough" ? 2 : 2;
+      if (batch.type === "sourdough") {
+        await HearthAPI.advanceSourdough(batch.id, { newPhase: nextPhase });
+      } else {
+        await HearthAPI.advanceKombucha(batch.id, { newPhase: nextPhase });
+      }
+      showToast(
+        "success",
+        "Phase advanced",
+        `${batch.code} moved to next phase.`,
+      );
+    } catch (err: unknown) {
+      showToast(
+        "error",
+        "Failed to advance",
+        err instanceof Error ? err.message : "Unknown error",
+      );
+    } finally {
+      advancingId.value = null;
+    }
+  };
+
+  const selectedBatch = batches.value.find((b) => b.id === selectedId.value);
+
+  return (
+    <div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {batches.value.map((batch) => {
+          const isSelected = selectedId.value === batch.id;
+          return (
+            <button
+              type="button"
+              onClick={() => toggleCard(batch.id)}
+              class={`bg-white rounded-xl border shadow-sm p-4 hover:shadow-md transition block text-left w-full cursor-pointer ${
+                isSelected
+                  ? "border-amber-400 ring-2 ring-amber-200"
+                  : "border-stone-200 hover:border-amber-200"
+              }`}
+            >
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-lg">{typeIcon(batch.type)}</span>
+                <span class="text-[10px] uppercase tracking-widest font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">
+                  {batch.phase}
+                </span>
+              </div>
+              <h3 class="font-bold text-stone-800 text-sm">{batch.code}</h3>
+              <p class="text-xs text-stone-400 mt-0.5">
+                Started {batch.startedAt}
+              </p>
+              <div class="mt-3 pt-2 border-t border-stone-100 flex items-baseline gap-1">
+                <span
+                  class={`text-2xl font-mono font-bold ${phColor(batch.ph)}`}
+                >
+                  {batch.ph}
+                </span>
+                <span class="text-[10px] text-stone-400 uppercase">pH</span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Expanded Detail Panel */}
+      {selectedBatch && (
+        <div class="mt-4 bg-white rounded-xl border border-amber-200 shadow-md p-6 animate-[scaleIn_0.2s_ease-out]">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl">{typeIcon(selectedBatch.type)}</span>
+                <h3 class="text-lg font-bold text-stone-800">
+                  {selectedBatch.code}
+                </h3>
+              </div>
+              <p class="text-sm text-stone-500 mt-1">
+                {selectedBatch.type === "sourdough" ? "Sourdough" : "Kombucha"}
+                {" "}
+                · Started {selectedBatch.startedAt}
+              </p>
+            </div>
+            <button
+              onClick={() => selectedId.value = null}
+              class="text-stone-400 hover:text-stone-600 text-sm"
+            >
+              ✕ Close
+            </button>
+          </div>
+
+          {/* Phase Info */}
+          <div class="bg-amber-50 rounded-lg p-4 mb-4 border border-amber-100">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-sm font-semibold text-amber-800">
+                Phase: {selectedBatch.phase}
+              </span>
+              <Tooltip
+                text={phaseDescriptions[selectedBatch.phase] ||
+                  "Current processing phase."}
+              >
+                <InfoIcon />
+              </Tooltip>
+            </div>
+            <p class="text-xs text-amber-700">
+              {phaseDescriptions[selectedBatch.phase]}
+            </p>
+          </div>
+
+          {/* Stats Grid */}
+          <div class="grid grid-cols-3 gap-4 mb-4">
+            <div class="bg-stone-50 rounded-lg p-3 text-center">
+              <p
+                class={`text-2xl font-mono font-bold ${
+                  phColor(selectedBatch.ph)
+                }`}
+              >
+                {selectedBatch.ph}
+              </p>
+              <p class="text-xs text-stone-400 mt-1">Current pH</p>
+            </div>
+            <div class="bg-stone-50 rounded-lg p-3 text-center">
+              <p class="text-2xl font-mono font-bold text-stone-700">75°F</p>
+              <p class="text-xs text-stone-400 mt-1">Temperature</p>
+            </div>
+            <div class="bg-stone-50 rounded-lg p-3 text-center">
+              <p class="text-2xl font-mono font-bold text-stone-700">2d</p>
+              <p class="text-xs text-stone-400 mt-1">Age</p>
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div class="flex items-center gap-3 pt-3 border-t border-stone-100">
+            <RecordPHForm
+              batchId={selectedBatch.id}
+              batchType={selectedBatch.type}
+            />
+            <button
+              onClick={() => confirmAdvance.value = true}
+              disabled={advancingId.value === selectedBatch.id}
+              class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition disabled:opacity-50"
+            >
+              ⏭ Advance Phase
+            </button>
+            <a
+              href="/batches"
+              class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-stone-100 text-stone-600 hover:bg-stone-200 transition"
+            >
+              View All Batches →
+            </a>
+          </div>
+
+          <ConfirmDialog
+            open={confirmAdvance.value}
+            title={`Advance ${selectedBatch.code}?`}
+            message={`This will move "${selectedBatch.code}" from ${selectedBatch.phase} to the next phase. This action cannot be undone.`}
+            confirmLabel="Advance Phase"
+            onConfirm={() => handleAdvance(selectedBatch)}
+            onCancel={() => confirmAdvance.value = false}
+          />
+        </div>
+      )}
+    </div>
+  );
+}

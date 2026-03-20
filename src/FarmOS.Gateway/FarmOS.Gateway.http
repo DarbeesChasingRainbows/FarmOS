@@ -1,0 +1,6 @@
+@FarmOS.Gateway_HostAddress = http://localhost:5031
+
+GET {{FarmOS.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

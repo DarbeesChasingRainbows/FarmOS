@@ -1,0 +1,15 @@
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.Hearth.Domain.deps.json
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.Hearth.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.Hearth.Domain.pdb
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.SharedKernel.pdb
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\FarmOS.Hearth.Domain.csproj.AssemblyReference.cache
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\FarmOS.Hearth.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\FarmOS.Hearth.Domain.AssemblyInfoInputs.cache
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\FarmOS.Hearth.Domain.AssemblyInfo.cs
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\FarmOS.Hearth.Domain.csproj.CoreCompileInputs.cache
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\FarmOS.H.8DED1132.Up2Date
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\FarmOS.Hearth.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\refint\FarmOS.Hearth.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\FarmOS.Hearth.Domain.pdb
+C:\Work\FarmOS\src\FarmOS.Hearth.Domain\obj\Debug\net10.0\ref\FarmOS.Hearth.Domain.dll

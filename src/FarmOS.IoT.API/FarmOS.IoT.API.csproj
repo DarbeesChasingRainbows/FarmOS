@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ArangoDBNetStandard" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.25" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FarmOS.IoT.Application\FarmOS.IoT.Application.csproj" />
+    <ProjectReference Include="..\FarmOS.IoT.Infrastructure\FarmOS.IoT.Infrastructure.csproj" />
+    <ProjectReference Include="..\FarmOS.SharedKernel\FarmOS.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Rules\IoTRules.fs(75,38): error FS3376: Invalid interpolated string. Bad format specifier: '-' [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Rules\IoTRules.fs(77,38): error FS3376: Invalid interpolated string. Bad format specifier: '-' [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Rules\IoTRules.fs(79,35): error FS3376: Invalid interpolated string. Bad format specifier: '-' [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+
+Build FAILED.
+
+C:\Work\FarmOS\src\FarmOS.Hearth.Rules\IoTRules.fs(75,38): error FS3376: Invalid interpolated string. Bad format specifier: '-' [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Rules\IoTRules.fs(77,38): error FS3376: Invalid interpolated string. Bad format specifier: '-' [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Rules\IoTRules.fs(79,35): error FS3376: Invalid interpolated string. Bad format specifier: '-' [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+    0 Warning(s)
+    3 Error(s)
+
+Time Elapsed 00:00:02.39

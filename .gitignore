@@ -1,0 +1,29 @@
+# Build outputs
+**/bin/
+**/obj/
+**/out/
+
+# IDE
+.vs/
+*.user
+*.suo
+
+# Node/Deno
+**/node_modules/
+**/_fresh/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Worktrees
+.worktrees/
+
+# Logs
+*.log

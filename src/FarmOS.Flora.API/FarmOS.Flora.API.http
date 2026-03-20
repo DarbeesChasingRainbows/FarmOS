@@ -1,0 +1,6 @@
+@FarmOS.Flora.API_HostAddress = http://localhost:5219
+
+GET {{FarmOS.Flora.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

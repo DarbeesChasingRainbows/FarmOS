@@ -1,0 +1,17 @@
+C:\Work\FarmOS\src\FarmOS.Assets.Application\bin\Debug\net10.0\FarmOS.Assets.Application.deps.json
+C:\Work\FarmOS\src\FarmOS.Assets.Application\bin\Debug\net10.0\FarmOS.Assets.Application.dll
+C:\Work\FarmOS\src\FarmOS.Assets.Application\bin\Debug\net10.0\FarmOS.Assets.Application.pdb
+C:\Work\FarmOS\src\FarmOS.Assets.Application\bin\Debug\net10.0\FarmOS.Assets.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Assets.Application\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+C:\Work\FarmOS\src\FarmOS.Assets.Application\bin\Debug\net10.0\FarmOS.SharedKernel.pdb
+C:\Work\FarmOS\src\FarmOS.Assets.Application\bin\Debug\net10.0\FarmOS.Assets.Domain.pdb
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\FarmOS.Assets.Application.csproj.AssemblyReference.cache
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\FarmOS.Assets.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\FarmOS.Assets.Application.AssemblyInfoInputs.cache
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\FarmOS.Assets.Application.AssemblyInfo.cs
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\FarmOS.Assets.Application.csproj.CoreCompileInputs.cache
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\FarmOS.A.81851E2F.Up2Date
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\FarmOS.Assets.Application.dll
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\refint\FarmOS.Assets.Application.dll
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\FarmOS.Assets.Application.pdb
+C:\Work\FarmOS\src\FarmOS.Assets.Application\obj\Debug\net10.0\ref\FarmOS.Assets.Application.dll

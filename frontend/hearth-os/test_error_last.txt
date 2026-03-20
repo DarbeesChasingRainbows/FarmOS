@@ -1,0 +1,50 @@
+Check tests/e2e/mushrooms.test.tsx
+[0m[38;5;245mrunning 1 test from ./tests/e2e/mushrooms.test.tsx[0m
+Listening on http://localhost:53319/
+Mushroom dashboard renders correctly ...
+[0m[38;5;245m------- output -------[0m
+    Fresh [1m[38;5;121m2.2.1[39m[22m is available. You're on [1m[38;5;208m2.2.0[39m[22m
+    To upgrade, run: deno run -A -r jsr:@fresh/update
+
+    Fresh [1m[38;5;121m2.2.1[39m[22m is available. You're on [1m[38;5;208m2.2.0[39m[22m
+    To upgrade, run: deno run -A -r jsr:@fresh/update
+
+    Fresh [1m[38;5;121m2.2.1[39m[22m is available. You're on [1m[38;5;208m2.2.0[39m[22m
+    To upgrade, run: deno run -A -r jsr:@fresh/update
+
+GET http://localhost:53319/mushrooms
+[0m[38;5;245m----- output end -----[0m
+Mushroom dashboard renders correctly ... [0m[31mFAILED[0m [0m[38;5;245m(351ms)[0m
+
+[0m[1m[37m[41m ERRORS [0m
+
+Mushroom dashboard renders correctly [0m[38;5;245m=> ./tests/e2e/mushrooms.test.tsx:6:6[0m
+[0m[1m[31merror[0m: AssertionError: The value '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Mushrooms ΓÇö Hearth OS</title><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><style>\n' +
+  "          body { font-family: 'Inter', system-ui, sans-serif; margin: 0; }\n" +
+  "          @keyframes slideIn {\n" +
+  "            from { opacity: 0; transform: translateX(20px); }\n" +
+  "            to { opacity: 1; transform: translateX(0); }\n" +
+  "          }\n" +
+  "          @keyframes scaleIn {\n" +
+  "            from { opacity: 0; transform: scale(0.95); }\n" +
+  "            to { opacity: 1; transform: scale(1); }\n" +
+  "          }\n" +
+  "        </style><script>\n" +
+  `            window.addEventListener('error', e => console.log("GLOBAL ERROR:", e.message, e.filename, e.lineno));\n` +
+  `            window.addEventListener('unhandledrejection', e => console.log("PROMISE REJECTION:", e.reason));\n` +
+  '            console.log("App script running!");\n' +
+  `          </script><link rel="stylesheet" href="/assets/client-entry-ZCdCRZqO.css?__frsh_c="/></head><body class="bg-stone-50 text-stone-900"><div class="flex min-h-screen"><nav class="w-64 min-h-screen bg-stone-900 text-stone-100 flex flex-col border-r border-stone-800"><div class="px-6 py-5 border-b border-stone-800"><h1 class="text-xl font-bold tracking-tight text-amber-400">≡ƒöÑ Hearth OS</h1><p class="text-xs text-stone-500 mt-1 uppercase tracking-widest">FarmOS Kitchen</p></div><ul class="flex-1 py-4 px-3 space-y-1"><li><a href="/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 text-stone-400 hover:bg-stone-800 hover:text-stone-200" data-ancestor="true" aria-current="true"><span class="text-lg">≡ƒÅá</span>Dashboard</a></li><li><a href="/batches" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 text-stone-400 hover:bg-stone-800 hover:text-stone-200"><span class="text-lg">≡ƒì₧</span>Batches</a></li><li><a href="/cultures" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 text-stone-400 hover:bg-stone-800 hover:text-stone-200"><span class="text-lg">≡ƒº½</span>Cultures</a></li><li><a href="/mushrooms" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 bg-amber-600/20 text-amber-300 shadow-sm" data-current="true" aria-current="page"><span class="text-lg">≡ƒìä</span>Mushrooms</a></li><li><a href="/compliance" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 text-stone-400 hover:bg-stone-800 hover:text-stone-200"><span class="text-lg">≡ƒôï</span>Compliance</a></li></ul><div class="px-6 py-4 border-t border-stone-800"><p class="text-xs text-stone-600">Sovereign ΓÇó Offline-First</p></div></nav><main class="flex-1 overflow-y-auto"><div class="p-8"><div class="mb-8 flex justify-between items-end"><div><h1 class="text-3xl font-extrabold text-stone-800 tracking-tight">Mushroom Cultivation</h1><p class="text-stone-500 mt-1">Track incubation, pinning, and fruiting phases for all fungi blocks.</p></div><a href="/mushrooms/new" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-5 rounded-lg shadow-sm transition">+ Start New Batch</a></div><div class="bg-white rounded-xl border border-stone-200 shadow-sm p-6 mb-8"><!--frsh:island:MushroomBatchList:0:--><div class="space-y-4"><a href="/mushrooms/mb-lion-01" class="block bg-white border border-stone-200 rounded-lg p-5 hover:border-emerald-300 hover:shadow-md transition group"><div class="flex items-center justify-between"><div><div class="flex items-center gap-3 mb-1"><h3 class="text-lg font-bold text-stone-800 group-hover:text-emerald-700 transition">Lion's Mane</h3><span class="text-xs font-bold px-2 py-0.5 rounded-full border bg-emerald-50 text-emerald-800 border-emerald-200">Fruiting</span></div><p class="text-sm font-medium text-stone-500 uppercase tracking-wide">LM-03-A</p></div><div class="text-right"><p class="text-sm text-stone-600"><span class="font-semibold text-stone-800">1</span> flushes</p><p class="text-xs text-stone-400 mt-1">Inoculated 21d ago</p></div></div><div class="mt-4 pt-4 border-t border-stone-100 flex items-center justify-between text-sm"><span class="text-stone-500">Hardwood Sawdust + Soy Hulls</span><span class="text-emerald-600 font-medium group-hover:translate-x-1 transition-transform inline-block">Manage Block ΓåÆ</span></div></a><a href="/mushrooms/mb-oyster-02" class="block bg-white border border-stone-200 rounded-lg p-5 hover:border-emerald-300 hover:shadow-md transition group"><div class="flex items-center justify-between"><div><div class="flex items-center gap-3 mb-1"><h3 class="text-lg font-bold text-stone-800 group-hover:text-emerald-700 transition">Blue Oyster</h3><span class="text-xs font-bold px-2 py-0.5 rounded-full border bg-stone-100 text-stone-800 border-stone-200">Incubating</span></div><p class="text-sm font-medium text-stone-500 uppercase tracking-wide">BO-03-B</p></div><div class="text-right"><p class="text-sm text-stone-600"><span class="font-semibold text-stone-800">0</span> flushes</p><p class="text-xs text-stone-400 mt-1">Inoculated 5d ago</p></div></div><div class="mt-4 pt-4 border-t border-stone-100 flex items-center justify-between text-sm"><span class="text-stone-500">Straw</span><span class="text-emerald-600 font-medium group-hover:translate-x-1 transition-transform inline-block">Manage Block ΓåÆ</span></div></a></div><!--/frsh:island--></div></div></main></div><!--frsh:island:ToastProvider:1:--><!--/frsh:island--><script type="module" nonce="54a0b15f14d94ee9bed9ec31ff7101b5">import { boot } from "/assets/client-entry-DQwyPCNT.js";import MushroomBatchList from "/assets/fresh-island__MushroomBatchList-CyZhjf8x.js";import ToastProvider from "/assets/fresh-island__ToastProvider-G0PNckJc.js";boot({MushroomBatchList,ToastProvider},"[[1,4],{\\"slots\\":2,\\"props\\":3},[],{},{\\"slots\\":5,\\"props\\":6},[],{}]");</script></body></html>` doesn't contain the expected item "Mushroom Management"
+      throw new AssertionError(
+[0m[31m            ^[0m
+    at [0m[1m[3mtoContain[0m ([0m[36mhttps://jsr.io/@std/expect/1.0.18/_matchers.ts[0m:[0m[33m480[0m:[0m[33m13[0m)
+    at [0m[1m[3mapplyMatcher[0m ([0m[36mhttps://jsr.io/@std/expect/1.0.18/expect.ts[0m:[0m[33m231[0m:[0m[33m13[0m)
+    at [0m[1m[3mProxy.<anonymous>[0m ([0m[36mhttps://jsr.io/@std/expect/1.0.18/expect.ts[0m:[0m[33m241[0m:[0m[33m13[0m)
+    at [0m[2m[38;5;245mfile:///C:/Work/FarmOS/frontend/hearth-os/[0m[0m[36mtests/e2e/mushrooms.test.tsx[0m:[0m[33m14[0m:[0m[33m18[0m
+
+[0m[1m[37m[41m FAILURES [0m
+
+Mushroom dashboard renders correctly [0m[38;5;245m=> ./tests/e2e/mushrooms.test.tsx:6:6[0m
+
+[0m[31mFAILED[0m | 0 passed | 1 failed [0m[38;5;245m(398ms)[0m
+
+error: Test failed

@@ -1,0 +1,83 @@
+{
+	layer4 {
+		:25 {
+			proxy {
+				to windmill_server:2525
+			}
+		}
+	}
+}
+
+# FarmOS — Caddy Reverse Proxy Gateway
+# Listens on :5050, routes /api/{service}/* to each backend.
+# Each backend container is on the Docker Compose default network.
+
+:5050 {
+
+	# ── Auth ────────────────────────────────────────────────────────────
+	handle /api/auth/* {
+		reverse_proxy auth-api:8080
+	}
+
+	# ── Domain APIs ─────────────────────────────────────────────────────
+	handle /api/pasture/* {
+		reverse_proxy pasture-api:8080
+	}
+
+	handle /api/flora/* {
+		reverse_proxy flora-api:8080
+	}
+
+	handle /api/hearth/* {
+		reverse_proxy hearth-api:8080
+	}
+
+	# SignalR Hubs
+	handle /hubs/kitchen* {
+		reverse_proxy hearth-api:8080
+	}
+
+	handle /api/apiary/* {
+		reverse_proxy apiary-api:8080
+	}
+
+	handle /api/commerce/* {
+		reverse_proxy commerce-api:8080
+	}
+
+	handle /api/assets/* {
+		reverse_proxy assets-api:8080
+	}
+
+	handle /api/ledger/* {
+		reverse_proxy ledger-api:8080
+	}
+
+	handle /api/iot/* {
+		reverse_proxy iot-api:8080
+	}
+
+	# SignalR IoT Sensor Hub
+	handle /hubs/sensors* {
+		reverse_proxy iot-api:8080
+	}
+
+	# ── Frontend micro-apps ─────────────────────────────────────────
+	handle /iot-os/* {
+		reverse_proxy iot-os-ui:8000
+	}
+}
+
+# ── Windmill UI and Services ──────────────────────────────────────────────
+{$BASE_URL::80} {
+	# LSP - Language Server Protocol for code intelligence (windmill_extra:3001)
+	reverse_proxy /ws/* http://windmill_extra:3001
+
+	# Debugger - Interactive debugging via DAP WebSocket (windmill_extra:3003)
+	handle_path /ws_debug/* {
+		reverse_proxy http://windmill_extra:3003
+	}
+
+	# Default: Windmill server
+	reverse_proxy /* http://windmill_server:8000
+}

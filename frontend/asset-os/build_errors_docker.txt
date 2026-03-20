@@ -1,0 +1,82 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 421B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/denoland/deno:latest
+#2 DONE 1.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [build 1/4] FROM docker.io/denoland/deno:latest@sha256:306bfec501d22d1b614ea6795c83751503974d99cfe24af3d27bb156dc22b8e4
+#4 resolve docker.io/denoland/deno:latest@sha256:306bfec501d22d1b614ea6795c83751503974d99cfe24af3d27bb156dc22b8e4 0.0s done
+#4 DONE 0.0s
+
+#5 [build 2/4] WORKDIR /app
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 545.03kB 0.3s done
+#6 DONE 0.3s
+
+#7 [build 3/4] COPY . .
+#7 DONE 0.7s
+
+#8 [build 4/4] RUN deno task build
+#8 0.246 Task build vite build
+#8 0.348 error: Uncaught (in promise) Error: Cannot find module @rollup/rollup-linux-x64-gnu. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.
+#8 0.348     throw new Error(
+#8 0.348           ^
+#8 0.348     at requireWithFriendlyError (file:///app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js:117:11)
+#8 0.348     at Object.<anonymous> (file:///app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js:127:3)
+#8 0.348     at Module._compile (node:module:801:34)
+#8 0.348     at loadMaybeCjs (node:module:826:10)
+#8 0.348     at Object..js (node:module:811:12)
+#8 0.348     at Module.load (node:module:678:32)
+#8 0.348     at Module._load (node:module:536:12)
+#8 0.348     at Module.require (node:module:697:19)
+#8 0.348     at require (node:module:872:16)
+#8 0.348     at file:///app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js:7:9
+#8 0.348 Caused by: Error: Cannot find module '@rollup/rollup-linux-x64-gnu'
+#8 0.348 Require stack:
+#8 0.348 - /app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js
+#8 0.348 - /app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js
+#8 0.348     at Module._resolveFilename (node:module:636:15)
+#8 0.348     at Module._load (node:module:499:27)
+#8 0.348     at Module.require (node:module:697:19)
+#8 0.348     at require (node:module:872:16)
+#8 0.348     at requireWithFriendlyError (file:///app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js:97:12)
+#8 0.348     at Object.<anonymous> (file:///app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js:127:3)
+#8 0.348     at Module._compile (node:module:801:34)
+#8 0.348     at loadMaybeCjs (node:module:826:10)
+#8 0.348     at Object..js (node:module:811:12)
+#8 0.348     at Module.load (node:module:678:32)
+#8 ERROR: process "/bin/sh -c deno task build" did not complete successfully: exit code: 1
+------
+ > [build 4/4] RUN deno task build:
+0.348     at Module._resolveFilename (node:module:636:15)
+0.348     at Module._load (node:module:499:27)
+0.348     at Module.require (node:module:697:19)
+0.348     at require (node:module:872:16)
+0.348     at requireWithFriendlyError (file:///app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js:97:12)
+0.348     at Object.<anonymous> (file:///app/node_modules/.deno/rollup@4.57.1/node_modules/rollup/dist/native.js:127:3)
+0.348     at Module._compile (node:module:801:34)
+0.348     at loadMaybeCjs (node:module:826:10)
+0.348     at Object..js (node:module:811:12)
+0.348     at Module.load (node:module:678:32)
+------
+Dockerfile:4
+--------------------
+   2 |     WORKDIR /app
+   3 |     COPY . .
+   4 | >>> RUN deno task build
+   5 |     
+   6 |     FROM denoland/deno:latest
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c deno task build" did not complete successfully: exit code: 1
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/2jumf174qhdi6yqf6hqxkiulq

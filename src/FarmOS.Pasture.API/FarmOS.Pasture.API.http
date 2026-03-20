@@ -1,0 +1,6 @@
+@FarmOS.Pasture.API_HostAddress = http://localhost:5009
+
+GET {{FarmOS.Pasture.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

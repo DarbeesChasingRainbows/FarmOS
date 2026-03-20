@@ -1,0 +1,8 @@
+{
+  "FarmOS.Hearth.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Hearth.API",
+  "FarmOS.Hearth.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Hearth.Application",
+  "FarmOS.Hearth.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Hearth.Domain",
+  "FarmOS.Hearth.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Hearth.Infrastructure",
+  "FarmOS.Hearth.Rules, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Hearth.Rules",
+  "FarmOS.SharedKernel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.SharedKernel"
+}

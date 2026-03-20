@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+ARG PROJECT_NAME
+WORKDIR /source
+
+# Copy the entire src directory to ensure Project References work
+COPY src/ ./src/
+
+# Change to the specific project directory
+WORKDIR /source/src/${PROJECT_NAME}
+
+# Restore and Publish
+RUN dotnet publish -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+ARG PROJECT_NAME
+WORKDIR /app
+COPY --from=build /app/publish .
+ENV APP_DLL=${PROJECT_NAME}.dll
+ENTRYPOINT ["sh", "-c", "dotnet $APP_DLL"]

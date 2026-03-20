@@ -1,0 +1,26 @@
+  Determining projects to restore...
+  Restored C:\Work\FarmOS\src\FarmOS.Hearth.Domain\FarmOS.Hearth.Domain.csproj (in 331 ms).
+  Restored C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj (in 331 ms).
+  Restored C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj (in 3.37 sec).
+  1 of 4 projects are up-to-date for restore.
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.SharedKernel\FarmOS.SharedKernel.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+  FarmOS.SharedKernel -> C:\Work\FarmOS\src\FarmOS.SharedKernel\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+  FarmOS.Hearth.Domain -> C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.Hearth.Domain.dll
+  FarmOS.Hearth.Rules -> C:\Work\FarmOS\src\FarmOS.Hearth.Rules\bin\Debug\net9.0\FarmOS.Hearth.Rules.dll
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Commands\Handlers\IoTCommandHandlers.cs(8,31): error CS0234: The type or namespace name 'Rules' does not exist in the namespace 'FarmOS.Hearth' (are you missing an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Commands\Handlers\IoTCommandHandlers.cs(10,36): error CS0234: The type or namespace name 'Rules' does not exist in the namespace 'FarmOS.Hearth' (are you missing an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Commands\Handlers\IoTCommandHandlers.cs(9,36): error CS0234: The type or namespace name 'Rules' does not exist in the namespace 'FarmOS.Hearth' (are you missing an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Commands\Handlers\IoTCommandHandlers.cs(20,5): error CS0246: The type or namespace name 'IKitchenHubNotifier' could not be found (are you missing a using directive or an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+
+Build FAILED.
+
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Commands\Handlers\IoTCommandHandlers.cs(8,31): error CS0234: The type or namespace name 'Rules' does not exist in the namespace 'FarmOS.Hearth' (are you missing an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Commands\Handlers\IoTCommandHandlers.cs(10,36): error CS0234: The type or namespace name 'Rules' does not exist in the namespace 'FarmOS.Hearth' (are you missing an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Commands\Handlers\IoTCommandHandlers.cs(9,36): error CS0234: The type or namespace name 'Rules' does not exist in the namespace 'FarmOS.Hearth' (are you missing an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Commands\Handlers\IoTCommandHandlers.cs(20,5): error CS0246: The type or namespace name 'IKitchenHubNotifier' could not be found (are you missing a using directive or an assembly reference?) [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+    0 Warning(s)
+    4 Error(s)
+
+Time Elapsed 00:00:07.76

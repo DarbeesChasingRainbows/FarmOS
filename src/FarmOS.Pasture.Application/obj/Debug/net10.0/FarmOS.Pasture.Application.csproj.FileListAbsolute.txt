@@ -1,0 +1,17 @@
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\bin\Debug\net10.0\FarmOS.Pasture.Application.deps.json
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\bin\Debug\net10.0\FarmOS.Pasture.Application.dll
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\bin\Debug\net10.0\FarmOS.Pasture.Application.pdb
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\bin\Debug\net10.0\FarmOS.Pasture.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\bin\Debug\net10.0\FarmOS.SharedKernel.pdb
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\bin\Debug\net10.0\FarmOS.Pasture.Domain.pdb
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\FarmOS.Pasture.Application.csproj.AssemblyReference.cache
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\FarmOS.Pasture.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\FarmOS.Pasture.Application.AssemblyInfoInputs.cache
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\FarmOS.Pasture.Application.AssemblyInfo.cs
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\FarmOS.Pasture.Application.csproj.CoreCompileInputs.cache
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\FarmOS.P.36C2BA3A.Up2Date
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\FarmOS.Pasture.Application.dll
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\refint\FarmOS.Pasture.Application.dll
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\FarmOS.Pasture.Application.pdb
+C:\Work\FarmOS\src\FarmOS.Pasture.Application\obj\Debug\net10.0\ref\FarmOS.Pasture.Application.dll

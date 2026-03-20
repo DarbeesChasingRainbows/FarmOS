@@ -1,0 +1,17 @@
+C:\Work\FarmOS\src\FarmOS.IoT.Application\bin\Debug\net10.0\FarmOS.IoT.Application.deps.json
+C:\Work\FarmOS\src\FarmOS.IoT.Application\bin\Debug\net10.0\FarmOS.IoT.Application.dll
+C:\Work\FarmOS\src\FarmOS.IoT.Application\bin\Debug\net10.0\FarmOS.IoT.Application.pdb
+C:\Work\FarmOS\src\FarmOS.IoT.Application\bin\Debug\net10.0\FarmOS.IoT.Domain.dll
+C:\Work\FarmOS\src\FarmOS.IoT.Application\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+C:\Work\FarmOS\src\FarmOS.IoT.Application\bin\Debug\net10.0\FarmOS.IoT.Domain.pdb
+C:\Work\FarmOS\src\FarmOS.IoT.Application\bin\Debug\net10.0\FarmOS.SharedKernel.pdb
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\FarmOS.IoT.Application.csproj.AssemblyReference.cache
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\FarmOS.IoT.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\FarmOS.IoT.Application.AssemblyInfoInputs.cache
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\FarmOS.IoT.Application.AssemblyInfo.cs
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\FarmOS.IoT.Application.csproj.CoreCompileInputs.cache
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\FarmOS.I.91F59E5A.Up2Date
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\FarmOS.IoT.Application.dll
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\refint\FarmOS.IoT.Application.dll
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\FarmOS.IoT.Application.pdb
+C:\Work\FarmOS\src\FarmOS.IoT.Application\obj\Debug\net10.0\ref\FarmOS.IoT.Application.dll

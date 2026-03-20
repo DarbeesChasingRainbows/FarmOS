@@ -1,0 +1,309 @@
+services:
+  arangodb:
+    image: arangodb:latest
+    environment:
+      - ARANGO_ROOT_PASSWORD=farmos_dev
+    ports:
+      - "8529:8529"
+    volumes:
+      - arangodb-data:/var/lib/arangodb3
+
+  arangodb-init:
+    image: curlimages/curl:latest
+    depends_on:
+      - arangodb
+    volumes:
+      - ./scripts/init-arangodb.sh:/init.sh:ro
+    entrypoint: [ "sh", "/init.sh" ]
+
+  # ── RabbitMQ (cross-service event bus) ────────────────────────────
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=farmos
+      - RABBITMQ_DEFAULT_PASS=farmos_dev
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    restart: unless-stopped
+
+  mqtt:
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./scripts/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+
+  # ── Home Assistant (sensor management) ─────────────────────────────
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    ports:
+      - "8123:8123"
+    volumes:
+      - ./ha-config:/config
+    environment:
+      - TZ=America/Chicago
+    restart: unless-stopped
+
+  # ── Caddy reverse proxy (replaces YARP gateway) ──────────────────────────
+  caddy:
+    image: ghcr.io/windmill-labs/caddy-l4:latest
+    environment:
+      - BASE_URL=:80
+    ports:
+      - "5050:5050"
+      - "80:80"
+      - "25:25"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      auth-api:
+        condition: service_started
+      pasture-api:
+        condition: service_started
+      flora-api:
+        condition: service_started
+      hearth-api:
+        condition: service_started
+      apiary-api:
+        condition: service_started
+      commerce-api:
+        condition: service_started
+      assets-api:
+        condition: service_started
+      ledger-api:
+        condition: service_started
+      iot-api:
+        condition: service_started
+    restart: unless-stopped
+
+  # ── Auth API (slim FarmOS.Gateway — auth endpoints only, no YARP) ─────────
+  auth-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Gateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  # ── Domain APIs ───────────────────────────────────────────────────────────
+  pasture-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Pasture.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  flora-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Flora.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_started
+
+  hearth-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Hearth.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_started
+
+  apiary-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Apiary.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  iot-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.IoT.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+      - HA_URL=http://homeassistant:8123
+      - HA_TOKEN=
+      - HA_POLL_INTERVAL_SECONDS=900
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - TWILIO_SID=
+      - TWILIO_AUTH_TOKEN=
+      - TWILIO_FROM=
+      - ALERT_PHONE=
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_started
+
+  commerce-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Commerce.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  assets-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Assets.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+      - HA_URL=http://homeassistant:8123
+      - HA_TOKEN=
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  ledger-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Ledger.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  # ── Frontend micro-apps ───────────────────────────────────────────────────
+  hearth-os-ui:
+    build:
+      context: ./frontend/hearth-os
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DENO_ENV=production
+      - GATEWAY_URL=http://caddy:5050
+    depends_on:
+      - caddy
+
+  apiary-os-ui:
+    build:
+      context: ./frontend/apiary-os
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - DENO_ENV=production
+      - FARMOS_URL=http://caddy:5050
+      - PORT=8001
+    depends_on:
+      - caddy
+
+  asset-os-ui:
+    build:
+      context: ./frontend/asset-os
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8000"
+    environment:
+      - DENO_ENV=production
+      - GATEWAY_URL=http://caddy:5050
+    depends_on:
+      - caddy
+
+  iot-os-ui:
+    build:
+      context: ./frontend/iot-os
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8000"
+    environment:
+      - DENO_ENV=production
+      - GATEWAY_URL=http://caddy:5050
+    depends_on:
+      - caddy
+
+  flower-os-ui:
+    build:
+      context: ./frontend
+      dockerfile: flower-os/Dockerfile
+    ports:
+      - "8004:8004"
+    environment:
+      - DENO_ENV=production
+      - GATEWAY_URL=http://caddy:5050
+    depends_on:
+      - caddy
+
+volumes:
+  arangodb-data:
+  rabbitmq-data:
+  caddy-data:
+  caddy-config:

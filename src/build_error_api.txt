@@ -1,0 +1,19 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.API\FarmOS.Hearth.API.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Rules\FarmOS.Hearth.Rules.fsproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Infrastructure\FarmOS.Hearth.Infrastructure.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.SharedKernel\FarmOS.SharedKernel.csproj]
+C:\Program Files\dotnet\sdk\11.0.100-preview.1.26104.118\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.RuntimeIdentifierInference.targets(383,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+  FarmOS.SharedKernel -> C:\Work\FarmOS\src\FarmOS.SharedKernel\bin\Debug\net10.0\FarmOS.SharedKernel.dll
+  FarmOS.Hearth.Rules -> C:\Work\FarmOS\src\FarmOS.Hearth.Rules\bin\Debug\net10.0\FarmOS.Hearth.Rules.dll
+  FarmOS.Hearth.Domain -> C:\Work\FarmOS\src\FarmOS.Hearth.Domain\bin\Debug\net10.0\FarmOS.Hearth.Domain.dll
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Queries\TraceabilityQueries.cs(21,49): error CS0738: 'Get24HourAuditReportQueryHandler' does not implement interface member 'IRequestHandler<Get24HourAuditReportQuery, IReadOnlyList<TraceabilityReportDto>?>.Handle(Get24HourAuditReportQuery, CancellationToken)'. 'Get24HourAuditReportQueryHandler.Handle(Get24HourAuditReportQuery, CancellationToken)' cannot implement 'IRequestHandler<Get24HourAuditReportQuery, IReadOnlyList<TraceabilityReportDto>?>.Handle(Get24HourAuditReportQuery, CancellationToken)' because it does not have the matching return type of 'Task<IReadOnlyList<TraceabilityReportDto>?>'. [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+
+Build FAILED.
+
+C:\Work\FarmOS\src\FarmOS.Hearth.Application\Queries\TraceabilityQueries.cs(21,49): error CS0738: 'Get24HourAuditReportQueryHandler' does not implement interface member 'IRequestHandler<Get24HourAuditReportQuery, IReadOnlyList<TraceabilityReportDto>?>.Handle(Get24HourAuditReportQuery, CancellationToken)'. 'Get24HourAuditReportQueryHandler.Handle(Get24HourAuditReportQuery, CancellationToken)' cannot implement 'IRequestHandler<Get24HourAuditReportQuery, IReadOnlyList<TraceabilityReportDto>?>.Handle(Get24HourAuditReportQuery, CancellationToken)' because it does not have the matching return type of 'Task<IReadOnlyList<TraceabilityReportDto>?>'. [C:\Work\FarmOS\src\FarmOS.Hearth.Application\FarmOS.Hearth.Application.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:01.34
