@@ -6,7 +6,8 @@ namespace FarmOS.Ledger.Application.Commands.Handlers;
 
 public sealed class ExpenseCommandHandlers(ILedgerEventStore store) :
     ICommandHandler<RecordExpenseCommand, Guid>,
-    ICommandHandler<VoidExpenseCommand, Guid>
+    ICommandHandler<VoidExpenseCommand, Guid>,
+    ICommandHandler<TagExpenseEnterpriseCommand, Guid>
 {
     public async Task<Result<Guid, DomainError>> Handle(RecordExpenseCommand cmd, CancellationToken ct)
     {
@@ -24,11 +25,21 @@ public sealed class ExpenseCommandHandlers(ILedgerEventStore store) :
         await store.SaveExpenseAsync(expense, "steward", ct);
         return expense.Id.Value;
     }
+
+    public async Task<Result<Guid, DomainError>> Handle(TagExpenseEnterpriseCommand cmd, CancellationToken ct)
+    {
+        var expense = await store.LoadExpenseAsync(cmd.ExpenseId.ToString(), ct);
+        var result = expense.TagEnterprise(cmd.Enterprise);
+        if (result.IsFailure) return result.Error;
+        await store.SaveExpenseAsync(expense, "steward", ct);
+        return expense.Id.Value;
+    }
 }
 
 public sealed class RevenueCommandHandlers(ILedgerEventStore store) :
     ICommandHandler<RecordRevenueCommand, Guid>,
-    ICommandHandler<VoidRevenueCommand, Guid>
+    ICommandHandler<VoidRevenueCommand, Guid>,
+    ICommandHandler<TagRevenueEnterpriseCommand, Guid>
 {
     public async Task<Result<Guid, DomainError>> Handle(RecordRevenueCommand cmd, CancellationToken ct)
     {
@@ -42,6 +53,15 @@ public sealed class RevenueCommandHandlers(ILedgerEventStore store) :
     {
         var revenue = await store.LoadRevenueAsync(cmd.RevenueId.ToString(), ct);
         var result = revenue.Void(cmd.Reason);
+        if (result.IsFailure) return result.Error;
+        await store.SaveRevenueAsync(revenue, "steward", ct);
+        return revenue.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(TagRevenueEnterpriseCommand cmd, CancellationToken ct)
+    {
+        var revenue = await store.LoadRevenueAsync(cmd.RevenueId.ToString(), ct);
+        var result = revenue.TagEnterprise(cmd.Enterprise);
         if (result.IsFailure) return result.Error;
         await store.SaveRevenueAsync(revenue, "steward", ct);
         return revenue.Id.Value;
