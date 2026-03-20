@@ -21,6 +21,11 @@
     <Project Path="src/FarmOS.Crew.Application/FarmOS.Crew.Application.csproj" />
     <Project Path="src/FarmOS.Crew.Domain/FarmOS.Crew.Domain.csproj" />
     <Project Path="src/FarmOS.Crew.Domain.Tests/FarmOS.Crew.Domain.Tests.csproj" />
+    <Project Path="src/FarmOS.Codex.API/FarmOS.Codex.API.csproj" />
+    <Project Path="src/FarmOS.Codex.Application/FarmOS.Codex.Application.csproj" />
+    <Project Path="src/FarmOS.Codex.Domain/FarmOS.Codex.Domain.csproj" />
+    <Project Path="src/FarmOS.Codex.Domain.Tests/FarmOS.Codex.Domain.Tests.csproj" />
+    <Project Path="src/FarmOS.Codex.Infrastructure/FarmOS.Codex.Infrastructure.csproj" />
     <Project Path="src/FarmOS.Crew.Infrastructure/FarmOS.Crew.Infrastructure.csproj" />
     <Project Path="src/FarmOS.Flora.API/FarmOS.Flora.API.csproj" />
     <Project Path="src/FarmOS.Flora.Application/FarmOS.Flora.Application.csproj" />
