@@ -25,7 +25,14 @@ public sealed class CommerceEventStore(IEventStore store) : ICommerceEventStore
         [nameof(OrderCreated)] = typeof(OrderCreated),
         [nameof(OrderPacked)] = typeof(OrderPacked),
         [nameof(OrderFulfilled)] = typeof(OrderFulfilled),
-        [nameof(OrderCancelled)] = typeof(OrderCancelled)
+        [nameof(OrderCancelled)] = typeof(OrderCancelled),
+
+        [nameof(CustomerCreated)] = typeof(CustomerCreated),
+        [nameof(CustomerProfileUpdated)] = typeof(CustomerProfileUpdated),
+        [nameof(CustomerNoteAdded)] = typeof(CustomerNoteAdded),
+        [nameof(DuplicateSuspected)] = typeof(DuplicateSuspected),
+        [nameof(CustomersMerged)] = typeof(CustomersMerged),
+        [nameof(DuplicateDismissed)] = typeof(DuplicateDismissed)
     };
 
     public Task<CSASeason> LoadSeasonAsync(string id, CancellationToken ct) =>
@@ -45,6 +52,12 @@ public sealed class CommerceEventStore(IEventStore store) : ICommerceEventStore
 
     public Task SaveOrderAsync(Order order, string userId, CancellationToken ct) =>
         SaveAsync(order, order.Id.ToString(), "Order", userId, ct);
+
+    public Task<Customer> LoadCustomerAsync(string id, CancellationToken ct) =>
+        store.LoadAsync<Customer, CustomerId>(CollectionName, id, () => new Customer(), DeserializeEvent, ct);
+
+    public Task SaveCustomerAsync(Customer customer, string userId, CancellationToken ct) =>
+        SaveAsync(customer, customer.Id.ToString(), "Customer", userId, ct);
 
     private async Task SaveAsync<TId>(AggregateRoot<TId> aggregate, string aggregateId, string aggregateType, string userId, CancellationToken ct) where TId : notnull
     {

@@ -15,3 +15,14 @@ public record ShareDefinition(ShareSize Size, decimal Price, int TotalWeeks, IRe
 public record CSAPickup(DateOnly Date, string TimeWindow, string Location, int? MaxSlots);
 public record OrderItem(string ProductName, string Category, Quantity Qty, decimal UnitPrice, string? Notes);
 public record ContactInfo(string Name, string Email, string? Phone, string? PreferredContact);
+
+// ─── Customer CRM ───────────────────────────────────────────────────
+
+public record CustomerId(Guid Value) { public static CustomerId New() => new(Guid.NewGuid()); public override string ToString() => Value.ToString(); }
+
+public enum CustomerChannel { CSA, BuyingClub, FarmStore, FarmersMarket, Wholesale, Online, Tour }
+public enum AccountTier { Standard, Premium, Wholesale }
+
+public record CustomerProfile(string Name, string Email, string? Phone, string? Address, IReadOnlyList<CustomerChannel> Channels, string? Notes, string? DietaryPrefs);
+public record CustomerNote(string Content, DateTimeOffset CreatedAt);
+public record MatchCandidate(CustomerId ExistingId, string ExistingName, string? ExistingEmail, decimal ConfidenceScore, string MatchBasis);
