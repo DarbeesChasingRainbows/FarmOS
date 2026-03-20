@@ -26,3 +26,16 @@ public enum AccountTier { Standard, Premium, Wholesale }
 public record CustomerProfile(string Name, string Email, string? Phone, string? Address, IReadOnlyList<CustomerChannel> Channels, string? Notes, string? DietaryPrefs);
 public record CustomerNote(string Content, DateTimeOffset CreatedAt);
 public record MatchCandidate(CustomerId ExistingId, string ExistingName, string? ExistingEmail, decimal ConfidenceScore, string MatchBasis);
+
+// ─── Buying Clubs ───────────────────────────────────────────────────
+
+public record BuyingClubId(Guid Value) { public static BuyingClubId New() => new(Guid.NewGuid()); public override string ToString() => Value.ToString(); }
+public record WholesaleAccountId(Guid Value) { public static WholesaleAccountId New() => new(Guid.NewGuid()); public override string ToString() => Value.ToString(); }
+
+public enum ClubStatus { Active, Paused, Closed }
+public enum OrderCycleStatus { Open, Closed }
+public enum OrderCycleFrequency { Weekly, BiWeekly, Monthly }
+
+public record DropSite(string Name, string Address, string ContactPerson, string ContactPhone, DayOfWeek DeliveryDay, TimeOnly DeliveryWindow);
+public record StandingOrder(string ProductName, int Quantity, decimal UnitPrice, string? Notes);
+public record DeliveryRoute(string Name, IReadOnlyList<string> DropSiteIds, decimal EstimatedMiles);

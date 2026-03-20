@@ -111,5 +111,85 @@ public static class CommerceEndpoints
             var result = await m.Send(cmd with { CustomerId = id }, ct);
             return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
         });
+
+        // ─── Buying Clubs ─────────────────────────────────────────
+
+        var buyingClubs = app.MapGroup("/api/commerce/buying-clubs");
+
+        buyingClubs.MapPost("/", async (CreateBuyingClubCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd, ct);
+            return result.Match(id => Results.Created($"/api/commerce/buying-clubs/{id}", new { id }), err => Results.BadRequest(err));
+        });
+
+        buyingClubs.MapPost("/{id:guid}/drop-sites", async (Guid id, AddDropSiteCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ClubId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        buyingClubs.MapDelete("/{id:guid}/drop-sites/{name}", async (Guid id, string name, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(new RemoveDropSiteCommand(id, name), ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        buyingClubs.MapPost("/{id:guid}/cycle/open", async (Guid id, OpenOrderCycleCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ClubId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        buyingClubs.MapPost("/{id:guid}/cycle/close", async (Guid id, CloseOrderCycleCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ClubId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        buyingClubs.MapPost("/{id:guid}/pause", async (Guid id, PauseBuyingClubCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ClubId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        buyingClubs.MapPost("/{id:guid}/close", async (Guid id, CloseBuyingClubCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ClubId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        // ─── Wholesale ────────────────────────────────────────────
+
+        var wholesale = app.MapGroup("/api/commerce/wholesale");
+
+        wholesale.MapPost("/", async (OpenWholesaleAccountCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd, ct);
+            return result.Match(id => Results.Created($"/api/commerce/wholesale/{id}", new { id }), err => Results.BadRequest(err));
+        });
+
+        wholesale.MapPost("/{id:guid}/standing-order", async (Guid id, SetStandingOrderCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { AccountId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        wholesale.MapDelete("/{id:guid}/standing-order/{productName}", async (Guid id, string productName, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(new CancelStandingOrderCommand(id, productName), ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        wholesale.MapPost("/{id:guid}/route", async (Guid id, AssignDeliveryRouteCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { AccountId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        wholesale.MapPost("/{id:guid}/close", async (Guid id, CloseWholesaleAccountCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { AccountId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
     }
 }

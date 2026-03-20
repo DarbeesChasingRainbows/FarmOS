@@ -32,7 +32,21 @@ public sealed class CommerceEventStore(IEventStore store) : ICommerceEventStore
         [nameof(CustomerNoteAdded)] = typeof(CustomerNoteAdded),
         [nameof(DuplicateSuspected)] = typeof(DuplicateSuspected),
         [nameof(CustomersMerged)] = typeof(CustomersMerged),
-        [nameof(DuplicateDismissed)] = typeof(DuplicateDismissed)
+        [nameof(DuplicateDismissed)] = typeof(DuplicateDismissed),
+
+        [nameof(BuyingClubCreated)] = typeof(BuyingClubCreated),
+        [nameof(DropSiteAdded)] = typeof(DropSiteAdded),
+        [nameof(DropSiteRemoved)] = typeof(DropSiteRemoved),
+        [nameof(OrderCycleOpened)] = typeof(OrderCycleOpened),
+        [nameof(OrderCycleClosed)] = typeof(OrderCycleClosed),
+        [nameof(BuyingClubPaused)] = typeof(BuyingClubPaused),
+        [nameof(BuyingClubClosed)] = typeof(BuyingClubClosed),
+
+        [nameof(WholesaleAccountOpened)] = typeof(WholesaleAccountOpened),
+        [nameof(StandingOrderSet)] = typeof(StandingOrderSet),
+        [nameof(StandingOrderCancelled)] = typeof(StandingOrderCancelled),
+        [nameof(DeliveryRouteAssigned)] = typeof(DeliveryRouteAssigned),
+        [nameof(WholesaleAccountClosed)] = typeof(WholesaleAccountClosed)
     };
 
     public Task<CSASeason> LoadSeasonAsync(string id, CancellationToken ct) =>
@@ -58,6 +72,18 @@ public sealed class CommerceEventStore(IEventStore store) : ICommerceEventStore
 
     public Task SaveCustomerAsync(Customer customer, string userId, CancellationToken ct) =>
         SaveAsync(customer, customer.Id.ToString(), "Customer", userId, ct);
+
+    public Task<BuyingClub> LoadBuyingClubAsync(string id, CancellationToken ct) =>
+        store.LoadAsync<BuyingClub, BuyingClubId>(CollectionName, id, () => new BuyingClub(), DeserializeEvent, ct);
+
+    public Task SaveBuyingClubAsync(BuyingClub club, string userId, CancellationToken ct) =>
+        SaveAsync(club, club.Id.ToString(), "BuyingClub", userId, ct);
+
+    public Task<WholesaleAccount> LoadWholesaleAccountAsync(string id, CancellationToken ct) =>
+        store.LoadAsync<WholesaleAccount, WholesaleAccountId>(CollectionName, id, () => new WholesaleAccount(), DeserializeEvent, ct);
+
+    public Task SaveWholesaleAccountAsync(WholesaleAccount account, string userId, CancellationToken ct) =>
+        SaveAsync(account, account.Id.ToString(), "WholesaleAccount", userId, ct);
 
     private async Task SaveAsync<TId>(AggregateRoot<TId> aggregate, string aggregateId, string aggregateType, string userId, CancellationToken ct) where TId : notnull
     {
