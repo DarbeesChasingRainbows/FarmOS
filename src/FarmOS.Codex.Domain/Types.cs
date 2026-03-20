@@ -14,3 +14,5 @@ public enum AudienceRole { Everyone, Employee, Apprentice, Manager }
 // ─── Value Objects ──────────────────────────────────────────────────
 public record ProcedureStep(int Order, string Title, string Instructions, string? ImagePath, string? WarningNote, int? EstimatedMinutes);
 public record PlaybookTask(int Month, string Title, string Description, ProcedureCategory Category, string? LinkedProcedureId, string Priority);
+public record DecisionTreeId(Guid Value) { public static DecisionTreeId New() => new(Guid.NewGuid()); public override string ToString() => Value.ToString(); }
+public record DecisionNode(string NodeId, string Question, string? YesNodeId, string? NoNodeId, string? ActionIfTerminal, string? Notes);

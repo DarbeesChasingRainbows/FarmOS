@@ -17,3 +17,9 @@ public record ArchiveProcedureCommand(Guid ProcedureId) : ICommand<Guid>;
 public record CreatePlaybookCommand(string Title, string? Description, AudienceRole Audience) : ICommand<Guid>;
 public record AddPlaybookTaskCommand(Guid PlaybookId, PlaybookTask Task) : ICommand<Guid>;
 public record RemovePlaybookTaskCommand(Guid PlaybookId, int Month, string TaskTitle) : ICommand<Guid>;
+
+// --- DecisionTree ------------------------------------------------------------
+
+public record CreateDecisionTreeCommand(string Title, ProcedureCategory Category, string? Description) : ICommand<Guid>;
+public record AddDecisionNodeCommand(Guid DecisionTreeId, DecisionNode Node) : ICommand<Guid>;
+public record UpdateDecisionNodeCommand(Guid DecisionTreeId, string NodeId, DecisionNode Node) : ICommand<Guid>;

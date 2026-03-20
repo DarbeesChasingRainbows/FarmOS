@@ -83,3 +83,33 @@ public sealed class PlaybookCommandHandlers(ICodexEventStore store) :
         return playbook.Id.Value;
     }
 }
+
+public sealed class DecisionTreeCommandHandlers(ICodexEventStore store) :
+    ICommandHandler<CreateDecisionTreeCommand, Guid>,
+    ICommandHandler<AddDecisionNodeCommand, Guid>,
+    ICommandHandler<UpdateDecisionNodeCommand, Guid>
+{
+    public async Task<Result<Guid, DomainError>> Handle(CreateDecisionTreeCommand cmd, CancellationToken ct)
+    {
+        var tree = DecisionTree.Create(cmd.Title, cmd.Category, cmd.Description);
+        await store.SaveDecisionTreeAsync(tree, "steward", ct);
+        return tree.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(AddDecisionNodeCommand cmd, CancellationToken ct)
+    {
+        var tree = await store.LoadDecisionTreeAsync(cmd.DecisionTreeId.ToString(), ct);
+        tree.AddNode(cmd.Node);
+        await store.SaveDecisionTreeAsync(tree, "steward", ct);
+        return tree.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(UpdateDecisionNodeCommand cmd, CancellationToken ct)
+    {
+        var tree = await store.LoadDecisionTreeAsync(cmd.DecisionTreeId.ToString(), ct);
+        var result = tree.UpdateNode(cmd.Node);
+        if (result.IsFailure) return result.Error;
+        await store.SaveDecisionTreeAsync(tree, "steward", ct);
+        return tree.Id.Value;
+    }
+}
