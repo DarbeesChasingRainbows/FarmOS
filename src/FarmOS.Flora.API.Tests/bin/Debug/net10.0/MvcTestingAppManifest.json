@@ -1,7 +1,0 @@
-{
-  "FarmOS.Flora.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Flora.API",
-  "FarmOS.Flora.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Flora.Application",
-  "FarmOS.Flora.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Flora.Domain",
-  "FarmOS.Flora.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.Flora.Infrastructure",
-  "FarmOS.SharedKernel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Work\\FarmOS\\src\\FarmOS.SharedKernel"
-}

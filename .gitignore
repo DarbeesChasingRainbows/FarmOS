@@ -27,3 +27,16 @@ Desktop.ini
 
 # Logs
 *.log
+
+# Home Assistant runtime data
+ha-config/home-assistant_v2.db*
+ha-config/.storage/
+ha-config/*.log
+
+# Claude local settings
+.claude/settings.local.json
+
+# Build logs
+build.log
+iot_logs.txt
+**/build_error.log
