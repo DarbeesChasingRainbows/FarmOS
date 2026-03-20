@@ -85,3 +85,54 @@ public sealed class ShiftCommandHandlers(ICrewEventStore store) :
         return shift.Id.Value;
     }
 }
+
+public sealed class ApprenticeProgramCommandHandlers(ICrewEventStore store) :
+    ICommandHandler<CreateProgramCommand, Guid>,
+    ICommandHandler<EnrollApprenticeCommand, Guid>,
+    ICommandHandler<RotateApprenticeCommand, Guid>,
+    ICommandHandler<CompleteProgramCommand, Guid>,
+    ICommandHandler<CancelProgramCommand, Guid>
+{
+    public async Task<Result<Guid, DomainError>> Handle(CreateProgramCommand cmd, CancellationToken ct)
+    {
+        var program = ApprenticeProgram.Create(cmd.Name, cmd.Year, cmd.StartDate, cmd.EndDate);
+        await store.SaveApprenticeProgramAsync(program, "steward", ct);
+        return program.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(EnrollApprenticeCommand cmd, CancellationToken ct)
+    {
+        var program = await store.LoadApprenticeProgramAsync(cmd.ProgramId.ToString(), ct);
+        var result = program.Enroll(new WorkerId(cmd.WorkerId));
+        if (result.IsFailure) return result.Error;
+        await store.SaveApprenticeProgramAsync(program, "steward", ct);
+        return program.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(RotateApprenticeCommand cmd, CancellationToken ct)
+    {
+        var program = await store.LoadApprenticeProgramAsync(cmd.ProgramId.ToString(), ct);
+        var result = program.Rotate(new WorkerId(cmd.WorkerId), cmd.Rotation);
+        if (result.IsFailure) return result.Error;
+        await store.SaveApprenticeProgramAsync(program, "steward", ct);
+        return program.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(CompleteProgramCommand cmd, CancellationToken ct)
+    {
+        var program = await store.LoadApprenticeProgramAsync(cmd.ProgramId.ToString(), ct);
+        var result = program.Complete();
+        if (result.IsFailure) return result.Error;
+        await store.SaveApprenticeProgramAsync(program, "steward", ct);
+        return program.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(CancelProgramCommand cmd, CancellationToken ct)
+    {
+        var program = await store.LoadApprenticeProgramAsync(cmd.ProgramId.ToString(), ct);
+        var result = program.Cancel(cmd.Reason);
+        if (result.IsFailure) return result.Error;
+        await store.SaveApprenticeProgramAsync(program, "steward", ct);
+        return program.Id.Value;
+    }
+}

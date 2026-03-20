@@ -13,3 +13,10 @@ public record ShiftScheduled(ShiftId Id, ShiftEntry Entry, DateTimeOffset Occurr
 public record ShiftStarted(ShiftId Id, DateTimeOffset OccurredAt) : IDomainEvent;
 public record ShiftCompleted(ShiftId Id, string? Notes, DateTimeOffset OccurredAt) : IDomainEvent;
 public record ShiftCancelled(ShiftId Id, string Reason, DateTimeOffset OccurredAt) : IDomainEvent;
+
+// ─── ApprenticeProgram ─────────────────────────────────────────────
+public record ProgramCreated(ApprenticeProgramId Id, string Name, int Year, DateOnly StartDate, DateOnly EndDate, DateTimeOffset OccurredAt) : IDomainEvent;
+public record ApprenticeEnrolled(ApprenticeProgramId Id, WorkerId WorkerId, DateTimeOffset OccurredAt) : IDomainEvent;
+public record ApprenticeRotated(ApprenticeProgramId Id, WorkerId WorkerId, RotationAssignment Rotation, DateTimeOffset OccurredAt) : IDomainEvent;
+public record ProgramCompleted(ApprenticeProgramId Id, DateTimeOffset OccurredAt) : IDomainEvent;
+public record ProgramCancelled(ApprenticeProgramId Id, string? Reason, DateTimeOffset OccurredAt) : IDomainEvent;

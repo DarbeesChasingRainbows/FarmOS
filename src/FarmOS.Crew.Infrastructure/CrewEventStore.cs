@@ -22,7 +22,13 @@ public sealed class CrewEventStore(IEventStore store) : ICrewEventStore
         [nameof(ShiftScheduled)] = typeof(ShiftScheduled),
         [nameof(ShiftStarted)] = typeof(ShiftStarted),
         [nameof(ShiftCompleted)] = typeof(ShiftCompleted),
-        [nameof(ShiftCancelled)] = typeof(ShiftCancelled)
+        [nameof(ShiftCancelled)] = typeof(ShiftCancelled),
+
+        [nameof(ProgramCreated)] = typeof(ProgramCreated),
+        [nameof(ApprenticeEnrolled)] = typeof(ApprenticeEnrolled),
+        [nameof(ApprenticeRotated)] = typeof(ApprenticeRotated),
+        [nameof(ProgramCompleted)] = typeof(ProgramCompleted),
+        [nameof(ProgramCancelled)] = typeof(ProgramCancelled)
     };
 
     public Task<Worker> LoadWorkerAsync(string id, CancellationToken ct) =>
@@ -36,6 +42,12 @@ public sealed class CrewEventStore(IEventStore store) : ICrewEventStore
 
     public Task SaveShiftAsync(Shift shift, string userId, CancellationToken ct) =>
         SaveAsync(shift, shift.Id.ToString(), "Shift", userId, ct);
+
+    public Task<ApprenticeProgram> LoadApprenticeProgramAsync(string id, CancellationToken ct) =>
+        store.LoadAsync<ApprenticeProgram, ApprenticeProgramId>(CollectionName, id, () => new ApprenticeProgram(), DeserializeEvent, ct);
+
+    public Task SaveApprenticeProgramAsync(ApprenticeProgram program, string userId, CancellationToken ct) =>
+        SaveAsync(program, program.Id.ToString(), "ApprenticeProgram", userId, ct);
 
     private async Task SaveAsync<TId>(AggregateRoot<TId> aggregate, string aggregateId, string aggregateType, string userId, CancellationToken ct) where TId : notnull
     {

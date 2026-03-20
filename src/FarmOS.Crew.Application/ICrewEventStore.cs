@@ -9,4 +9,7 @@ public interface ICrewEventStore
 
     Task<Shift> LoadShiftAsync(string shiftId, CancellationToken ct);
     Task SaveShiftAsync(Shift shift, string userId, CancellationToken ct);
+
+    Task<ApprenticeProgram> LoadApprenticeProgramAsync(string programId, CancellationToken ct);
+    Task SaveApprenticeProgramAsync(ApprenticeProgram program, string userId, CancellationToken ct);
 }
