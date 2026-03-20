@@ -12,4 +12,7 @@ public interface ICommerceEventStore
 
     Task<Order> LoadOrderAsync(string orderId, CancellationToken ct);
     Task SaveOrderAsync(Order order, string userId, CancellationToken ct);
+
+    Task<Customer> LoadCustomerAsync(string customerId, CancellationToken ct);
+    Task SaveCustomerAsync(Customer customer, string userId, CancellationToken ct);
 }

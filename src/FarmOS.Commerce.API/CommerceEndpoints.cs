@@ -77,5 +77,39 @@ public static class CommerceEndpoints
             var result = await m.Send(cmd with { OrderId = id }, ct);
             return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
         });
+
+        // ─── Customers (CRM) ─────────────────────────────────────────
+
+        var customers = app.MapGroup("/api/commerce/customers");
+
+        customers.MapPost("/", async (CreateCustomerCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd, ct);
+            return result.Match(id => Results.Created($"/api/commerce/customers/{id}", new { id }), err => Results.BadRequest(err));
+        });
+
+        customers.MapPut("/{id:guid}/profile", async (Guid id, UpdateCustomerProfileCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { CustomerId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        customers.MapPost("/{id:guid}/notes", async (Guid id, AddCustomerNoteCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { CustomerId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        customers.MapPost("/merge", async (MergeCustomersCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd, ct);
+            return result.Match(id => Results.Ok(new { id }), err => Results.BadRequest(err));
+        });
+
+        customers.MapPost("/{id:guid}/dismiss-duplicate", async (Guid id, DismissDuplicateCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { CustomerId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
     }
 }
