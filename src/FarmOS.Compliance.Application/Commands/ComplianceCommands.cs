@@ -17,3 +17,12 @@ public record RegisterPolicyCommand(PolicyType Type, string Provider, string Pol
 public record RenewPolicyCommand(Guid PolicyId, DateOnly NewExpiryDate, decimal NewPremium) : ICommand<Guid>;
 public record MarkPolicyExpiredCommand(Guid PolicyId) : ICommand<Guid>;
 public record UpdateCoveragesCommand(Guid PolicyId, IReadOnlyList<CoverageDetail> Coverages) : ICommand<Guid>;
+
+// --- Grant -----------------------------------------------------------------
+
+public record ApplyForGrantCommand(string Name, string Grantor, decimal Amount, DateOnly ApplicationDate, string? Notes) : ICommand<Guid>;
+public record AwardGrantCommand(Guid GrantId, decimal AwardedAmount, DateOnly AwardDate) : ICommand<Guid>;
+public record DenyGrantCommand(Guid GrantId, string? Reason) : ICommand<Guid>;
+public record AddGrantMilestoneCommand(Guid GrantId, GrantMilestone Milestone) : ICommand<Guid>;
+public record CompleteGrantMilestoneCommand(Guid GrantId, string MilestoneDescription, string? ReportPath) : ICommand<Guid>;
+public record CloseGrantCommand(Guid GrantId) : ICommand<Guid>;

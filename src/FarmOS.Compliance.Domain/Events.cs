@@ -14,3 +14,11 @@ public record PolicyRenewed(PolicyId Id, DateOnly NewExpiryDate, decimal NewPrem
 public record PolicyExpired(PolicyId Id, DateTimeOffset OccurredAt) : IDomainEvent;
 public record PolicyCancelled(PolicyId Id, string Reason, DateTimeOffset OccurredAt) : IDomainEvent;
 public record PolicyCoverageUpdated(PolicyId Id, IReadOnlyList<CoverageDetail> Coverages, DateTimeOffset OccurredAt) : IDomainEvent;
+
+// ─── Grant ─────────────────────────────────────────────────────────
+public record GrantApplied(GrantId Id, string Name, string Grantor, decimal Amount, DateOnly ApplicationDate, string? Notes, DateTimeOffset OccurredAt) : IDomainEvent;
+public record GrantAwarded(GrantId Id, decimal AwardedAmount, DateOnly AwardDate, DateTimeOffset OccurredAt) : IDomainEvent;
+public record GrantDenied(GrantId Id, string? Reason, DateTimeOffset OccurredAt) : IDomainEvent;
+public record GrantMilestoneAdded(GrantId Id, GrantMilestone Milestone, DateTimeOffset OccurredAt) : IDomainEvent;
+public record GrantMilestoneCompleted(GrantId Id, string MilestoneDescription, string? ReportPath, DateTimeOffset OccurredAt) : IDomainEvent;
+public record GrantClosed(GrantId Id, DateTimeOffset OccurredAt) : IDomainEvent;
