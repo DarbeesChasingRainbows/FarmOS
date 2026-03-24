@@ -6,8 +6,15 @@ import { resolve } from "node:path";
 export default defineConfig({
   plugins: [fresh(), tailwindcss()],
   resolve: {
-    // Ensure bare specifiers from shared/ resolve to this project's node_modules
-    modules: [resolve(import.meta.dirname!, "node_modules"), "node_modules"],
+    // shared/farmos-client.ts imports @msgpack/msgpack but lives outside
+    // this project's directory, so Vite can't find the package from shared/'s
+    // location. Point the bare specifier to this project's installed copy.
+    alias: {
+      "@msgpack/msgpack": resolve(
+        import.meta.dirname!,
+        "node_modules/@msgpack/msgpack/dist.esm/index.mjs",
+      ),
+    },
   },
   server: {
     fs: {

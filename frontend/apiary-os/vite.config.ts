@@ -8,9 +8,13 @@ export default defineConfig({
   resolve: {
     alias: {
       "npm:@preact/signals@^2.2.1": "@preact/signals",
+      // shared/farmos-client.ts imports @msgpack/msgpack but lives outside
+      // this project, so Vite can't resolve it from shared/'s location.
+      "@msgpack/msgpack": resolve(
+        import.meta.dirname!,
+        "node_modules/@msgpack/msgpack/dist.esm/index.mjs",
+      ),
     },
-    // Ensure bare specifiers from shared/ resolve to this project's node_modules
-    modules: [resolve(import.meta.dirname!, "node_modules"), "node_modules"],
   },
   server: {
     fs: {
