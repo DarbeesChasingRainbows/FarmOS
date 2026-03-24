@@ -44,3 +44,10 @@ public record StandingOrderSet(WholesaleAccountId Id, StandingOrder Order, DateT
 public record StandingOrderCancelled(WholesaleAccountId Id, string ProductName, DateTimeOffset OccurredAt) : IDomainEvent;
 public record DeliveryRouteAssigned(WholesaleAccountId Id, DeliveryRoute Route, DateTimeOffset OccurredAt) : IDomainEvent;
 public record WholesaleAccountClosed(WholesaleAccountId Id, string? Reason, DateTimeOffset OccurredAt) : IDomainEvent;
+
+// ─── A La Carte CSA ────────────────────────────────────────────────
+
+public record CSASelectionModeSet(CSASeasonId SeasonId, CSASelectionMode Mode, decimal FullShareValue, decimal HalfShareValue, DateTimeOffset OccurredAt) : IDomainEvent;
+public record CSASelectionWindowOpened(CSASeasonId SeasonId, DateOnly PickupDate, DateTimeOffset Deadline, DateTimeOffset OccurredAt) : IDomainEvent;
+public record CSASelectionWindowClosed(CSASeasonId SeasonId, DateOnly PickupDate, DateTimeOffset OccurredAt) : IDomainEvent;
+public record CSAItemsSelected(CSAMemberId MemberId, DateOnly PickupDate, IReadOnlyList<CSAItemSelection> Items, decimal TotalValue, DateTimeOffset OccurredAt) : IDomainEvent;

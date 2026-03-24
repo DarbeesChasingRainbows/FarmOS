@@ -32,6 +32,26 @@ public static class CommerceEndpoints
             return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
         });
 
+        // ─── A La Carte CSA ─────────────────────────────────────
+
+        seasons.MapPost("/{id:guid}/selection-mode", async (Guid id, SetSelectionModeCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { SeasonId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        seasons.MapPost("/{id:guid}/selection-window/open", async (Guid id, OpenSelectionWindowCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { SeasonId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        seasons.MapPost("/{id:guid}/selection-window/close", async (Guid id, CloseSelectionWindowCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { SeasonId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
         // ─── CSA Members ─────────────────────────────────────────
 
         members.MapPost("/", async (RegisterMemberCommand cmd, IMediator m, CancellationToken ct) =>
@@ -47,6 +67,12 @@ public static class CommerceEndpoints
         });
 
         members.MapPost("/{id:guid}/pickups", async (Guid id, RecordPickupCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { MemberId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        members.MapPost("/{id:guid}/select-items", async (Guid id, SelectItemsCommand cmd, IMediator m, CancellationToken ct) =>
         {
             var result = await m.Send(cmd with { MemberId = id }, ct);
             return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));

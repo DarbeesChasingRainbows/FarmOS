@@ -39,3 +39,17 @@ public enum OrderCycleFrequency { Weekly, BiWeekly, Monthly }
 public record DropSite(string Name, string Address, string ContactPerson, string ContactPhone, DayOfWeek DeliveryDay, TimeOnly DeliveryWindow);
 public record StandingOrder(string ProductName, int Quantity, decimal UnitPrice, string? Notes);
 public record DeliveryRoute(string Name, IReadOnlyList<string> DropSiteIds, decimal EstimatedMiles);
+
+// ─── A La Carte CSA ────────────────────────────────────────────────
+
+public enum CSASelectionMode { FixedBox, ALaCarte, Hybrid }
+public enum SelectionWindowStatus { Closed, Open }
+
+/// <summary>
+/// A single item selection within an a la carte CSA pickup.
+/// ProductId matches the inventory_products collection keys.
+/// </summary>
+public record CSAItemSelection(string ProductId, string ProductName, int Quantity, decimal UnitPrice)
+{
+    public decimal Subtotal => Quantity * UnitPrice;
+}

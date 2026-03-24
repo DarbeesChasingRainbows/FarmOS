@@ -46,7 +46,12 @@ public sealed class CommerceEventStore(IEventStore store) : ICommerceEventStore
         [nameof(StandingOrderSet)] = typeof(StandingOrderSet),
         [nameof(StandingOrderCancelled)] = typeof(StandingOrderCancelled),
         [nameof(DeliveryRouteAssigned)] = typeof(DeliveryRouteAssigned),
-        [nameof(WholesaleAccountClosed)] = typeof(WholesaleAccountClosed)
+        [nameof(WholesaleAccountClosed)] = typeof(WholesaleAccountClosed),
+
+        [nameof(CSASelectionModeSet)] = typeof(CSASelectionModeSet),
+        [nameof(CSASelectionWindowOpened)] = typeof(CSASelectionWindowOpened),
+        [nameof(CSASelectionWindowClosed)] = typeof(CSASelectionWindowClosed),
+        [nameof(CSAItemsSelected)] = typeof(CSAItemsSelected)
     };
 
     public Task<CSASeason> LoadSeasonAsync(string id, CancellationToken ct) =>
