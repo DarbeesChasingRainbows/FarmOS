@@ -5,12 +5,16 @@ ENV DENO_DEPLOYMENT_ID=${GIT_REVISION}
 
 WORKDIR /app
 
-# Cache the dependencies first to speed up future rebuilds
-COPY deno.json deno.lock ./
-RUN deno install
+# Copy shared module first (referenced by ../../shared/ from utils/)
+COPY shared/ /app/shared/
 
-# Copy your raw source code
-COPY . .
+# Copy hearth-os app
+COPY hearth-os/ /app/hearth-os/
+
+WORKDIR /app/hearth-os
+
+# Cache the dependencies
+RUN deno install
 
 # Build the Fresh/Vite project — generates _fresh/
 RUN deno task build

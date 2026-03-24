@@ -243,8 +243,8 @@ services:
   # ── Frontend micro-apps ───────────────────────────────────────────────────
   hearth-os-ui:
     build:
-      context: ./frontend/hearth-os
-      dockerfile: Dockerfile
+      context: ./frontend
+      dockerfile: hearth-os/Dockerfile
     ports:
       - "8000:8000"
     environment:
@@ -255,8 +255,8 @@ services:
 
   apiary-os-ui:
     build:
-      context: ./frontend/apiary-os
-      dockerfile: Dockerfile
+      context: ./frontend
+      dockerfile: apiary-os/Dockerfile
     ports:
       - "8001:8001"
     environment:
