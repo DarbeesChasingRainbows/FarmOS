@@ -31,10 +31,10 @@ public sealed class HarvestRightCommandHandlers(
         var batchAutoCompleted = false;
 
         // ── Map screen → domain phase ────────────────────────────────────
-        var fsPhase = FsRules.MapScreenToPhase(cmd.ScreenNumber);
-        var isRunning = FsRules.IsRunningScreen(cmd.ScreenNumber);
-        var isError = FsRules.IsErrorScreen(cmd.ScreenNumber);
-        var isComplete = FsRules.IsCompleteScreen(cmd.ScreenNumber);
+        var fsPhase = FsRules.mapScreenToPhase(cmd.ScreenNumber);
+        var isRunning = FsRules.isRunningScreen(cmd.ScreenNumber);
+        var isError = FsRules.isErrorScreen(cmd.ScreenNumber);
+        var isComplete = FsRules.isCompleteScreen(cmd.ScreenNumber);
 
         FreezeDryerPhase? mappedPhase = null;
         if (Microsoft.FSharp.Core.FSharpOption<FsRules.FreezeDryerPhase>.get_IsSome(fsPhase))
@@ -112,7 +112,7 @@ public sealed class HarvestRightCommandHandlers(
                     ? (double)(cmd.PhaseElapsedSeconds.Value / 3600m)
                     : 0.0;
 
-                var fsAlert = FsRules.EvaluateTelemetry(
+                var fsAlert = FsRules.evaluateTelemetry(
                     MapToFsPhase(mappedPhase.Value),
                     cmd.TemperatureF,
                     cmd.VacuumMTorr,
