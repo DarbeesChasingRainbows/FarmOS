@@ -72,7 +72,10 @@ public sealed class InventoryProjectorWorker : BackgroundService
     {
         var lastProcessed = _cursors[collection];
 
-        var cursor = await _arango.Cursor.PostCursorAsync<EventDoc>(
+        CursorResponse<EventDoc> cursor;
+        try
+        {
+            cursor = await _arango.Cursor.PostCursorAsync<EventDoc>(
             new PostCursorBody
             {
                 Query = $@"
@@ -87,6 +90,13 @@ public sealed class InventoryProjectorWorker : BackgroundService
                     ["lastProcessed"] = lastProcessed.ToString("O")
                 }
             });
+        }
+        catch (ArangoDBNetStandard.ApiErrorException ex) when (ex.Message.Contains("not found"))
+        {
+            // Collection doesn't exist yet — context hasn't persisted any events
+            _logger.LogDebug("Collection {Collection} not found, skipping.", collection);
+            return 0;
+        }
 
         if (!cursor.Result.Any())
             return 0;
