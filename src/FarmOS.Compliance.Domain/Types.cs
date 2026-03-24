@@ -15,3 +15,6 @@ public enum PolicyStatus { Active, PendingRenewal, Expired, Cancelled }
 // ─── Value Objects ──────────────────────────────────────────────────
 public record RenewalInfo(DateOnly RenewalDate, decimal? Fee, string? Notes);
 public record CoverageDetail(string CoverageType, decimal Limit, decimal Deductible);
+public record GrantId(Guid Value) { public static GrantId New() => new(Guid.NewGuid()); public override string ToString() => Value.ToString(); }
+public enum GrantStatus { Applied, Awarded, Active, Reporting, Closed, Denied }
+public record GrantMilestone(string Description, DateOnly DueDate, bool Completed, string? ReportPath);

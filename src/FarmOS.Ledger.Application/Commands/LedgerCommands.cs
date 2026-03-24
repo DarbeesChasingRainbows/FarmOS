@@ -19,3 +19,7 @@ public record RecordRevenueCommand(
     DateOnly Date) : ICommand<Guid>;
 
 public record VoidRevenueCommand(Guid RevenueId, string Reason) : ICommand<Guid>;
+
+// ─── Enterprise Tagging ─────────────────────────────────────────────
+public record TagExpenseEnterpriseCommand(Guid ExpenseId, EnterpriseCode Enterprise) : ICommand<Guid>;
+public record TagRevenueEnterpriseCommand(Guid RevenueId, EnterpriseCode Enterprise) : ICommand<Guid>;

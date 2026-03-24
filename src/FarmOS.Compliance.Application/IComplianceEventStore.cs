@@ -9,4 +9,7 @@ public interface IComplianceEventStore
 
     Task<InsurancePolicy> LoadPolicyAsync(string policyId, CancellationToken ct);
     Task SavePolicyAsync(InsurancePolicy policy, string userId, CancellationToken ct);
+
+    Task<Grant> LoadGrantAsync(string grantId, CancellationToken ct);
+    Task SaveGrantAsync(Grant grant, string userId, CancellationToken ct);
 }
