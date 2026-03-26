@@ -36,7 +36,10 @@ builder.Services.AddSingleton<IEventStore>(sp =>
 // ─── RabbitMQ Event Bus ─────────────────────────────────────────────
 var rabbitHost = builder.Configuration.GetValue<string>("RABBITMQ_HOST") ?? "localhost";
 var rabbitPort = builder.Configuration.GetValue<int?>("RABBITMQ_PORT") ?? 5672;
-builder.Services.AddSingleton<IEventBus>(new RabbitMqEventBus(rabbitHost, rabbitPort));
+var rabbitUser = builder.Configuration.GetValue<string>("RABBITMQ_USER") ?? "guest";
+var rabbitPass = builder.Configuration.GetValue<string>("RABBITMQ_PASS") ?? "guest";
+builder.Services.AddSingleton<IEventBus>(new RabbitMqEventBus(rabbitHost, rabbitPort, userName: rabbitUser, password: rabbitPass));
+
 
 // ─── SignalR ────────────────────────────────────────────────────────
 builder.Services.AddSignalR();

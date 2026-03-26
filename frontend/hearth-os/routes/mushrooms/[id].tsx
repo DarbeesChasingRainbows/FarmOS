@@ -1,6 +1,6 @@
 import { Head } from "fresh/runtime";
 import { define } from "../../utils.ts";
-import MushroomActionPanel from "../../islands/MushroomActionPanel.tsx";
+import ArrowMushroomActionPanel from "../../islands/ArrowMushroomActionPanel.tsx";
 
 // Mock data fetcher until projector is wired
 export default define.page(async function MushroomBatchDetails(ctx) {
@@ -81,7 +81,7 @@ export default define.page(async function MushroomBatchDetails(ctx) {
               <h3 class="font-bold text-stone-800">Block Actions</h3>
             </div>
             <div class="p-5">
-              <MushroomActionPanel
+              <ArrowMushroomActionPanel
                 batchId={batch.id}
                 currentPhase={batch.phase}
               />

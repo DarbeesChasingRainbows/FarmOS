@@ -127,6 +127,8 @@ services:
       - ArangoDB__Password=farmos_dev
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=farmos
+      - RABBITMQ_PASS=farmos_dev
     depends_on:
       arangodb-init:
         condition: service_completed_successfully
@@ -146,6 +148,8 @@ services:
       - ArangoDB__Password=farmos_dev
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=farmos
+      - RABBITMQ_PASS=farmos_dev
     depends_on:
       arangodb-init:
         condition: service_completed_successfully
@@ -183,6 +187,8 @@ services:
       - HA_POLL_INTERVAL_SECONDS=900
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=farmos
+      - RABBITMQ_PASS=farmos_dev
       - TWILIO_SID=
       - TWILIO_AUTH_TOKEN=
       - TWILIO_FROM=

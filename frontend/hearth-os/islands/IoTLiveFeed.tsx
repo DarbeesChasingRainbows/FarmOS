@@ -32,12 +32,12 @@ export default function IoTLiveFeed() {
     events.filter((e) => e.alert.level === "Warning").length;
 
   return (
-    <div class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
+    <div class="flex flex-col h-full overflow-hidden -m-6">
       {/* Header */}
       <div class="px-5 py-4 border-b border-stone-100 flex items-center justify-between bg-stone-50">
         <div class="flex items-center gap-3">
-          <h3 class="text-base font-bold text-stone-800">
-            🌡️ Live Sensor Feed
+          <h3 class="text-[13px] font-bold text-stone-700 uppercase tracking-widest px-2">
+            Live Feed
           </h3>
           {criticalCount > 0 && (
             <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full animate-pulse">
@@ -67,7 +67,7 @@ export default function IoTLiveFeed() {
       </div>
 
       {/* Feed */}
-      <div class="max-h-72 overflow-y-auto">
+      <div class="flex-1 overflow-y-auto">
         {!connected && connectionStatus.value === "offline" && (
           <div class="px-5 py-3 bg-amber-50 border-b border-amber-100">
             <p class="text-xs text-amber-700">⚠️ Unable to connect to live sensor feed.</p>

@@ -53,6 +53,9 @@ public interface IHearthEventStore
 
     /// <summary>List all freeze-dryer batches (most recent first).</summary>
     Task<IReadOnlyList<FreezeDryerBatchSummary>> ListFreezeDryerBatchesAsync(CancellationToken ct);
+
+    /// <summary>List all active (non-completed) sourdough and kombucha batches.</summary>
+    Task<IReadOnlyList<ActiveBatchSummary>> ListActiveBatchSummariesAsync(CancellationToken ct);
 }
 
 /// <summary>Read-only projection of a freeze-dryer batch for list views.</summary>
@@ -63,3 +66,12 @@ public record FreezeDryerBatchSummary(
     int Phase,
     decimal PreDryWeight,
     decimal? PostDryWeight);
+
+/// <summary>Read-only projection of an active fermentation batch (sourdough or kombucha).</summary>
+public record ActiveBatchSummary(
+    string Id,
+    string BatchCode,
+    string ProductType,
+    string Phase,
+    decimal? CurrentPH,
+    string StatusMessage);

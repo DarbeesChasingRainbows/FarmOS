@@ -247,6 +247,24 @@ export const KitchenAPI = {
     ),
 };
 
+// ─── Fermentation Analytics ──────────────────────────────────────────
+
+export interface ActiveFermentationMonitorDto {
+  batchId: string;
+  batchCode: string;
+  productType: string;
+  phase: string;
+  currentPH: number | null;
+  dropRatePerHour: number | null;
+  isSafe: boolean;
+  statusMessage: string;
+}
+
+export const FermentationAPI = {
+  getActiveMonitoring: () =>
+    fetchFarmOS<ActiveFermentationMonitorDto[]>("/api/hearth/fermentation/active-monitoring"),
+};
+
 // ─── HACCP / Compliance API ────────────────────────────────────────
 
 export const HACCPAPI = {

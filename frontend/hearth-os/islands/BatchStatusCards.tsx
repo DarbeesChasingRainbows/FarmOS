@@ -1,6 +1,6 @@
 import { useSignal } from "@preact/signals";
 import Tooltip, { InfoIcon } from "../components/Tooltip.tsx";
-import RecordPHForm from "./RecordPHForm.tsx";
+import ArrowRecordPHForm from "./ArrowRecordPHForm.tsx";
 import { showToast } from "../utils/toastState.ts";
 import ConfirmDialog from "./ConfirmDialog.tsx";
 
@@ -25,41 +25,23 @@ const phaseDescriptions: Record<string, string> = {
   Complete: "Batch is finished. Ready for consumption or storage.",
 };
 
-export default function BatchStatusCards() {
-  const batches = useSignal<Batch[]>([
-    {
-      id: "a1b2c3d4",
-      code: "SD-2024-03-A",
-      type: "sourdough",
-      phase: "BulkFerment",
-      ph: 4.2,
-      startedAt: "Mar 1",
-    },
-    {
-      id: "e5f6g7h8",
-      code: "SD-2024-03-B",
-      type: "sourdough",
-      phase: "Proofing",
-      ph: 3.9,
-      startedAt: "Feb 28",
-    },
-    {
-      id: "k1l2m3n4",
-      code: "KB-MAR-01",
-      type: "kombucha",
-      phase: "Primary",
-      ph: 3.2,
-      startedAt: "Feb 25",
-    },
-    {
-      id: "o5p6q7r8",
-      code: "KB-MAR-02",
-      type: "kombucha",
-      phase: "Secondary",
-      ph: 2.8,
-      startedAt: "Feb 20",
-    },
-  ]);
+import { type ActiveFermentationMonitorDto } from "../utils/farmos-client.ts";
+
+export interface BatchStatusCardsProps {
+  initialBatches: ActiveFermentationMonitorDto[];
+}
+
+export default function BatchStatusCards({ initialBatches }: BatchStatusCardsProps) {
+  const mapDto = (dto: ActiveFermentationMonitorDto): Batch => ({
+    id: dto.batchId,
+    code: dto.batchCode,
+    type: dto.productType.toLowerCase() as "sourdough" | "kombucha",
+    phase: dto.phase,
+    ph: dto.currentPH ?? 0,
+    startedAt: dto.statusMessage, 
+  });
+
+  const batches = useSignal<Batch[]>(initialBatches.map(mapDto));
 
   const selectedId = useSignal<string | null>(null);
   const confirmAdvance = useSignal(false);
@@ -115,10 +97,10 @@ export default function BatchStatusCards() {
             <button
               type="button"
               onClick={() => toggleCard(batch.id)}
-              class={`bg-white rounded-xl border shadow-sm p-4 hover:shadow-md transition block text-left w-full cursor-pointer ${
+              class={`bg-white rounded-2xl border shadow-lg shadow-stone-200/30 p-5 hover:-translate-y-1 hover:shadow-xl hover:shadow-stone-300/40 transition-all duration-300 block text-left w-full cursor-pointer ${
                 isSelected
-                  ? "border-amber-400 ring-2 ring-amber-200"
-                  : "border-stone-200 hover:border-amber-200"
+                  ? "border-amber-400 ring-2 ring-amber-200/50"
+                  : "border-stone-100/80 hover:border-amber-200/80"
               }`}
             >
               <div class="flex items-center justify-between mb-2">
@@ -146,7 +128,9 @@ export default function BatchStatusCards() {
 
       {/* Expanded Detail Panel */}
       {selectedBatch && (
-        <div class="mt-4 bg-white rounded-xl border border-amber-200 shadow-md p-6 animate-[scaleIn_0.2s_ease-out]">
+        <div class="mt-6 bg-white rounded-3xl border border-amber-200/50 shadow-2xl shadow-amber-900/5 p-6 md:p-8 animate-[scaleIn_0.2s_ease-out] relative overflow-hidden backdrop-blur-md">
+          {/* Subtle neon glow for active expansion */}
+          <div class={`absolute -right-32 -top-32 w-64 h-64 bg-linear-to-bl from-amber-200 to-transparent rounded-full blur-3xl opacity-30`} />
           <div class="flex items-start justify-between mb-4">
             <div>
               <div class="flex items-center gap-2">
@@ -162,6 +146,7 @@ export default function BatchStatusCards() {
               </p>
             </div>
             <button
+              type="button"
               onClick={() => selectedId.value = null}
               class="text-stone-400 hover:text-stone-600 text-sm"
             >
@@ -211,11 +196,12 @@ export default function BatchStatusCards() {
 
           {/* Actions */}
           <div class="flex items-center gap-3 pt-3 border-t border-stone-100">
-            <RecordPHForm
+            <ArrowRecordPHForm
               batchId={selectedBatch.id}
               batchType={selectedBatch.type}
             />
             <button
+              type="button"
               onClick={() => confirmAdvance.value = true}
               disabled={advancingId.value === selectedBatch.id}
               class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-blue-100 text-blue-700 hover:bg-blue-200 transition disabled:opacity-50"

@@ -27,7 +27,7 @@ public sealed class MessagePackMiddleware
     {
         // ─── Request: convert incoming MessagePack body to JSON for model binding ───
         if (context.Request.ContentType?.Contains(MsgPackContentType, StringComparison.OrdinalIgnoreCase) == true
-            && context.Request.ContentLength > 0)
+            && (context.Request.ContentLength ?? 1) > 0)
         {
             var msgPackBytes = await ReadRequestBodyAsync(context.Request);
             var json = MessagePackSerializer.ConvertToJson(msgPackBytes, MsgPackOptions.Standard);

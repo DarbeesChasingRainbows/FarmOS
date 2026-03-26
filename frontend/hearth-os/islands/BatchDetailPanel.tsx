@@ -1,9 +1,9 @@
 import { useSignal } from "@preact/signals";
 import StatusBadge from "../components/StatusBadge.tsx";
 import Tooltip, { InfoIcon } from "../components/Tooltip.tsx";
-import RecordPHForm from "./RecordPHForm.tsx";
+import ArrowRecordPHForm from "./ArrowRecordPHForm.tsx";
 import ConfirmDialog from "./ConfirmDialog.tsx";
-import NewBatchForm from "./NewBatchForm.tsx";
+import ArrowNewBatchForm from "./ArrowNewBatchForm.tsx";
 import { showToast } from "../utils/toastState.ts";
 
 interface Batch {
@@ -34,46 +34,30 @@ const phaseVariant = (phase: string) => {
   return "fermenting" as const;
 };
 
-export default function BatchDetailPanel() {
-  const sourdoughBatches = useSignal<Batch[]>([
-    {
-      id: "a1b2c3d4",
-      code: "SD-2024-03-A",
-      phase: "BulkFerment",
-      ph: 4.2,
-      startedAt: "Mar 1, 2024",
-      type: "sourdough",
-    },
-    {
-      id: "e5f6g7h8",
-      code: "SD-2024-03-B",
-      phase: "Proofing",
-      ph: 3.9,
-      startedAt: "Feb 28, 2024",
-      type: "sourdough",
-    },
-  ]);
+import { type ActiveFermentationMonitorDto } from "../utils/farmos-client.ts";
 
-  const kombuchaBatches = useSignal<Batch[]>([
-    {
-      id: "k1l2m3n4",
-      code: "KB-MAR-01",
-      phase: "Primary",
-      ph: 3.2,
-      startedAt: "Feb 25, 2024",
-      type: "kombucha",
-      tea: "Green",
-    },
-    {
-      id: "o5p6q7r8",
-      code: "KB-MAR-02",
-      phase: "Secondary",
-      ph: 2.8,
-      startedAt: "Feb 20, 2024",
-      type: "kombucha",
-      tea: "Black",
-    },
-  ]);
+export interface BatchDetailPanelProps {
+  initialBatches: ActiveFermentationMonitorDto[];
+}
+
+export default function BatchDetailPanel({ initialBatches }: BatchDetailPanelProps) {
+  const mapDto = (dto: ActiveFermentationMonitorDto): Batch => ({
+    id: dto.batchId,
+    code: dto.batchCode,
+    type: dto.productType.toLowerCase() as "sourdough" | "kombucha",
+    phase: dto.phase,
+    ph: dto.currentPH ?? 0,
+    startedAt: dto.statusMessage, 
+    tea: undefined
+  });
+
+  const sourdoughBatches = useSignal<Batch[]>(
+    initialBatches.filter(b => b.productType === "Sourdough").map(mapDto)
+  );
+
+  const kombuchaBatches = useSignal<Batch[]>(
+    initialBatches.filter(b => b.productType === "Kombucha").map(mapDto)
+  );
 
   const selectedId = useSignal<string | null>(null);
   const isSidebarOpen = useSignal(false);
@@ -219,7 +203,7 @@ export default function BatchDetailPanel() {
         </section>
 
         {/* New Batch Modal Trigger */}
-        <NewBatchForm />
+        <ArrowNewBatchForm />
       </div>
 
       {/* Mobile Backdrop */}
@@ -263,6 +247,7 @@ export default function BatchDetailPanel() {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={closeSidebar}
                 class="text-stone-400 hover:text-stone-700 bg-stone-50 hover:bg-stone-100 rounded-full p-2 transition"
               >
@@ -307,7 +292,7 @@ export default function BatchDetailPanel() {
                       text={selectedBatch.type === "kombucha"
                         ? "Target: 2.5–3.5. Below 2.5 is very acidic."
                         : "Target: 3.5–4.5 during bulk ferment."}
-                      position="left"
+                      position="top"
                     >
                       <InfoIcon />
                     </Tooltip>
@@ -339,7 +324,7 @@ export default function BatchDetailPanel() {
 
               {/* pH Form */}
               <div class="mb-4">
-                <RecordPHForm
+                <ArrowRecordPHForm
                   batchId={selectedBatch.id}
                   batchType={selectedBatch.type}
                 />
@@ -353,12 +338,14 @@ export default function BatchDetailPanel() {
               </p>
               <div class="flex flex-col gap-2">
                 <button
+                  type="button"
                   onClick={() => confirmAdvance.value = true}
                   class="w-full py-2.5 text-sm font-bold rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition border border-blue-100 flex items-center justify-center gap-2"
                 >
                   ⏭ Advance Phase
                 </button>
                 <button
+                  type="button"
                   onClick={() => confirmComplete.value = true}
                   class="w-full py-2.5 text-sm font-bold rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition border border-emerald-100 flex items-center justify-center gap-2"
                 >

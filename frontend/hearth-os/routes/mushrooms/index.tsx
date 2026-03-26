@@ -1,6 +1,6 @@
 import { Head } from "fresh/runtime";
 import { define } from "../../utils.ts";
-import MushroomBatchList from "../../islands/MushroomBatchList.tsx";
+import ArrowMushroomBatchList from "../../islands/ArrowMushroomBatchList.tsx";
 
 export default define.page(function MushroomsPage() {
   return (
@@ -27,7 +27,7 @@ export default define.page(function MushroomsPage() {
       </div>
 
       <div class="bg-white rounded-xl border border-stone-200 shadow-sm p-6 mb-8">
-        <MushroomBatchList />
+        <ArrowMushroomBatchList />
       </div>
     </div>
   );

@@ -30,7 +30,13 @@ builder.Services.AddSingleton<IEventStore>(sp =>
 // ─── RabbitMQ Event Bus ─────────────────────────────────────────────
 var rabbitHost = builder.Configuration.GetValue<string>("RABBITMQ_HOST") ?? "localhost";
 var rabbitPort = builder.Configuration.GetValue<int?>("RABBITMQ_PORT") ?? 5672;
-builder.Services.AddSingleton<IEventBus>(new RabbitMqEventBus(rabbitHost, rabbitPort));
+var rabbitUser = builder.Configuration.GetValue<string>("RABBITMQ_USER") ?? "guest";
+var rabbitPass = builder.Configuration.GetValue<string>("RABBITMQ_PASS") ?? "guest";
+builder.Services.AddSingleton<IEventBus>(new RabbitMqEventBus(rabbitHost, rabbitPort, userName: rabbitUser, password: rabbitPass));
+
+// ─── SignalR ─────────────────────────────────────────────────────────
+builder.Services.AddSignalR();
+builder.Services.AddScoped<FarmOS.Hearth.Application.IKitchenHubNotifier, KitchenHubNotifier>();
 
 // ─── Hearth Services ─────────────────────────────────────────────────
 builder.Services.AddScoped<IHearthEventStore, HearthEventStore>();
@@ -51,7 +57,7 @@ builder.Services.AddSingleton<FarmOS.Hearth.Infrastructure.HarvestRight.HarvestR
 builder.Services.AddHostedService(sp => sp.GetRequiredService<FarmOS.Hearth.Infrastructure.HarvestRight.HarvestRightMqttWorker>());
 
 builder.Services.AddCors(opts => opts.AddDefaultPolicy(policy =>
-    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+    policy.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()));
 
 var app = builder.Build();
 

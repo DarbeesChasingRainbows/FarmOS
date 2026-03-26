@@ -31,9 +31,10 @@ public sealed class FermentationAnalyticsHandlers(IHearthEventStore store) :
     public async Task<List<ActiveFermentationMonitorDto>?> Handle(
         GetActiveFermentationMonitoringQuery request, CancellationToken ct)
     {
-        // This would ideally query a projection of active batches.
-        // For now, return an empty list — the projection worker will populate this.
-        return new List<ActiveFermentationMonitorDto>();
+        var summaries = await store.ListActiveBatchSummariesAsync(ct);
+        return summaries.Select(s => new ActiveFermentationMonitorDto(
+            Guid.Parse(s.Id), s.BatchCode, s.ProductType, s.Phase,
+            s.CurrentPH, null, true, s.StatusMessage)).ToList();
     }
 
     private static FermentationAnalyticsDto BuildKombuchaAnalytics(KombuchaBatch batch)

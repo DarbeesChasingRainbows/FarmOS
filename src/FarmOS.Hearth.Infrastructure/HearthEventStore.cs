@@ -224,6 +224,60 @@ public sealed class HearthEventStore(IEventStore store, IArangoDBClient arango) 
         return summaries;
     }
 
+    public async Task<IReadOnlyList<ActiveBatchSummary>> ListActiveBatchSummariesAsync(CancellationToken ct)
+    {
+        // Find distinct SourdoughBatch and KombuchaBatch aggregate IDs
+        var aql = @"
+            FOR e IN hearth_events
+                FILTER e.AggregateType IN ['SourdoughBatch', 'KombuchaBatch']
+                COLLECT aggregateId = e.AggregateId, aggregateType = e.AggregateType
+                SORT aggregateId DESC
+                LIMIT 100
+                RETURN { id: aggregateId, type: aggregateType }
+        ";
+
+        var cursor = await arango.Cursor.PostCursorAsync<AggregateIdTypeResult>(
+            new PostCursorBody { Query = aql });
+
+        var results = new List<ActiveBatchSummary>();
+        foreach (var item in cursor.Result)
+        {
+            try
+            {
+                if (item.Type == "SourdoughBatch")
+                {
+                    var batch = await store.LoadAsync<SourdoughBatch, BatchId>(
+                        CollectionName, item.Id, () => new SourdoughBatch(), DeserializeEvent, ct);
+                    if (batch.Phase is not (BatchPhase.Complete or BatchPhase.Discarded))
+                    {
+                        results.Add(new ActiveBatchSummary(
+                            batch.Id.ToString(), batch.BatchCode, "Sourdough",
+                            batch.Phase.ToString(), null, $"Phase: {batch.Phase}"));
+                    }
+                }
+                else if (item.Type == "KombuchaBatch")
+                {
+                    var batch = await store.LoadAsync<KombuchaBatch, BatchId>(
+                        CollectionName, item.Id, () => new KombuchaBatch(), DeserializeEvent, ct);
+                    if (batch.Phase is not (FermentationPhase.Complete or FermentationPhase.Discarded))
+                    {
+                        results.Add(new ActiveBatchSummary(
+                            batch.Id.ToString(), batch.BatchCode, "Kombucha",
+                            batch.Phase.ToString(), batch.CurrentPH, $"Phase: {batch.Phase}"));
+                    }
+                }
+            }
+            catch
+            {
+                // Skip batches that fail to rehydrate
+            }
+        }
+
+        return results;
+    }
+
+    private record AggregateIdTypeResult(string Id, string Type);
+
     public Task<int> PurgeExpiredTraceabilityAsync(DateTimeOffset cutoff, CancellationToken ct)
     {
         // TODO: Implement AQL query to delete TraceabilityRecord streams older than cutoff.

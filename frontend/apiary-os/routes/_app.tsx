@@ -1,7 +1,8 @@
 import { define } from "../utils.ts";
 import ToastProvider from "../islands/ToastProvider.tsx";
+import ArrowNavBar from "../islands/ArrowNavBar.tsx";
 
-export default define.page(function App({ Component }) {
+export default define.page(function App({ Component, url }) {
   return (
     <html lang="en">
       <head>
@@ -31,12 +32,16 @@ export default define.page(function App({ Component }) {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
           }
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
         `}
         </style>
       </head>
       <body class="bg-stone-50 text-stone-900">
         <div class="flex min-h-screen">
-          {/* Main Content Area */}
+          <ArrowNavBar currentPath={url.pathname} />
           <main class="flex-1 overflow-auto">
             <ToastProvider />
             <Component />
