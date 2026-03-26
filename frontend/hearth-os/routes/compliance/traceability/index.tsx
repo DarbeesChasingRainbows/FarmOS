@@ -4,10 +4,14 @@ import TraceabilityDashboard from "../../../islands/TraceabilityDashboard.tsx";
 
 export default define.page(function TraceabilityPage() {
   return (
-    <div class="p-8">
+    <div class="px-6 py-8 max-w-7xl mx-auto">
       <Head>
         <title>Traceability & FSMA 204 — Hearth OS</title>
       </Head>
+
+      <div class="mb-2">
+        <a href="/compliance" class="text-orange-600 hover:text-orange-700 text-sm font-semibold transition">&larr; Back to Compliance</a>
+      </div>
 
       <div class="mb-8 flex justify-between items-end">
         <div>
