@@ -36,11 +36,16 @@ export default define.page(function App({ Component }) {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
           }
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
         `}
         </style>
         <script
           dangerouslySetInnerHTML={{
             __html: `
+            window.__GATEWAY_URL__ = "${Deno.env.get("GATEWAY_URL") ?? "http://localhost:5050"}";
             window.addEventListener('error', e => console.log("GLOBAL ERROR:", e.message, e.filename, e.lineno));
             window.addEventListener('unhandledrejection', e => console.log("PROMISE REJECTION:", e.reason));
             console.log("App script running!");
