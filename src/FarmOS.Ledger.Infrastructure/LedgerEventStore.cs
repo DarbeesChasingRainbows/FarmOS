@@ -17,7 +17,9 @@ public sealed class LedgerEventStore(IEventStore store) : ILedgerEventStore
         [nameof(ExpenseRecorded)] = typeof(ExpenseRecorded),
         [nameof(ExpenseVoided)] = typeof(ExpenseVoided),
         [nameof(RevenueRecorded)] = typeof(RevenueRecorded),
-        [nameof(RevenueVoided)] = typeof(RevenueVoided)
+        [nameof(RevenueVoided)] = typeof(RevenueVoided),
+        [nameof(ExpenseEnterpriseTagged)] = typeof(ExpenseEnterpriseTagged),
+        [nameof(RevenueEnterpriseTagged)] = typeof(RevenueEnterpriseTagged)
     };
 
     public Task<Expense> LoadExpenseAsync(string id, CancellationToken ct) =>

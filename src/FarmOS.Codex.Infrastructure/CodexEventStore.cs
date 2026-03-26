@@ -22,7 +22,11 @@ public sealed class CodexEventStore(IEventStore store) : ICodexEventStore
 
         [nameof(PlaybookCreated)] = typeof(PlaybookCreated),
         [nameof(PlaybookTaskAdded)] = typeof(PlaybookTaskAdded),
-        [nameof(PlaybookTaskRemoved)] = typeof(PlaybookTaskRemoved)
+        [nameof(PlaybookTaskRemoved)] = typeof(PlaybookTaskRemoved),
+
+        [nameof(DecisionTreeCreated)] = typeof(DecisionTreeCreated),
+        [nameof(DecisionNodeAdded)] = typeof(DecisionNodeAdded),
+        [nameof(DecisionNodeUpdated)] = typeof(DecisionNodeUpdated)
     };
 
     public Task<Procedure> LoadProcedureAsync(string id, CancellationToken ct) =>
@@ -36,6 +40,12 @@ public sealed class CodexEventStore(IEventStore store) : ICodexEventStore
 
     public Task SavePlaybookAsync(Playbook playbook, string userId, CancellationToken ct) =>
         SaveAsync(playbook, playbook.Id.ToString(), "Playbook", userId, ct);
+
+    public Task<DecisionTree> LoadDecisionTreeAsync(string id, CancellationToken ct) =>
+        store.LoadAsync<DecisionTree, DecisionTreeId>(CollectionName, id, () => new DecisionTree(), DeserializeEvent, ct);
+
+    public Task SaveDecisionTreeAsync(DecisionTree decisionTree, string userId, CancellationToken ct) =>
+        SaveAsync(decisionTree, decisionTree.Id.ToString(), "DecisionTree", userId, ct);
 
     private async Task SaveAsync<TId>(AggregateRoot<TId> aggregate, string aggregateId, string aggregateType, string userId, CancellationToken ct) where TId : notnull
     {

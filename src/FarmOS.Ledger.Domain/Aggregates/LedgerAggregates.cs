@@ -15,6 +15,7 @@ public sealed class Expense : AggregateRoot<ExpenseId>
     public DateOnly Date { get; private set; }
     public string? ReceiptPath { get; private set; }
     public bool IsVoided { get; private set; }
+    public EnterpriseCode? Enterprise { get; private set; }
 
     public static Expense Record(string description, ExpenseCategory category, LedgerContext context,
         IReadOnlyList<LineItem> items, decimal total, string? vendor, DateOnly date, string? receiptPath)
@@ -31,6 +32,13 @@ public sealed class Expense : AggregateRoot<ExpenseId>
         return Id;
     }
 
+    public Result<ExpenseId, DomainError> TagEnterprise(EnterpriseCode enterprise)
+    {
+        if (IsVoided) return DomainError.Conflict("Cannot tag a voided expense.");
+        RaiseEvent(new ExpenseEnterpriseTagged(Id, enterprise, DateTimeOffset.UtcNow));
+        return Id;
+    }
+
     protected override void Apply(IDomainEvent @event)
     {
         switch (@event)
@@ -39,6 +47,7 @@ public sealed class Expense : AggregateRoot<ExpenseId>
                 Id = e.Id; Description = e.Description; Category = e.Category; Context = e.Context;
                 _items.AddRange(e.Items); Total = e.Total; Vendor = e.Vendor; Date = e.Date; ReceiptPath = e.ReceiptPath; break;
             case ExpenseVoided: IsVoided = true; break;
+            case ExpenseEnterpriseTagged e: Enterprise = e.Enterprise; break;
         }
     }
 }
@@ -54,6 +63,7 @@ public sealed class Revenue : AggregateRoot<RevenueId>
     public string? CustomerName { get; private set; }
     public DateOnly Date { get; private set; }
     public bool IsVoided { get; private set; }
+    public EnterpriseCode? Enterprise { get; private set; }
 
     public static Revenue Record(string description, RevenueCategory category, LedgerContext context,
         IReadOnlyList<LineItem> items, decimal total, string? customerName, DateOnly date)
@@ -70,6 +80,13 @@ public sealed class Revenue : AggregateRoot<RevenueId>
         return Id;
     }
 
+    public Result<RevenueId, DomainError> TagEnterprise(EnterpriseCode enterprise)
+    {
+        if (IsVoided) return DomainError.Conflict("Cannot tag a voided revenue.");
+        RaiseEvent(new RevenueEnterpriseTagged(Id, enterprise, DateTimeOffset.UtcNow));
+        return Id;
+    }
+
     protected override void Apply(IDomainEvent @event)
     {
         switch (@event)
@@ -78,6 +95,7 @@ public sealed class Revenue : AggregateRoot<RevenueId>
                 Id = e.Id; Description = e.Description; Category = e.Category; Context = e.Context;
                 _items.AddRange(e.Items); Total = e.Total; CustomerName = e.CustomerName; Date = e.Date; break;
             case RevenueVoided: IsVoided = true; break;
+            case RevenueEnterpriseTagged e: Enterprise = e.Enterprise; break;
         }
     }
 }

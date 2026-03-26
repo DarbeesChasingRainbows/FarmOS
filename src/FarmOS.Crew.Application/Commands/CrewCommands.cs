@@ -17,3 +17,11 @@ public record ScheduleShiftCommand(ShiftEntry Entry) : ICommand<Guid>;
 public record StartShiftCommand(Guid ShiftId) : ICommand<Guid>;
 public record CompleteShiftCommand(Guid ShiftId, string? Notes) : ICommand<Guid>;
 public record CancelShiftCommand(Guid ShiftId, string Reason) : ICommand<Guid>;
+
+// --- ApprenticeProgram -------------------------------------------------------
+
+public record CreateProgramCommand(string Name, int Year, DateOnly StartDate, DateOnly EndDate) : ICommand<Guid>;
+public record EnrollApprenticeCommand(Guid ProgramId, Guid WorkerId) : ICommand<Guid>;
+public record RotateApprenticeCommand(Guid ProgramId, Guid WorkerId, RotationAssignment Rotation) : ICommand<Guid>;
+public record CompleteProgramCommand(Guid ProgramId) : ICommand<Guid>;
+public record CancelProgramCommand(Guid ProgramId, string? Reason) : ICommand<Guid>;

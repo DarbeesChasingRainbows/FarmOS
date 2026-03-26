@@ -7,3 +7,6 @@ public record ExpenseVoided(ExpenseId Id, string Reason, DateTimeOffset Occurred
 
 public record RevenueRecorded(RevenueId Id, string Description, RevenueCategory Category, LedgerContext Context, IReadOnlyList<LineItem> Items, decimal Total, string? CustomerName, DateOnly Date, DateTimeOffset OccurredAt) : IDomainEvent;
 public record RevenueVoided(RevenueId Id, string Reason, DateTimeOffset OccurredAt) : IDomainEvent;
+
+public record ExpenseEnterpriseTagged(ExpenseId Id, EnterpriseCode Enterprise, DateTimeOffset OccurredAt) : IDomainEvent;
+public record RevenueEnterpriseTagged(RevenueId Id, EnterpriseCode Enterprise, DateTimeOffset OccurredAt) : IDomainEvent;

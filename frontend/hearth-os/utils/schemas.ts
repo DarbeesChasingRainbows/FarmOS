@@ -43,6 +43,15 @@ export const KombuchaBatchSchema = z.object({
   ),
 });
 
+// ─── Generic Batch (any fermented product) ───────────────────────────
+
+export const GenericBatchSchema = z.object({
+  batchCode: z.string().min(3, "Batch code must be at least 3 characters")
+    .regex(/^[A-Za-z0-9-]+$/, "Only letters, numbers, and hyphens"),
+  productType: z.string().min(2, "Product type is required"),
+  notes: z.string().max(500).optional(),
+});
+
 // ─── pH Record ───────────────────────────────────────────────────────
 
 export const PHRecordSchema = z.object({

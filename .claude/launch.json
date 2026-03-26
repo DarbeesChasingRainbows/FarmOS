@@ -1,0 +1,26 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "flower-os",
+      "runtimeExecutable": "echo",
+      "runtimeArgs": ["flower-os already running on port 8004"],
+      "port": 8004,
+      "autoPort": false
+    },
+    {
+      "name": "hearth-os",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": ["serve", "-A", "_fresh/server.js"],
+      "port": 8000,
+      "cwd": "frontend/hearth-os"
+    },
+    {
+      "name": "apiary-os",
+      "runtimeExecutable": "echo",
+      "runtimeArgs": ["apiary-os already running on port 8001"],
+      "port": 8001,
+      "autoPort": false
+    }
+  ]
+}

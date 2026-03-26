@@ -22,8 +22,7 @@
     "@microsoft/signalr": "npm:@microsoft/signalr@^8.0.0",
     "@std/expect": "jsr:@std/expect@^1.0.8",
     "@std/path": "jsr:@std/path@^1.0.8",
-    "@std/http": "jsr:@std/http@^1.0.13",
-    "@msgpack/msgpack": "npm:@msgpack/msgpack@^3.0.0"
+    "@std/http": "jsr:@std/http@^1.0.13"
   },
   "compilerOptions": {
     "lib": ["dom", "dom.asynciterable", "dom.iterable", "deno.ns"],

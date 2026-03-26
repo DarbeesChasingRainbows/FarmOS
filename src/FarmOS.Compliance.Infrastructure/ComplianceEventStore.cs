@@ -23,7 +23,14 @@ public sealed class ComplianceEventStore(IEventStore store) : IComplianceEventSt
         [nameof(PolicyRenewed)] = typeof(PolicyRenewed),
         [nameof(PolicyExpired)] = typeof(PolicyExpired),
         [nameof(PolicyCancelled)] = typeof(PolicyCancelled),
-        [nameof(PolicyCoverageUpdated)] = typeof(PolicyCoverageUpdated)
+        [nameof(PolicyCoverageUpdated)] = typeof(PolicyCoverageUpdated),
+
+        [nameof(GrantApplied)] = typeof(GrantApplied),
+        [nameof(GrantAwarded)] = typeof(GrantAwarded),
+        [nameof(GrantDenied)] = typeof(GrantDenied),
+        [nameof(GrantMilestoneAdded)] = typeof(GrantMilestoneAdded),
+        [nameof(GrantMilestoneCompleted)] = typeof(GrantMilestoneCompleted),
+        [nameof(GrantClosed)] = typeof(GrantClosed)
     };
 
     public Task<Permit> LoadPermitAsync(string id, CancellationToken ct) =>
@@ -37,6 +44,12 @@ public sealed class ComplianceEventStore(IEventStore store) : IComplianceEventSt
 
     public Task SavePolicyAsync(InsurancePolicy policy, string userId, CancellationToken ct) =>
         SaveAsync(policy, policy.Id.ToString(), "InsurancePolicy", userId, ct);
+
+    public Task<Grant> LoadGrantAsync(string id, CancellationToken ct) =>
+        store.LoadAsync<Grant, GrantId>(CollectionName, id, () => new Grant(), DeserializeEvent, ct);
+
+    public Task SaveGrantAsync(Grant grant, string userId, CancellationToken ct) =>
+        SaveAsync(grant, grant.Id.ToString(), "Grant", userId, ct);
 
     private async Task SaveAsync<TId>(AggregateRoot<TId> aggregate, string aggregateId, string aggregateType, string userId, CancellationToken ct) where TId : notnull
     {

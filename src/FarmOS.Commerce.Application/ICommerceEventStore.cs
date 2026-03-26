@@ -15,4 +15,10 @@ public interface ICommerceEventStore
 
     Task<Customer> LoadCustomerAsync(string customerId, CancellationToken ct);
     Task SaveCustomerAsync(Customer customer, string userId, CancellationToken ct);
+
+    Task<BuyingClub> LoadBuyingClubAsync(string clubId, CancellationToken ct);
+    Task SaveBuyingClubAsync(BuyingClub club, string userId, CancellationToken ct);
+
+    Task<WholesaleAccount> LoadWholesaleAccountAsync(string accountId, CancellationToken ct);
+    Task SaveWholesaleAccountAsync(WholesaleAccount account, string userId, CancellationToken ct);
 }

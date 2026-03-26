@@ -1,6 +1,6 @@
 import { Head } from "fresh/runtime";
 import { define } from "../../utils.ts";
-import NewMushroomBatchForm from "../../islands/NewMushroomBatchForm.tsx";
+import ArrowNewMushroomBatchForm from "../../islands/ArrowNewMushroomBatchForm.tsx";
 
 export default define.page(function NewMushroomPage() {
   return (
@@ -24,7 +24,7 @@ export default define.page(function NewMushroomPage() {
         </p>
       </div>
 
-      <NewMushroomBatchForm />
+      <ArrowNewMushroomBatchForm />
     </div>
   );
 });

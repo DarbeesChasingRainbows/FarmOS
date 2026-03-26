@@ -5,18 +5,12 @@
  * used by all FarmOS micro-frontends. Each app imports from here
  * and adds its own domain-specific API object (e.g. FloraAPI, ApiaryAPI).
  *
- * Wire format: MessagePack (`application/x-msgpack`) for all internal APIs.
- * The backend MessagePackMiddleware handles content negotiation:
- *   - Request bodies are encoded as MessagePack binary
- *   - Response bodies are decoded from MessagePack binary
- *   - Falls back to JSON if the server doesn't support msgpack (e.g. error pages)
+ * Wire format: JSON (`application/json`) for all internal APIs.
  *
  * Gateway URL resolution:
  *   Server-side (Deno): reads FARMOS_GATEWAY_URL or GATEWAY_URL env vars
- *   Client-side (browser): uses the current page origin (Caddy proxies /api/*)
+ *   Client-side (browser): uses localhost:5050 (Caddy gateway)
  */
-
-import { decode, encode } from "@msgpack/msgpack";
 
 // ─── Error Types ──────────────────────────────────────────────────
 
@@ -35,8 +29,10 @@ export class ApiError extends Error {
 
 const resolveGatewayUrl = (): string => {
   if (typeof document !== "undefined") {
-    // Browser — Caddy reverse-proxies /api/* on the same origin
-    return globalThis.location.origin;
+    // Browser — in dev, Deno Fresh runs on :8000 but Caddy gateway is on :5050
+    const injected = (globalThis as unknown as Record<string, string>).__FARMOS_GATEWAY_URL__;
+    if (injected) return injected;
+    return "http://localhost:5050";
   }
   // Server-side Deno process
   return Deno.env.get("FARMOS_GATEWAY_URL") ||
@@ -46,20 +42,15 @@ const resolveGatewayUrl = (): string => {
 
 const GATEWAY_URL = resolveGatewayUrl();
 
-const MSGPACK_CONTENT_TYPE = "application/x-msgpack";
-
 // ─── Core Fetch ───────────────────────────────────────────────────
 
 /**
- * Unified FarmOS API client with MessagePack wire format.
+ * Unified FarmOS API client with JSON wire format.
  * All requests go through the Gateway (Caddy reverse proxy).
  * Throws ApiError for structured error handling in route handlers.
  *
- * Request bodies are encoded as MessagePack binary.
- * Responses are decoded from MessagePack binary, with JSON fallback.
- *
  * @param path   API path (e.g. "/api/flora/beds")
- * @param options Standard RequestInit options (body should be a plain object, not stringified)
+ * @param options Standard RequestInit options (body should be a JSON string)
  * @returns Parsed response, or null for 204 No Content
  */
 export async function fetchFarmOS<T = unknown>(
@@ -68,23 +59,17 @@ export async function fetchFarmOS<T = unknown>(
 ): Promise<T | null> {
   const headers = new Headers(options.headers);
 
-  // Always request MessagePack responses
-  headers.set("Accept", MSGPACK_CONTENT_TYPE);
+  headers.set("Accept", "application/json");
 
-  // Encode request body as MessagePack for mutating operations
-  let body = options.body;
-  if (body && typeof body === "string") {
-    // Body was passed as JSON string — parse and re-encode as MessagePack
-    const parsed = JSON.parse(body);
-    body = encode(parsed);
-    headers.set("Content-Type", MSGPACK_CONTENT_TYPE);
+  // Set Content-Type for request bodies
+  if (options.body && typeof options.body === "string") {
+    headers.set("Content-Type", "application/json");
   }
 
   let response: Response;
   try {
     response = await fetch(`${GATEWAY_URL}${path}`, {
       ...options,
-      body,
       headers,
     });
   } catch (_err) {
@@ -92,13 +77,17 @@ export async function fetchFarmOS<T = unknown>(
   }
 
   if (!response.ok) {
-    // Error responses may come as JSON or MessagePack — try both
     if (response.status === 400) {
-      const err = await decodeResponse(response);
-      throw new ApiError(
-        400,
-        (err as Record<string, string>)?.message || "Domain rule violation",
-      );
+      try {
+        const err = await response.json();
+        throw new ApiError(
+          400,
+          (err as Record<string, string>)?.message || "Domain rule violation",
+        );
+      } catch (e) {
+        if (e instanceof ApiError) throw e;
+        throw new ApiError(400, "Bad request");
+      }
     }
     if (response.status === 404) {
       throw new ApiError(404, "Resource not found");
@@ -110,21 +99,5 @@ export async function fetchFarmOS<T = unknown>(
   }
 
   if (response.status === 204) return null;
-  return decodeResponse(response) as Promise<T>;
-}
-
-/**
- * Decode a response body based on Content-Type.
- * Supports both MessagePack and JSON (fallback for error pages, etc.)
- */
-async function decodeResponse(response: Response): Promise<unknown> {
-  const contentType = response.headers.get("Content-Type") || "";
-
-  if (contentType.includes(MSGPACK_CONTENT_TYPE)) {
-    const buffer = await response.arrayBuffer();
-    return decode(new Uint8Array(buffer));
-  }
-
-  // Fallback to JSON (error responses, non-msgpack endpoints)
-  return response.json();
+  return response.json() as Promise<T>;
 }

@@ -25,6 +25,12 @@ public static class LedgerEndpoints
             return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
         });
 
+        expenses.MapPost("/{id:guid}/tag-enterprise", async (Guid id, TagExpenseEnterpriseCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ExpenseId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
         // ─── Revenue ─────────────────────────────────────────────
 
         revenue.MapPost("/", async (RecordRevenueCommand cmd, IMediator m, CancellationToken ct) =>
@@ -34,6 +40,12 @@ public static class LedgerEndpoints
         });
 
         revenue.MapPost("/{id:guid}/void", async (Guid id, VoidRevenueCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { RevenueId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        revenue.MapPost("/{id:guid}/tag-enterprise", async (Guid id, TagRevenueEnterpriseCommand cmd, IMediator m, CancellationToken ct) =>
         {
             var result = await m.Send(cmd with { RevenueId = id }, ct);
             return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));

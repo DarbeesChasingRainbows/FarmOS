@@ -22,3 +22,10 @@ public record CreateOrderCommand(string CustomerName, IReadOnlyList<OrderItem> I
 public record PackOrderCommand(Guid OrderId) : ICommand<Guid>;
 public record FulfillOrderCommand(Guid OrderId) : ICommand<Guid>;
 public record CancelOrderCommand(Guid OrderId, string Reason) : ICommand<Guid>;
+
+// ─── A La Carte CSA ─────────────────────────────────────────────────
+
+public record SetSelectionModeCommand(Guid SeasonId, CSASelectionMode Mode, decimal FullShareValue, decimal HalfShareValue) : ICommand<Guid>;
+public record OpenSelectionWindowCommand(Guid SeasonId, DateOnly PickupDate, DateTimeOffset Deadline) : ICommand<Guid>;
+public record CloseSelectionWindowCommand(Guid SeasonId, DateOnly PickupDate) : ICommand<Guid>;
+public record SelectItemsCommand(Guid MemberId, DateOnly PickupDate, IReadOnlyList<CSAItemSelection> Items, decimal ShareAllowance) : ICommand<Guid>;

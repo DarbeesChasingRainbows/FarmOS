@@ -5,6 +5,7 @@ using FarmOS.Commerce.Application;
 using FarmOS.Commerce.Application.Commands.Handlers;
 using FarmOS.Commerce.Infrastructure;
 using FarmOS.SharedKernel.EventStore;
+using FarmOS.Commerce.Infrastructure.Projectors;
 using FarmOS.SharedKernel.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,8 @@ builder.Services.AddSingleton<IEventStore>(sp =>
 
 // ─── Commerce Services ───────────────────────────────────────────────
 builder.Services.AddScoped<ICommerceEventStore, CommerceEventStore>();
+builder.Services.AddSingleton<InventoryQueryService>();
+builder.Services.AddHostedService<InventoryProjectorWorker>();
 
 // ─── MediatR ─────────────────────────────────────────────────────────
 builder.Services.AddMediatR(cfg => {
@@ -41,5 +44,6 @@ var app = builder.Build();
 app.UseCors();
 app.UseMiddleware<MessagePackMiddleware>();
 app.MapCommerceEndpoints();
+app.MapInventoryEndpoints();
 
 app.Run();

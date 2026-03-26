@@ -24,11 +24,9 @@ export default function ConnectionBanner() {
     let connection: { stop: () => void } | null = null;
     const connect = async () => {
       try {
-        const gatewayUrl = (typeof window !== "undefined" &&
-          (window as unknown as Record<string, string>)?.__GATEWAY_URL__) ??
-          "http://localhost:5050";
-
-        const hubUrl = `${gatewayUrl}/hubs/kitchen`;
+        // For SignalR from the browser, use localhost gateway
+        // The GATEWAY_URL env var contains Docker-internal hostnames (caddy:5050) which don't resolve in browser
+        const hubUrl = `http://localhost:5050/hubs/kitchen`;
 
         const hub = new HubConnectionBuilder()
           .withUrl(hubUrl)

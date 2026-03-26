@@ -18,3 +18,6 @@ public record EmergencyContact(string Name, string Relationship, string Phone);
 public record WorkerProfile(string Name, string Email, string? Phone, WorkerRole Role, EmergencyContact? Emergency, string? HousingAssignment, DateOnly StartDate);
 public record Certification(CertificationType Type, string Name, DateOnly Issued, DateOnly? Expires, string? IssuingBody, string? DocumentPath);
 public record ShiftEntry(WorkerId WorkerId, Enterprise Enterprise, DateOnly Date, TimeOnly Start, TimeOnly End, string? TaskDescription, string? Notes);
+public record ApprenticeProgramId(Guid Value) { public static ApprenticeProgramId New() => new(Guid.NewGuid()); public override string ToString() => Value.ToString(); }
+public enum ProgramStatus { Active, Completed, Cancelled }
+public record RotationAssignment(Enterprise Enterprise, DateOnly StartDate, DateOnly EndDate, string? Mentor);

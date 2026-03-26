@@ -83,3 +83,64 @@ public sealed class PolicyCommandHandlers(IComplianceEventStore store) :
         return policy.Id.Value;
     }
 }
+
+public sealed class GrantCommandHandlers(IComplianceEventStore store) :
+    ICommandHandler<ApplyForGrantCommand, Guid>,
+    ICommandHandler<AwardGrantCommand, Guid>,
+    ICommandHandler<DenyGrantCommand, Guid>,
+    ICommandHandler<AddGrantMilestoneCommand, Guid>,
+    ICommandHandler<CompleteGrantMilestoneCommand, Guid>,
+    ICommandHandler<CloseGrantCommand, Guid>
+{
+    public async Task<Result<Guid, DomainError>> Handle(ApplyForGrantCommand cmd, CancellationToken ct)
+    {
+        var grant = Grant.Apply(cmd.Name, cmd.Grantor, cmd.Amount, cmd.ApplicationDate, cmd.Notes);
+        await store.SaveGrantAsync(grant, "steward", ct);
+        return grant.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(AwardGrantCommand cmd, CancellationToken ct)
+    {
+        var grant = await store.LoadGrantAsync(cmd.GrantId.ToString(), ct);
+        var result = grant.Award(cmd.AwardedAmount, cmd.AwardDate);
+        if (result.IsFailure) return result.Error;
+        await store.SaveGrantAsync(grant, "steward", ct);
+        return grant.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(DenyGrantCommand cmd, CancellationToken ct)
+    {
+        var grant = await store.LoadGrantAsync(cmd.GrantId.ToString(), ct);
+        var result = grant.Deny(cmd.Reason);
+        if (result.IsFailure) return result.Error;
+        await store.SaveGrantAsync(grant, "steward", ct);
+        return grant.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(AddGrantMilestoneCommand cmd, CancellationToken ct)
+    {
+        var grant = await store.LoadGrantAsync(cmd.GrantId.ToString(), ct);
+        var result = grant.AddMilestone(cmd.Milestone);
+        if (result.IsFailure) return result.Error;
+        await store.SaveGrantAsync(grant, "steward", ct);
+        return grant.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(CompleteGrantMilestoneCommand cmd, CancellationToken ct)
+    {
+        var grant = await store.LoadGrantAsync(cmd.GrantId.ToString(), ct);
+        var result = grant.CompleteMilestone(cmd.MilestoneDescription, cmd.ReportPath);
+        if (result.IsFailure) return result.Error;
+        await store.SaveGrantAsync(grant, "steward", ct);
+        return grant.Id.Value;
+    }
+
+    public async Task<Result<Guid, DomainError>> Handle(CloseGrantCommand cmd, CancellationToken ct)
+    {
+        var grant = await store.LoadGrantAsync(cmd.GrantId.ToString(), ct);
+        var result = grant.Close();
+        if (result.IsFailure) return result.Error;
+        await store.SaveGrantAsync(grant, "steward", ct);
+        return grant.Id.Value;
+    }
+}

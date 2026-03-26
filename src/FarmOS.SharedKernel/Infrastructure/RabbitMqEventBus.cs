@@ -17,12 +17,15 @@ public sealed class RabbitMqEventBus : IEventBus, IAsyncDisposable
     private IChannel? _publishChannel;
     private readonly SemaphoreSlim _initLock = new(1, 1);
 
-    public RabbitMqEventBus(string hostName, int port, string exchangeName = "farm.events")
+    public RabbitMqEventBus(string hostName, int port, string exchangeName = "farm.events",
+        string userName = "guest", string password = "guest")
     {
         _factory = new ConnectionFactory
         {
             HostName = hostName,
             Port = port,
+            UserName = userName,
+            Password = password,
         };
         _exchangeName = exchangeName;
     }

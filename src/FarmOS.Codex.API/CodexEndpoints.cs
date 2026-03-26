@@ -10,6 +10,7 @@ public static class CodexEndpoints
     {
         var procedures = app.MapGroup("/api/codex/procedures");
         var playbooks = app.MapGroup("/api/codex/playbooks");
+        var decisionTrees = app.MapGroup("/api/codex/decision-trees");
 
         // --- Procedures -------------------------------------------------------
 
@@ -60,6 +61,26 @@ public static class CodexEndpoints
         playbooks.MapPost("/{id:guid}/tasks/remove", async (Guid id, RemovePlaybookTaskCommand cmd, IMediator m, CancellationToken ct) =>
         {
             var result = await m.Send(cmd with { PlaybookId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        // --- DecisionTrees ----------------------------------------------------
+
+        decisionTrees.MapPost("/", async (CreateDecisionTreeCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd, ct);
+            return result.Match(id => Results.Created($"/api/codex/decision-trees/{id}", new { id }), err => Results.BadRequest(err));
+        });
+
+        decisionTrees.MapPost("/{id:guid}/nodes", async (Guid id, AddDecisionNodeCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { DecisionTreeId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        decisionTrees.MapPut("/{id:guid}/nodes/{nodeId}", async (Guid id, string nodeId, UpdateDecisionNodeCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { DecisionTreeId = id, NodeId = nodeId }, ct);
             return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
         });
     }

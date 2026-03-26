@@ -10,6 +10,7 @@ public static class CrewEndpoints
     {
         var workers = app.MapGroup("/api/crew/workers");
         var shifts = app.MapGroup("/api/crew/shifts");
+        var programs = app.MapGroup("/api/crew/programs");
 
         // --- Workers -------------------------------------------------------
 
@@ -60,6 +61,38 @@ public static class CrewEndpoints
         shifts.MapPost("/{id:guid}/cancel", async (Guid id, CancelShiftCommand cmd, IMediator m, CancellationToken ct) =>
         {
             var result = await m.Send(cmd with { ShiftId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        // --- Programs ----------------------------------------------------------
+
+        programs.MapPost("/", async (CreateProgramCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd, ct);
+            return result.Match(id => Results.Created($"/api/crew/programs/{id}", new { id }), err => Results.BadRequest(err));
+        });
+
+        programs.MapPost("/{id:guid}/enroll", async (Guid id, EnrollApprenticeCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ProgramId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        programs.MapPost("/{id:guid}/rotate", async (Guid id, RotateApprenticeCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ProgramId = id }, ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        programs.MapPost("/{id:guid}/complete", async (Guid id, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(new CompleteProgramCommand(id), ct);
+            return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
+        });
+
+        programs.MapPost("/{id:guid}/cancel", async (Guid id, CancelProgramCommand cmd, IMediator m, CancellationToken ct) =>
+        {
+            var result = await m.Send(cmd with { ProgramId = id }, ct);
             return result.Match(_ => Results.NoContent(), err => Results.BadRequest(err));
         });
     }
