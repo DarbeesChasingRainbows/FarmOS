@@ -45,7 +45,6 @@ builder.Services.AddCors(opts => opts.AddDefaultPolicy(policy =>
 var app = builder.Build();
 
 app.UseCors();
-app.UseMiddleware<MessagePackMiddleware>();
 app.MapApiaryEndpoints();
 
 app.Run();

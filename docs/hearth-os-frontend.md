@@ -7,7 +7,7 @@ Hearth OS is the dedicated micro-frontend for farm processing, kitchen activitie
 Hearth OS is built upon a modern, zero-build-step (or near-zero) server-side rendered stack:
 
 - **Deno Fresh 2.x**: Providing the core routing and rendering. All routes use the updated type-safe `define.page()` and `define.handlers()` API, ensuring strict type linkages between server data fetching and client presentation.
-- **Preact & `@preact/signals`**: For highly reactive, lightweight interactive components ("Islands").
+- **Arrow.js (`@arrow-js/core`)**: For reactive, zero-dependency interactive components ("Islands"). Each island uses a thin Preact wrapper (`useRef` + `useEffect`) to mount Arrow's `reactive()` state and `html` tagged templates.
 - **Tailwind CSS v4**: For utility-first styling, driven directly through Vite.
 - **Zod**: For strict runtime validation of data payloads sent to the backend API.
 - **SignalR (`@microsoft/signalr`)**: For establishing WebSocket connections to the API Gateway to receive live IoT telemetry.
@@ -93,9 +93,9 @@ Fresh 2.x file-system-based layout inheritance is used for clean separation:
 By leveraging Deno Fresh, maximum performance is achieved by serving pure HTML/CSS from the server for static content (like forms and tables). JavaScript is only shipped to the client for specific `islands/` components (like the `IoTLiveFeed` or the `SanitationLog` form).
 
 ### State Management
-Instead of complex Redux stores or heavy Context APIs, Hearth OS utilizes **Preact Signals**. 
-- Form states (`useSignal("")`) are co-located in the forms.
-- Global, lightweight states (such as application-wide Toast notifications) are managed via exported standalone signals in `utils/toastState.ts`. The `ToastProvider.tsx` island listens to this signal and dynamically renders success/error banners globally without causing main tree re-renders.
+Instead of complex Redux stores or heavy Context APIs, Hearth OS utilizes **Arrow.js `reactive()` objects** for island-local state.
+- Form states and UI toggles are encapsulated in a single `reactive({ ... })` object inside each island's `useEffect`, co-located with the template.
+- Global, lightweight states (such as application-wide Toast notifications) are managed via exported standalone signals in `utils/toastState.ts`. The `ArrowToastProvider.tsx` island listens to this signal and dynamically renders success/error banners globally without causing main tree re-renders.
 - **Connection state**: A global `connectionStatus` signal in `utils/connectionState.ts` tracks WebSocket health (`"connected" | "reconnecting" | "offline"`). Every telemetry-dependent island reads this to adjust its display.
 
 ### Offline Resilience & Stale Data
@@ -208,7 +208,7 @@ Unit tests covering edge cases for all validation schemas:
 - **HACCP corrective action enforcement**: `withinLimits: false` without `correctiveAction` must fail validation
 
 ### Island Component Tests
-Preact Testing Library for critical interaction flows:
+Arrow.js islands are tested by mounting their container `div` and verifying DOM output after reactive state changes:
 - Recording a CCP reading
 - Advancing a batch phase
 - Kombucha pH form submission

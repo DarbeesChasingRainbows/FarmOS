@@ -49,20 +49,18 @@ export function ArrowKPICard(props: KPICardProps) {
   const c = colorStyles[props.color || "amber"];
 
   const trendArrow = () => {
-    const dir =
-      typeof props.trendDirection === "function"
-        ? props.trendDirection()
-        : props.trendDirection;
+    const dir = typeof props.trendDirection === "function"
+      ? props.trendDirection()
+      : props.trendDirection;
     if (dir === "up") return "\u2197";
     if (dir === "down") return "\u2198";
     return "\u2192";
   };
 
   const trendColor = () => {
-    const dir =
-      typeof props.trendDirection === "function"
-        ? props.trendDirection()
-        : props.trendDirection;
+    const dir = typeof props.trendDirection === "function"
+      ? props.trendDirection()
+      : props.trendDirection;
     if (dir === "up") return "text-emerald-600 bg-emerald-50";
     if (dir === "down") return "text-red-600 bg-red-50";
     return "text-stone-500 bg-stone-50";
@@ -70,27 +68,30 @@ export function ArrowKPICard(props: KPICardProps) {
 
   return html`
     <div
-      class="${c.bg} rounded-2xl border border-stone-200/60 shadow-sm p-5 hover:shadow-md transition-shadow"
+      class="${c
+        .bg} rounded-2xl border border-stone-200/60 shadow-sm p-5 hover:shadow-md transition-shadow"
     >
       <div class="flex items-center justify-between mb-3">
         <span
-          class="w-10 h-10 rounded-xl ${c.iconBg} flex items-center justify-center text-lg"
-          >${props.icon}</span
-        >
+          class="w-10 h-10 rounded-xl ${c
+            .iconBg} flex items-center justify-center text-lg"
+        >${props.icon}</span>
         ${() => {
-          const trend =
-            typeof props.trend === "function" ? props.trend() : props.trend;
-          if (!trend) return html``;
+          const trend = typeof props.trend === "function"
+            ? props.trend()
+            : props.trend;
+          if (!trend) {
+            return html`
+
+            `;
+          }
           return html`
             <span
               class="${() =>
                 trendColor()} text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-0.5"
             >
-              ${() => trendArrow()}
-              ${() =>
-                typeof props.trend === "function"
-                  ? props.trend()
-                  : props.trend}
+              ${() => trendArrow()} ${() =>
+                typeof props.trend === "function" ? props.trend() : props.trend}
             </span>
           `;
         }}

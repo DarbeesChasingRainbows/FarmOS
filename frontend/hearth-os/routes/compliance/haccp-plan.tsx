@@ -1,6 +1,6 @@
 import { Head } from "fresh/runtime";
 import { define } from "../../utils.ts";
-import HACCPPlanBuilder from "../../islands/HACCPPlanBuilder.tsx";
+import ArrowHACCPPlanBuilder from "../../islands/ArrowHACCPPlanBuilder.tsx";
 
 /**
  * HACCP Plan Template route.
@@ -44,9 +44,16 @@ export default define.page(function HACCPPlan() {
 
   return (
     <div class="px-6 py-8 max-w-7xl mx-auto">
-      <Head><title>HACCP Plan — Hearth OS</title></Head>
+      <Head>
+        <title>HACCP Plan — Hearth OS</title>
+      </Head>
       <div class="mb-2">
-        <a href="/compliance" class="text-orange-600 hover:text-orange-700 text-sm font-semibold transition">&larr; Back to Compliance</a>
+        <a
+          href="/compliance"
+          class="text-orange-600 hover:text-orange-700 text-sm font-semibold transition"
+        >
+          &larr; Back to Compliance
+        </a>
       </div>
       {/* Document Header */}
       <div class="mb-8 pb-6 border-b-2 border-stone-800">
@@ -245,7 +252,7 @@ export default define.page(function HACCPPlan() {
           </span>
           Manage CCP Definitions
         </h2>
-        <HACCPPlanBuilder />
+        <ArrowHACCPPlanBuilder />
       </section>
 
       {/* Principle 6: Verification */}

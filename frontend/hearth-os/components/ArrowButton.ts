@@ -12,11 +12,12 @@ export interface ArrowButtonProps {
 export function ArrowButton(props: ArrowButtonProps) {
   return html`
     <button
-      id="${props.id || ''}"
-      type="${props.type || 'button'}"
+      id="${props.id || ""}"
+      type="${props.type || "button"}"
       @click="${props.onClick}"
       disabled="${props.disabled}"
-      class="px-2 py-1 border-stone-500 border-2 rounded-sm bg-white hover:bg-stone-200 transition-colors disabled:opacity-50 ${props.class || ''}"
+      class="px-2 py-1 border-stone-500 border-2 rounded-sm bg-white hover:bg-stone-200 transition-colors disabled:opacity-50 ${props
+        .class || ""}"
     >
       ${props.text}
     </button>

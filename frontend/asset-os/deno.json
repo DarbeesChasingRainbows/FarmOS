@@ -11,9 +11,9 @@
   "exclude": ["**/_fresh/*"],
   "imports": {
     "@/": "./",
-    "fresh": "jsr:@fresh/core@^2.2.0",
-    "preact": "npm:preact@^10.27.2",
-    "@preact/signals": "npm:@preact/signals@^2.5.0",
+    "fresh": "jsr:@fresh/core@^2.2.2",
+    "preact": "npm:preact@^10.28.3",
+    "@preact/signals": "npm:@preact/signals@^2.7.1",
     "npm:@preact/signals@^2.2.1": "npm:@preact/signals@^2.5.0",
     "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.8",
     "vite": "npm:vite@^7.1.3",

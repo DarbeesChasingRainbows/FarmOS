@@ -7,35 +7,40 @@ const sections = [
     href: "/beds",
     icon: "🌱",
     title: "Flower Beds",
-    description: "Manage beds, succession planting, and track the growing lifecycle from seed to harvest.",
+    description:
+      "Manage beds, succession planting, and track the growing lifecycle from seed to harvest.",
     color: "emerald",
   },
   {
     href: "/seeds",
     icon: "🌰",
     title: "Seed Inventory",
-    description: "Track seed lots, germination rates, and organic certification across suppliers.",
+    description:
+      "Track seed lots, germination rates, and organic certification across suppliers.",
     color: "amber",
   },
   {
     href: "/batches",
     icon: "✂️",
     title: "Post-Harvest",
-    description: "Grade stems, condition bunches, and manage cooler slots from field to vase.",
+    description:
+      "Grade stems, condition bunches, and manage cooler slots from field to vase.",
     color: "cyan",
   },
   {
     href: "/recipes",
     icon: "💐",
     title: "Bouquet Recipes",
-    description: "Design bouquet templates with focal, filler, greenery, and accent stems.",
+    description:
+      "Design bouquet templates with focal, filler, greenery, and accent stems.",
     color: "rose",
   },
   {
     href: "/plans",
     icon: "📋",
     title: "Crop Plans",
-    description: "Plan seasonal production, track yields per linear foot, and analyze profitability.",
+    description:
+      "Plan seasonal production, track yields per linear foot, and analyze profitability.",
     color: "blue",
   },
 ];
@@ -62,7 +67,8 @@ export default define.page(function Home() {
             🌸 Flower OS
           </h1>
           <p class="text-stone-500 mt-2">
-            Cut flower farm management — from succession planting to bouquet delivery.
+            Cut flower farm management — from succession planting to bouquet
+            delivery.
           </p>
         </div>
 
@@ -71,7 +77,9 @@ export default define.page(function Home() {
             <a
               key={href}
               href={href}
-              class={`block p-6 bg-white rounded-xl border-2 ${colorMap[color]} transition-all duration-200 hover:shadow-md`}
+              class={`block p-6 bg-white rounded-xl border-2 ${
+                colorMap[color]
+              } transition-all duration-200 hover:shadow-md`}
             >
               <div class="text-3xl mb-3">{icon}</div>
               <h2 class="text-lg font-bold text-stone-800">{title}</h2>

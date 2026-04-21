@@ -1,6 +1,6 @@
 import { Head } from "fresh/runtime";
 import { define } from "../../utils.ts";
-import CAPADashboard from "../../islands/CAPADashboard.tsx";
+import ArrowCAPADashboard from "../../islands/ArrowCAPADashboard.tsx";
 
 export default define.page(function CAPAPage() {
   return (
@@ -10,7 +10,12 @@ export default define.page(function CAPAPage() {
       </Head>
 
       <div class="mb-2">
-        <a href="/compliance" class="text-orange-600 hover:text-orange-700 text-sm font-semibold transition">&larr; Back to Compliance</a>
+        <a
+          href="/compliance"
+          class="text-orange-600 hover:text-orange-700 text-sm font-semibold transition"
+        >
+          &larr; Back to Compliance
+        </a>
       </div>
 
       <div class="mb-8">
@@ -23,7 +28,7 @@ export default define.page(function CAPAPage() {
         </p>
       </div>
 
-      <CAPADashboard />
+      <ArrowCAPADashboard />
     </div>
   );
 });

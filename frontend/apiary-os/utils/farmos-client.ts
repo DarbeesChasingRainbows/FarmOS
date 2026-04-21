@@ -414,20 +414,18 @@ export interface WeatherSnapshot {
 }
 
 export const ApiaryReportsAPI = {
-  getAllHives: () =>
-    fetchFarmOS<HiveSummary[]>("/api/apiary/hives"),
+  getAllHives: () => fetchFarmOS<HiveSummary[]>("/api/apiary/hives"),
 
-  getAllApiaries: () =>
-    fetchFarmOS<ApiaryOverview[]>("/api/apiary/apiaries"),
+  getAllApiaries: () => fetchFarmOS<ApiaryOverview[]>("/api/apiary/apiaries"),
 
   getMiteTrends: (hiveId?: string) =>
     fetchFarmOS<MiteTrendPoint[]>(
-      `/api/apiary/reports/mite-trends${hiveId ? `?hiveId=${hiveId}` : ""}`
+      `/api/apiary/reports/mite-trends${hiveId ? `?hiveId=${hiveId}` : ""}`,
     ),
 
   getYieldReport: (year?: number) =>
     fetchFarmOS<YieldReport>(
-      `/api/apiary/reports/yield${year ? `?year=${year}` : ""}`
+      `/api/apiary/reports/yield${year ? `?year=${year}` : ""}`,
     ),
 
   getSurvivalReport: () =>
@@ -435,15 +433,17 @@ export const ApiaryReportsAPI = {
 
   getCalendar: (month?: number) =>
     fetchFarmOS<SeasonalTask[]>(
-      `/api/apiary/calendar${month ? `?month=${month}` : ""}`
+      `/api/apiary/calendar${month ? `?month=${month}` : ""}`,
     ),
 
   getWeatherCorrelations: () =>
-    fetchFarmOS<WeatherCorrelation[]>("/api/apiary/reports/weather-correlation"),
+    fetchFarmOS<WeatherCorrelation[]>(
+      "/api/apiary/reports/weather-correlation",
+    ),
 
   getCurrentWeather: (lat: number, lng: number) =>
     fetchFarmOS<WeatherSnapshot | null>(
-      `/api/apiary/weather/current?lat=${lat}&lng=${lng}`
+      `/api/apiary/weather/current?lat=${lat}&lng=${lng}`,
     ),
 };
 
@@ -463,8 +463,12 @@ export const ApiarySensorsAPI = {
     fetchFarmOS<SensorReading[]>(`/api/apiary/hives/${hiveId}/sensors`),
 
   getSummary: (hiveId: string) =>
-    fetchFarmOS<SensorSummary | null>(`/api/apiary/hives/${hiveId}/sensors/summary`),
+    fetchFarmOS<SensorSummary | null>(
+      `/api/apiary/hives/${hiveId}/sensors/summary`,
+    ),
 
   getWeightTrend: (hiveId: string) =>
-    fetchFarmOS<WeightTrend[]>(`/api/apiary/hives/${hiveId}/sensors/weight-trend`),
+    fetchFarmOS<WeightTrend[]>(
+      `/api/apiary/hives/${hiveId}/sensors/weight-trend`,
+    ),
 };

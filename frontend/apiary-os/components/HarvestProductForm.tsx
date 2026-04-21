@@ -74,8 +74,8 @@ export default function HarvestProductForm(
             : undefined,
         },
       });
-      const productLabel =
-        productTypes[Number(product.value)]?.label ?? "Product";
+      const productLabel = productTypes[Number(product.value)]?.label ??
+        "Product";
       showToast(
         "success",
         "Harvest recorded",

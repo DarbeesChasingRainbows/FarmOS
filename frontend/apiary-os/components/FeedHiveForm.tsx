@@ -3,14 +3,26 @@ import { showToast } from "../utils/toastState.ts";
 import FormField from "../components/FormField.tsx";
 import {
   extractErrors,
-  type FieldErrors,
   FeedingSchema,
+  type FieldErrors,
 } from "../utils/schemas.ts";
 
 const feedTypes = [
-  { value: 0, label: "Sugar Syrup", desc: "1:1 (spring) or 2:1 (fall) sugar water" },
-  { value: 1, label: "Fondant", desc: "Solid sugar block for winter emergency feeding" },
-  { value: 2, label: "Pollen Patty", desc: "Protein supplement for brood rearing" },
+  {
+    value: 0,
+    label: "Sugar Syrup",
+    desc: "1:1 (spring) or 2:1 (fall) sugar water",
+  },
+  {
+    value: 1,
+    label: "Fondant",
+    desc: "Solid sugar block for winter emergency feeding",
+  },
+  {
+    value: 2,
+    label: "Pollen Patty",
+    desc: "Protein supplement for brood rearing",
+  },
   { value: 3, label: "Other", desc: "Honey frames, dry sugar, etc." },
 ];
 
@@ -59,7 +71,11 @@ export default function FeedHiveForm(
 
     if (!result.success) {
       errors.value = extractErrors(result);
-      showToast("error", "Validation failed", "Please fix the highlighted fields.");
+      showToast(
+        "error",
+        "Validation failed",
+        "Please fix the highlighted fields.",
+      );
       return;
     }
 
@@ -84,11 +100,17 @@ export default function FeedHiveForm(
       showToast(
         "success",
         "Feeding recorded",
-        `${hiveName} fed ${result.data.amountValue} ${result.data.amountUnit} of ${feedTypes[result.data.feedType].label}.`,
+        `${hiveName} fed ${result.data.amountValue} ${result.data.amountUnit} of ${
+          feedTypes[result.data.feedType].label
+        }.`,
       );
       resetForm();
     } catch (err: unknown) {
-      showToast("error", "Failed to record feeding", err instanceof Error ? err.message : "Unknown error");
+      showToast(
+        "error",
+        "Failed to record feeding",
+        err instanceof Error ? err.message : "Unknown error",
+      );
     } finally {
       isSubmitting.value = false;
     }
@@ -121,9 +143,7 @@ export default function FeedHiveForm(
               onChange={(e) =>
                 feedType.value = (e.target as HTMLSelectElement).value}
             >
-              {feedTypes.map((t) => (
-                <option value={t.value}>{t.label}</option>
-              ))}
+              {feedTypes.map((t) => <option value={t.value}>{t.label}</option>)}
             </select>
             <p class="text-xs text-stone-400 mt-1">
               {feedTypes[Number(feedType.value)]?.desc}

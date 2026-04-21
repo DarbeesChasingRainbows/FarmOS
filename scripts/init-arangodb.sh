@@ -14,7 +14,8 @@ curl -s -X POST http://arangodb:8529/_api/database \
 
 echo "Database 'farmos' ensured."
 
-for col in pasture_events flora_events hearth_events apiary_events commerce_events assets_events ledger_events iot_events; do
+for col in pasture_events flora_events hearth_events apiary_events commerce_events assets_events ledger_events iot_events \
+           campus_events codex_events compliance_events counter_events crew_events; do
   curl -s -X POST http://arangodb:8529/_db/farmos/_api/collection \
     --user root:farmos_dev \
     -H "Content-Type: application/json" \

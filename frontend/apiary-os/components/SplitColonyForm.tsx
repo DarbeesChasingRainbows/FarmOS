@@ -96,7 +96,11 @@ export default function SplitColonyForm(
       </h4>
       <form onSubmit={onSubmit} class="flex flex-col gap-3">
         <div class="grid grid-cols-2 gap-3">
-          <FormField label="New Hive Name" error={errors.value.newName} required>
+          <FormField
+            label="New Hive Name"
+            error={errors.value.newName}
+            required
+          >
             <input
               type="text"
               class={inputClass("newName")}
@@ -114,9 +118,7 @@ export default function SplitColonyForm(
               onChange={(e) =>
                 newType.value = (e.target as HTMLSelectElement).value}
             >
-              {hiveTypes.map((t) => (
-                <option value={t.value}>{t.label}</option>
-              ))}
+              {hiveTypes.map((t) => <option value={t.value}>{t.label}</option>)}
             </select>
           </FormField>
         </div>

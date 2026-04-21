@@ -28,10 +28,9 @@ export function ArrowStatusBadge(props: ArrowStatusBadgeProps) {
   return html`
     <span
       class="${() => {
-        const v =
-          typeof props.variant === "function"
-            ? props.variant()
-            : props.variant;
+        const v = typeof props.variant === "function"
+          ? props.variant()
+          : props.variant;
         return (
           "inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold uppercase tracking-wider rounded-full border " +
           variants[v]
@@ -39,12 +38,12 @@ export function ArrowStatusBadge(props: ArrowStatusBadgeProps) {
       }}"
     >
       ${() => {
-        const v =
-          typeof props.variant === "function"
-            ? props.variant()
-            : props.variant;
-        const l =
-          typeof props.label === "function" ? props.label() : props.label;
+        const v = typeof props.variant === "function"
+          ? props.variant()
+          : props.variant;
+        const l = typeof props.label === "function"
+          ? props.label()
+          : props.label;
         return l || v.charAt(0).toUpperCase() + v.slice(1);
       }}
     </span>

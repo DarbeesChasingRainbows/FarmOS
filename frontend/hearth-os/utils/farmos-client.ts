@@ -262,7 +262,9 @@ export interface ActiveFermentationMonitorDto {
 
 export const FermentationAPI = {
   getActiveMonitoring: () =>
-    fetchFarmOS<ActiveFermentationMonitorDto[]>("/api/hearth/fermentation/active-monitoring"),
+    fetchFarmOS<ActiveFermentationMonitorDto[]>(
+      "/api/hearth/fermentation/active-monitoring",
+    ),
 };
 
 // ─── HACCP / Compliance API ────────────────────────────────────────
@@ -289,25 +291,36 @@ export const HACCPAPI = {
       body: JSON.stringify(cmd),
     }),
 
-  removeCCPDefinition: (planId: string, cmd: { product: string; ccpName: string }) =>
+  removeCCPDefinition: (
+    planId: string,
+    cmd: { product: string; ccpName: string },
+  ) =>
     fetchFarmOS(`/api/hearth/compliance/haccp/plans/${planId}/ccps`, {
       method: "DELETE",
       body: JSON.stringify(cmd),
     }),
 
-  openCAPA: (cmd: { description: string; deviationSource: string; relatedCTE?: number }) =>
+  openCAPA: (
+    cmd: { description: string; deviationSource: string; relatedCTE?: number },
+  ) =>
     fetchFarmOS<{ id: string }>("/api/hearth/compliance/capa", {
       method: "POST",
       body: JSON.stringify(cmd),
     }),
 
-  closeCAPA: (capaId: string, cmd: { resolution: string; verifiedBy: string }) =>
+  closeCAPA: (
+    capaId: string,
+    cmd: { resolution: string; verifiedBy: string },
+  ) =>
     fetchFarmOS(`/api/hearth/compliance/capa/${capaId}/close`, {
       method: "POST",
       body: JSON.stringify(cmd),
     }),
 
-  appendCorrection: (logId: string, cmd: { reason: string; correctedValueF?: number; correctedBy: string }) =>
+  appendCorrection: (
+    logId: string,
+    cmd: { reason: string; correctedValueF?: number; correctedBy: string },
+  ) =>
     fetchFarmOS(`/api/hearth/kitchen/temps/${logId}/correction`, {
       method: "POST",
       body: JSON.stringify(cmd),
@@ -326,16 +339,29 @@ export interface FreezeDryerBatchDto {
 }
 
 export const FreezeDryerAPI = {
-  getBatches: () => fetchFarmOS<FreezeDryerBatchDto[]>("/api/hearth/freeze-dryer"),
+  getBatches: () =>
+    fetchFarmOS<FreezeDryerBatchDto[]>("/api/hearth/freeze-dryer"),
 
-  startBatch: (cmd: { batchCode: string; dryerId: string; productDescription: string; preDryWeight: number }) =>
+  startBatch: (
+    cmd: {
+      batchCode: string;
+      dryerId: string;
+      productDescription: string;
+      preDryWeight: number;
+    },
+  ) =>
     fetchFarmOS<{ id: string }>("/api/hearth/freeze-dryer", {
       method: "POST",
       body: JSON.stringify(cmd),
     }),
 
   recordReading: (batchId: string, cmd: {
-    reading: { shelfTempF: number; vacuumMTorr: number; productTempF?: number; notes?: string };
+    reading: {
+      shelfTempF: number;
+      vacuumMTorr: number;
+      productTempF?: number;
+      notes?: string;
+    };
   }) =>
     fetchFarmOS(`/api/hearth/freeze-dryer/${batchId}/readings`, {
       method: "POST",
@@ -443,13 +469,29 @@ export interface ZoneDetailDto extends ZoneSummaryDto {
 export const IoTAPI = {
   // Devices
   getDevices: () => fetchFarmOS<DeviceSummaryDto[]>("/api/iot/devices"),
-  getDevice: (id: string) => fetchFarmOS<DeviceDetailDto>(`/api/iot/devices/${id}`),
-  registerDevice: (cmd: { deviceCode: string; name: string; sensorType: number; metadata?: Record<string, string> }) =>
+  getDevice: (id: string) =>
+    fetchFarmOS<DeviceDetailDto>(`/api/iot/devices/${id}`),
+  registerDevice: (
+    cmd: {
+      deviceCode: string;
+      name: string;
+      sensorType: number;
+      metadata?: Record<string, string>;
+    },
+  ) =>
     fetchFarmOS<{ id: string }>("/api/iot/devices", {
       method: "POST",
       body: JSON.stringify(cmd),
     }),
-  updateDevice: (id: string, cmd: { deviceId: string; name: string; status: number; metadata?: Record<string, string> }) =>
+  updateDevice: (
+    id: string,
+    cmd: {
+      deviceId: string;
+      name: string;
+      status: number;
+      metadata?: Record<string, string>;
+    },
+  ) =>
     fetchFarmOS(`/api/iot/devices/${id}`, {
       method: "PUT",
       body: JSON.stringify(cmd),
@@ -459,7 +501,15 @@ export const IoTAPI = {
       method: "POST",
       body: JSON.stringify(cmd),
     }),
-  assignDeviceToZone: (id: string, cmd: { deviceId: string; zoneId: string; gridPos?: GridPosition; geoPos?: GeoPosition }) =>
+  assignDeviceToZone: (
+    id: string,
+    cmd: {
+      deviceId: string;
+      zoneId: string;
+      gridPos?: GridPosition;
+      geoPos?: GeoPosition;
+    },
+  ) =>
     fetchFarmOS(`/api/iot/devices/${id}/zone`, {
       method: "PUT",
       body: JSON.stringify(cmd),
@@ -472,12 +522,24 @@ export const IoTAPI = {
   // Zones
   getZones: () => fetchFarmOS<ZoneSummaryDto[]>("/api/iot/zones"),
   getZone: (id: string) => fetchFarmOS<ZoneDetailDto>(`/api/iot/zones/${id}`),
-  createZone: (cmd: { name: string; zoneType: number; description?: string; parentZoneId?: string; gridPos?: GridPosition; geoPos?: GeoPosition }) =>
+  createZone: (
+    cmd: {
+      name: string;
+      zoneType: number;
+      description?: string;
+      parentZoneId?: string;
+      gridPos?: GridPosition;
+      geoPos?: GeoPosition;
+    },
+  ) =>
     fetchFarmOS<{ id: string }>("/api/iot/zones", {
       method: "POST",
       body: JSON.stringify(cmd),
     }),
-  updateZone: (id: string, cmd: { zoneId: string; name: string; description?: string }) =>
+  updateZone: (
+    id: string,
+    cmd: { zoneId: string; name: string; description?: string },
+  ) =>
     fetchFarmOS(`/api/iot/zones/${id}`, {
       method: "PUT",
       body: JSON.stringify(cmd),

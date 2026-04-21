@@ -57,9 +57,7 @@ export default function BedManagementPanel() {
       newBlock.value = "";
       await loadBeds();
     } catch (err) {
-      error.value = err instanceof Error
-        ? err.message
-        : "Failed to create bed";
+      error.value = err instanceof Error ? err.message : "Failed to create bed";
     }
   };
 
@@ -105,16 +103,18 @@ export default function BedManagementPanel() {
                 type="text"
                 placeholder="Bed name (e.g., Bed A-1)"
                 value={newName.value}
-                onInput={(e) =>
-                  (newName.value = (e.target as HTMLInputElement).value)}
+                onInput={(
+                  e,
+                ) => (newName.value = (e.target as HTMLInputElement).value)}
                 class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               />
               <input
                 type="text"
                 placeholder="Block (e.g., North Field)"
                 value={newBlock.value}
-                onInput={(e) =>
-                  (newBlock.value = (e.target as HTMLInputElement).value)}
+                onInput={(
+                  e,
+                ) => (newBlock.value = (e.target as HTMLInputElement).value)}
                 class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
               />
               <div class="flex gap-2">
@@ -123,9 +123,10 @@ export default function BedManagementPanel() {
                   <input
                     type="number"
                     value={newLength.value}
-                    onInput={(e) =>
-                      (newLength.value =
-                        +(e.target as HTMLInputElement).value)}
+                    onInput={(
+                      e,
+                    ) => (newLength.value = +(e.target as HTMLInputElement)
+                      .value)}
                     class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg"
                   />
                 </div>
@@ -134,9 +135,10 @@ export default function BedManagementPanel() {
                   <input
                     type="number"
                     value={newWidth.value}
-                    onInput={(e) =>
-                      (newWidth.value =
-                        +(e.target as HTMLInputElement).value)}
+                    onInput={(
+                      e,
+                    ) => (newWidth.value = +(e.target as HTMLInputElement)
+                      .value)}
                     class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg"
                   />
                 </div>
@@ -191,9 +193,7 @@ export default function BedManagementPanel() {
                         {bed.name}
                       </span>
                       <StatusBadge
-                        status={bed.successionCount > 0
-                          ? "growing"
-                          : "planned"}
+                        status={bed.successionCount > 0 ? "growing" : "planned"}
                         label={`${bed.successionCount} succ.`}
                       />
                     </div>
