@@ -1,27 +1,34 @@
 import { useEffect, useRef } from "preact/hooks";
-import { reactive, html } from "@arrow-js/core";
+import { html, reactive } from "@arrow-js/core";
 import { showToast } from "../utils/toastState.ts";
-import { ArrowTooltip, ArrowInfoIcon } from "../components/ArrowTooltip.ts";
-import { extractErrors, type FieldErrors, PHRecordSchema } from "../utils/schemas.ts";
+import { ArrowInfoIcon, ArrowTooltip } from "../components/ArrowTooltip.ts";
+import {
+  clearErrors,
+  extractErrors,
+  type FieldErrors,
+  PHRecordSchema,
+} from "../utils/schemas.ts";
 
 export interface ArrowRecordPHFormProps {
   batchId: string;
   batchType: "sourdough" | "kombucha";
 }
 
-export default function ArrowRecordPHForm({ batchId, batchType }: ArrowRecordPHFormProps) {
+export default function ArrowRecordPHForm(
+  { batchId, batchType }: ArrowRecordPHFormProps,
+) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
-    containerRef.current.innerHTML = '';
+    containerRef.current.innerHTML = "";
 
     const state = reactive({
       isOpen: false,
       ph: "",
       temp: "",
       isSubmitting: false,
-      errors: {} as FieldErrors
+      errors: {} as FieldErrors,
     });
 
     const onSubmit = async (e: Event) => {
@@ -33,12 +40,12 @@ export default function ArrowRecordPHForm({ batchId, batchType }: ArrowRecordPHF
       });
 
       if (!result.success) {
-        state.errors = extractErrors(result);
+        clearErrors(state.errors);
         return;
       }
 
       state.isSubmitting = true;
-      state.errors = {};
+      clearErrors(state.errors);
 
       try {
         const { HearthAPI } = await import("../utils/farmos-client.ts");
@@ -57,14 +64,22 @@ export default function ArrowRecordPHForm({ batchId, batchType }: ArrowRecordPHF
           });
         }
 
-        showToast("success", "pH recorded", `pH ${result.data.pH} saved for batch.`);
+        showToast(
+          "success",
+          "pH recorded",
+          `pH ${result.data.pH} saved for batch.`,
+        );
         state.ph = "";
         state.temp = "";
         setTimeout(() => {
           state.isOpen = false;
         }, 1000);
       } catch (err: unknown) {
-        showToast("error", "Failed to record pH", err instanceof Error ? err.message : "Unknown error");
+        showToast(
+          "error",
+          "Failed to record pH",
+          err instanceof Error ? err.message : "Unknown error",
+        );
       } finally {
         state.isSubmitting = false;
       }
@@ -92,21 +107,29 @@ export default function ArrowRecordPHForm({ batchId, batchType }: ArrowRecordPHF
                 min="0"
                 max="14"
                 placeholder="pH"
-                class="w-16 px-2 py-1 border rounded text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 ${() => state.errors.pH ? 'border-red-400' : 'border-stone-300'}"
+                class="w-16 px-2 py-1 border rounded text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 ${() =>
+                  state.errors.pH ? "border-red-400" : "border-stone-300"}"
                 value="${() => state.ph}"
-                @input="${(e: Event) => state.ph = (e.target as HTMLInputElement).value}"
+                @input="${(e: Event) =>
+                  state.ph = (e.target as HTMLInputElement).value}"
               />
               ${ArrowTooltip({
-                text: batchType === "kombucha" ? "Kombucha safe range: 2.5–3.5 pH. Below 2.5 is too acidic." : "Sourdough target: 3.5–4.5 pH during bulk ferment.",
-                children: ArrowInfoIcon()
+                text: batchType === "kombucha"
+                  ? "Kombucha safe range: 2.5–3.5 pH. Below 2.5 is too acidic."
+                  : "Sourdough target: 3.5–4.5 pH during bulk ferment.",
+                children: ArrowInfoIcon(),
               })}
             </div>
             <input
               type="number"
               placeholder="°F"
-              class="w-14 px-2 py-1 border rounded text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 ${() => state.errors.temperature ? 'border-red-400' : 'border-stone-300'}"
+              class="w-14 px-2 py-1 border rounded text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 ${() =>
+                state.errors.temperature
+                  ? "border-red-400"
+                  : "border-stone-300"}"
               value="${() => state.temp}"
-              @input="${(e: Event) => state.temp = (e.target as HTMLInputElement).value}"
+              @input="${(e: Event) =>
+                state.temp = (e.target as HTMLInputElement).value}"
             />
             <button
               type="submit"
@@ -117,7 +140,10 @@ export default function ArrowRecordPHForm({ batchId, batchType }: ArrowRecordPHF
             </button>
             <button
               type="button"
-              @click="${() => { state.isOpen = false; state.errors = {}; }}"
+              @click="${() => {
+                state.isOpen = false;
+                clearErrors(state.errors);
+              }}"
               class="text-stone-400 hover:text-stone-600 text-xs"
             >
               ✕

@@ -57,32 +57,34 @@ export default function ArrowNavBar(
       return currentPath.startsWith(href);
     };
 
-    const navLink = (item: NavItem) => html`
-      <li>
-        <a
-          href="${item.href}"
-          class="${isActive(item.href)
-      ? "bg-orange-600/20 text-orange-300 shadow-sm"
-      : "text-stone-400 hover:bg-stone-800 hover:text-stone-200"} flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150"
-        >
-          <span class="text-lg">${item.icon}</span>
-          <span class="hidden lg:inline">${item.label}</span>
-        </a>
-      </li>
-    `;
+    const navLink = (item: NavItem) =>
+      html`
+        <li>
+          <a
+            href="${item.href}"
+            class="${isActive(item.href)
+              ? "bg-orange-600/20 text-orange-300 shadow-sm"
+              : "text-stone-400 hover:bg-stone-800 hover:text-stone-200"} flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150"
+          >
+            <span class="text-lg">${item.icon}</span>
+            <span class="hidden lg:inline">${item.label}</span>
+          </a>
+        </li>
+      `;
 
-    const navGroupTemplate = (group: NavGroup) => html`
-      <div class="mb-6">
-        <p
-          class="text-[10px] text-stone-600 uppercase tracking-widest font-bold px-3 mb-2 hidden lg:block"
-        >
-          ${group.title}
-        </p>
-        <ul class="space-y-1">
-          ${group.items.map((item) => navLink(item))}
-        </ul>
-      </div>
-    `;
+    const navGroupTemplate = (group: NavGroup) =>
+      html`
+        <div class="mb-6">
+          <p
+            class="text-[10px] text-stone-600 uppercase tracking-widest font-bold px-3 mb-2 hidden lg:block"
+          >
+            ${group.title}
+          </p>
+          <ul class="space-y-1">
+            ${group.items.map((item) => navLink(item))}
+          </ul>
+        </div>
+      `;
 
     const template = html`
       <nav
@@ -92,11 +94,9 @@ export default function ArrowNavBar(
           <h1
             class="text-xl font-bold tracking-tight text-orange-400 hidden lg:flex items-center gap-2"
           >
-            <span>\uD83D\uDD25</span> Hearth OS
+            <span>\\uD83D\\uDD25</span> Hearth OS
           </h1>
-          <span class="text-xl lg:hidden block text-center"
-            >\uD83D\uDD25</span
-          >
+          <span class="text-xl lg:hidden block text-center">\\uD83D\\uDD25</span>
           <p
             class="text-xs text-stone-500 mt-1 uppercase tracking-widest hidden lg:block"
           >
@@ -116,11 +116,10 @@ export default function ArrowNavBar(
 
         <div class="px-3 lg:px-6 py-4 border-t border-stone-800">
           <p class="text-xs text-stone-600 hidden lg:block">
-            Sovereign \u00B7 Offline-First
+            Sovereign \\u00B7 Offline-First
           </p>
           <span class="text-xs text-stone-600 lg:hidden block text-center"
-            >\u25CF</span
-          >
+          >\\u25CF</span>
         </div>
       </nav>
     `;

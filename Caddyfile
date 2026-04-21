@@ -62,6 +62,39 @@
 		reverse_proxy iot-api:8080
 	}
 
+	handle /api/campus/* {
+		reverse_proxy campus-api:8080
+	}
+
+	handle /api/codex/* {
+		reverse_proxy codex-api:8080
+	}
+
+	handle /api/compliance/* {
+		reverse_proxy compliance-api:8080
+	}
+
+	handle /api/counter/* {
+		reverse_proxy counter-api:8080
+	}
+
+	handle /api/crew/* {
+		reverse_proxy crew-api:8080
+	}
+
+	# ── Marketplace (MCP + UCP + SEO structured data) ───────────────────
+	handle /api/marketplace/* {
+		reverse_proxy marketplace-api:8080
+	}
+
+	handle /mcp* {
+		reverse_proxy marketplace-api:8080
+	}
+
+	handle /.well-known/ucp {
+		reverse_proxy marketplace-api:8080
+	}
+
 	# ── Frontend micro-apps ─────────────────────────────────────────
 	handle /iot-os/* {
 		reverse_proxy iot-os-ui:8000

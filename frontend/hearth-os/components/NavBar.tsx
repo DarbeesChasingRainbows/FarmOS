@@ -68,7 +68,9 @@ export default function NavBar({ currentPath }: { currentPath: string }) {
       {/* Footer */}
       <div class="px-8 py-6">
         <div class="w-8 h-1 rounded-full bg-stone-800 mb-3"></div>
-        <p class="text-[10px] text-stone-500 font-bold tracking-widest uppercase">Sovereign OS</p>
+        <p class="text-[10px] text-stone-500 font-bold tracking-widest uppercase">
+          Sovereign OS
+        </p>
       </div>
     </nav>
   );

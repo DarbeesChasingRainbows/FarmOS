@@ -1,3 +1,5 @@
+name: farmos
+
 services:
   arangodb:
     image: arangodb:latest
@@ -79,6 +81,18 @@ services:
       ledger-api:
         condition: service_started
       iot-api:
+        condition: service_started
+      campus-api:
+        condition: service_started
+      codex-api:
+        condition: service_started
+      compliance-api:
+        condition: service_started
+      counter-api:
+        condition: service_started
+      crew-api:
+        condition: service_started
+      marketplace-api:
         condition: service_started
     restart: unless-stopped
 
@@ -237,6 +251,96 @@ services:
       dockerfile: Dockerfile.api
       args:
         PROJECT_NAME: FarmOS.Ledger.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  campus-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Campus.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  codex-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Codex.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  compliance-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Compliance.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  counter-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Counter.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  crew-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Crew.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ArangoDB__Url=http://arangodb:8529
+      - ArangoDB__Password=farmos_dev
+    depends_on:
+      arangodb-init:
+        condition: service_completed_successfully
+
+  marketplace-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      args:
+        PROJECT_NAME: FarmOS.Marketplace.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080

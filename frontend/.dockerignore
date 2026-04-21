@@ -1,0 +1,6 @@
+**/node_modules
+**/.deno
+**/_fresh
+**/.vite
+**/build_errors_docker.txt
+**/deno.lock.bak

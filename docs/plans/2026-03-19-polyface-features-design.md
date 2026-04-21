@@ -1,17 +1,19 @@
 # Polyface-Style Feature Expansion Design
 
 **Date:** 2026-03-19
-**Status:** Approved
+**Status:** Approved (amended 2026-04-20 — federation seam added)
 **Scope:** 4 new bounded contexts + 2 extensions + 1 cross-cutting context
+
+> **Amendment (2026-04-20):** `Commerce` and `Ledger` now also participate in a **B2B federation seam** with external Quartermaster (QM) peers such as Mustang Coffee. A FarmOS tenant runs its own QM instance as a supplier peer; inbound procurement orders, invoices, and payments are translated by a dedicated `FarmOS.Federation.Quartermaster` adapter and projected into `Commerce` (as `WholesaleAccount` / standing-order records) and `Ledger` (as `RevenueCategory.Wholesale` / `ExpenseCategory.Processing` entries). The in-house decision below is unchanged — federation is *additive*, not a replacement for FarmOS's farm-enterprise accounting. See `docs/plans/2026-04-20-quartermaster-federation-design.md` for the full design.
 
 ## Overview
 
-FarmOS has 8 bounded contexts covering farm operations (Pasture, Flora, Hearth, Apiary), business (Commerce, Ledger), and infrastructure (Assets, IoT). This design adds 7 feature areas to support a Polyface Farms-style diversified operation with commercial value-added products (Jun, cafe, syrups, sourdough) and eventual agritourism/education programs.
+FarmOS has 8 (and growing) bounded contexts covering farm operations (Pasture, Flora, Hearth, Apiary), business (Commerce, Ledger), and infrastructure (Assets, IoT). This design adds 7 feature areas to support a Polyface Farms-style diversified operation with commercial value-added products (Jun, cafe, syrups, sourdough) and eventual agritourism/education programs.
 
 ## Decision: Build In-House (Not External CRM)
 
 Evaluated Twenty CRM (Docker) and ERPNext integration. Chose in-house for:
-- **Sovereignty** -- no external dependencies, air-gapped compatible
+- **Sovereignty** -- no external dependencies, air-gapped compatible but not required
 - **Event sourcing** -- complete audit trail for compliance
 - **Farm-specific models** -- buying clubs, drop sites, ordering cycles don't map to Salesforce-shaped CRM abstractions
 - **Single data store** -- ArangoDB, no PostgreSQL sidecar

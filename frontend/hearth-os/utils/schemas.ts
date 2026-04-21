@@ -214,7 +214,9 @@ export const FreezeDryerBatchSchema = z.object({
   batchCode: z.string().min(3, "Batch code must be at least 3 characters")
     .regex(/^[A-Za-z0-9-]+$/, "Only letters, numbers, and hyphens"),
   dryerId: z.string().uuid("Select a freeze dryer"),
-  productDescription: z.string().min(2, "Product description required").max(200),
+  productDescription: z.string().min(2, "Product description required").max(
+    200,
+  ),
   preDryWeight: z.coerce.number().positive("Pre-dry weight must be positive"),
 });
 
@@ -244,9 +246,15 @@ export const CCPDefinitionSchema = z.object({
   product: z.string().min(2, "Product name required").max(100),
   ccpName: z.string().min(2, "CCP name required").max(100),
   hazardType: z.coerce.number().min(0).max(3),
-  criticalLimitExpression: z.string().min(2, "Critical limit required").max(200),
-  monitoringProcedure: z.string().min(5, "Monitoring procedure required").max(500),
-  defaultCorrectiveAction: z.string().min(5, "Corrective action required").max(500),
+  criticalLimitExpression: z.string().min(2, "Critical limit required").max(
+    200,
+  ),
+  monitoringProcedure: z.string().min(5, "Monitoring procedure required").max(
+    500,
+  ),
+  defaultCorrectiveAction: z.string().min(5, "Corrective action required").max(
+    500,
+  ),
 });
 
 // ─── Monitoring Correction ──────────────────────────────────────────
@@ -271,4 +279,23 @@ export function extractErrors(
     if (!errors[key]) errors[key] = issue.message;
   }
   return errors;
+}
+
+/**
+ * Clear all keys from a reactive error proxy in-place.
+ * Arrow.js reactive() wraps objects in a ReactiveProxy with internal
+ * tracking props ($on, $off, _em, _st). Reassigning `state.errors = {}`
+ * replaces the proxy with a plain object, breaking reactivity and types.
+ * This helper mutates the existing proxy instead.
+ */
+export function clearErrors(target: FieldErrors): void {
+  for (const key of Object.keys(target)) delete target[key];
+}
+
+/**
+ * Set errors on a reactive error proxy in-place (clear then copy).
+ */
+export function setErrors(target: FieldErrors, source: FieldErrors): void {
+  clearErrors(target);
+  for (const [key, value] of Object.entries(source)) target[key] = value;
 }

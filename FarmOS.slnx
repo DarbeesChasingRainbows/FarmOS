@@ -61,4 +61,7 @@
     <Project Path="src/FarmOS.Pasture.Infrastructure/FarmOS.Pasture.Infrastructure.csproj" />
     <Project Path="src/FarmOS.SharedKernel/FarmOS.SharedKernel.csproj" />
   </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/FarmOS.EventViewer/FarmOS.EventViewer.csproj" />
+  </Folder>
 </Solution>

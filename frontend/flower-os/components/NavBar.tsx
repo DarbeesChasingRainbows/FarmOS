@@ -10,7 +10,10 @@ export default function NavBar({ current }: { current?: string }) {
   return (
     <nav class="bg-white border-b border-stone-200 px-6 py-3">
       <div class="flex items-center gap-6">
-        <a href="/" class="flex items-center gap-2 text-lg font-bold text-emerald-700">
+        <a
+          href="/"
+          class="flex items-center gap-2 text-lg font-bold text-emerald-700"
+        >
           <span class="text-2xl">🌸</span>
           Flower OS
         </a>

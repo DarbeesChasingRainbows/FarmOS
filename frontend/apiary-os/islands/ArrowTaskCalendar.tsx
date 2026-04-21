@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "preact/hooks";
-import { reactive, html } from "@arrow-js/core";
+import { html, reactive } from "@arrow-js/core";
 import type { SeasonalTask } from "../utils/farmos-client.ts";
 
 const MONTH_NAMES = [
@@ -88,10 +88,11 @@ export default function ArrowTaskCalendar() {
         const { ApiaryReportsAPI } = await import(
           "../utils/farmos-client.ts"
         );
-        state.tasks = await ApiaryReportsAPI.getCalendar(month);
+        state.tasks = (await ApiaryReportsAPI.getCalendar(month)) ?? [];
       } catch (err: unknown) {
-        state.error =
-          err instanceof Error ? err.message : "Failed to load tasks";
+        state.error = err instanceof Error
+          ? err.message
+          : "Failed to load tasks";
       } finally {
         state.loading = false;
       }
@@ -130,10 +131,12 @@ export default function ArrowTaskCalendar() {
           type="button"
           @click="${() => selectMonth(month)}"
           class="${() => {
-            if (state.selectedMonth === month)
+            if (state.selectedMonth === month) {
               return "bg-amber-500 text-white shadow-md";
-            if (isCurrent)
+            }
+            if (isCurrent) {
               return "bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100";
+            }
             return "bg-stone-100 text-stone-600 hover:bg-stone-200";
           }} px-3 py-2 rounded-xl text-sm font-semibold transition-all min-w-[48px] text-center"
         >
@@ -148,7 +151,8 @@ export default function ArrowTaskCalendar() {
       const icon = CATEGORY_ICONS[task.category] || "\uD83D\uDCCB";
       return html`
         <div
-          class="${style.bg} ${style.border} border rounded-2xl p-5 hover:shadow-sm transition-shadow"
+          class="${style.bg} ${style
+            .border} border rounded-2xl p-5 hover:shadow-sm transition-shadow"
         >
           <div class="flex items-start gap-3">
             <span class="text-xl flex-shrink-0 mt-0.5">${icon}</span>
@@ -189,8 +193,7 @@ export default function ArrowTaskCalendar() {
             Seasonal Calendar
           </h1>
           <p class="text-stone-500 mt-1">
-            Monthly task templates for inspections, treatments, and
-            harvest windows.
+            Monthly task templates for inspections, treatments, and harvest windows.
           </p>
         </header>
 
@@ -220,49 +223,50 @@ export default function ArrowTaskCalendar() {
 
         ${() =>
           state.error
-            ? html`<div
+            ? html`
+              <div
                 class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-4 text-sm"
               >
                 ${state.error}
-              </div>`
-            : html``}
+              </div>
+            `
+            : html`
 
-        ${() =>
+            `} ${() =>
           state.loading
             ? html`
-                <div class="flex items-center justify-center py-16">
-                  <div
-                    class="animate-spin w-8 h-8 border-4 border-stone-200 border-t-amber-500 rounded-full"
-                  ></div>
+              <div class="flex items-center justify-center py-16">
+                <div
+                  class="animate-spin w-8 h-8 border-4 border-stone-200 border-t-amber-500 rounded-full"
+                >
                 </div>
-              `
+              </div>
+            `
             : html`
-                ${() =>
-                  sortedTasks().length === 0
-                    ? html`
-                        <div
-                          class="bg-stone-50 border border-stone-200 rounded-2xl p-12 text-center"
-                        >
-                          <p
-                            class="text-lg font-medium text-stone-600 mb-2"
-                          >
-                            No tasks for this month
-                          </p>
-                          <p class="text-sm text-stone-500">
-                            Select a different month to see scheduled
-                            tasks.
-                          </p>
-                        </div>
-                      `
-                    : html`
-                        <div
-                          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-                        >
-                          ${() =>
-                            sortedTasks().map((task) => taskCard(task))}
-                        </div>
-                      `}
-              `}
+              ${() =>
+                sortedTasks().length === 0
+                  ? html`
+                    <div
+                      class="bg-stone-50 border border-stone-200 rounded-2xl p-12 text-center"
+                    >
+                      <p
+                        class="text-lg font-medium text-stone-600 mb-2"
+                      >
+                        No tasks for this month
+                      </p>
+                      <p class="text-sm text-stone-500">
+                        Select a different month to see scheduled tasks.
+                      </p>
+                    </div>
+                  `
+                  : html`
+                    <div
+                      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
+                      ${() => sortedTasks().map((task) => taskCard(task))}
+                    </div>
+                  `}
+            `}
       </div>
     `;
 

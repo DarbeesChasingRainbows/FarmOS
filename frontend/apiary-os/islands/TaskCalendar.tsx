@@ -3,14 +3,39 @@ import { useEffect } from "preact/hooks";
 import type { SeasonalTask } from "../utils/farmos-client.ts";
 
 const MONTH_NAMES = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
-const PRIORITY_STYLES: Record<string, { bg: string; text: string; dot: string }> = {
-  High: { bg: "bg-red-50 border-red-200", text: "text-red-700", dot: "bg-red-500" },
-  Medium: { bg: "bg-amber-50 border-amber-200", text: "text-amber-700", dot: "bg-amber-500" },
-  Low: { bg: "bg-emerald-50 border-emerald-200", text: "text-emerald-700", dot: "bg-emerald-500" },
+const PRIORITY_STYLES: Record<
+  string,
+  { bg: string; text: string; dot: string }
+> = {
+  High: {
+    bg: "bg-red-50 border-red-200",
+    text: "text-red-700",
+    dot: "bg-red-500",
+  },
+  Medium: {
+    bg: "bg-amber-50 border-amber-200",
+    text: "text-amber-700",
+    dot: "bg-amber-500",
+  },
+  Low: {
+    bg: "bg-emerald-50 border-emerald-200",
+    text: "text-emerald-700",
+    dot: "bg-emerald-500",
+  },
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -33,7 +58,7 @@ export default function TaskCalendar() {
     error.value = null;
     try {
       const { ApiaryReportsAPI } = await import("../utils/farmos-client.ts");
-      tasks.value = await ApiaryReportsAPI.getCalendar(month);
+      tasks.value = (await ApiaryReportsAPI.getCalendar(month)) ?? [];
     } catch (err: unknown) {
       error.value = err instanceof Error ? err.message : "Failed to load tasks";
     } finally {
@@ -131,7 +156,8 @@ export default function TaskCalendar() {
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {monthTasks.map((task, i) => {
-                    const style = PRIORITY_STYLES[task.priority] ?? PRIORITY_STYLES.Low;
+                    const style = PRIORITY_STYLES[task.priority] ??
+                      PRIORITY_STYLES.Low;
                     const icon = CATEGORY_ICONS[task.category] ?? "📋";
                     return (
                       <div
@@ -139,18 +165,28 @@ export default function TaskCalendar() {
                         class={`rounded-xl border p-4 ${style.bg}`}
                       >
                         <div class="flex items-start gap-3">
-                          <span class="text-xl flex-shrink-0 mt-0.5">{icon}</span>
+                          <span class="text-xl flex-shrink-0 mt-0.5">
+                            {icon}
+                          </span>
                           <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2 mb-1">
-                              <h4 class={`font-bold text-sm ${style.text}`}>{task.title}</h4>
-                              <span class={`w-2 h-2 rounded-full ${style.dot} flex-shrink-0`} />
+                              <h4 class={`font-bold text-sm ${style.text}`}>
+                                {task.title}
+                              </h4>
+                              <span
+                                class={`w-2 h-2 rounded-full ${style.dot} flex-shrink-0`}
+                              />
                             </div>
-                            <p class="text-xs text-stone-600 leading-relaxed">{task.description}</p>
+                            <p class="text-xs text-stone-600 leading-relaxed">
+                              {task.description}
+                            </p>
                             <div class="flex items-center gap-2 mt-2">
                               <span class="text-xs bg-white/70 px-2 py-0.5 rounded-md font-medium text-stone-500">
                                 {task.category}
                               </span>
-                              <span class={`text-xs font-semibold ${style.text}`}>
+                              <span
+                                class={`text-xs font-semibold ${style.text}`}
+                              >
                                 {task.priority}
                               </span>
                             </div>
@@ -165,7 +201,9 @@ export default function TaskCalendar() {
 
           {filteredTasks.length === 0 && (
             <div class="bg-stone-50 border border-stone-200 rounded-xl p-12 text-center">
-              <p class="text-lg font-medium text-stone-600 mb-2">No tasks for this period</p>
+              <p class="text-lg font-medium text-stone-600 mb-2">
+                No tasks for this period
+              </p>
               <p class="text-sm text-stone-500">
                 Select a different month or view all months.
               </p>

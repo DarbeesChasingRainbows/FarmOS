@@ -1,17 +1,19 @@
 import { Head } from "fresh/runtime";
 import { define } from "../../utils.ts";
 import ArrowComplianceHub from "../../islands/ArrowComplianceHub.tsx";
-import EquipmentPanel from "../../islands/EquipmentPanel.tsx";
-import SanitationLog from "../../islands/SanitationLog.tsx";
-import StaffCertifications from "../../islands/StaffCertifications.tsx";
-import DeliveryLog from "../../islands/DeliveryLog.tsx";
+import ArrowEquipmentPanel from "../../islands/ArrowEquipmentPanel.tsx";
+import ArrowSanitationLog from "../../islands/ArrowSanitationLog.tsx";
+import ArrowStaffCertifications from "../../islands/ArrowStaffCertifications.tsx";
+import ArrowDeliveryLog from "../../islands/ArrowDeliveryLog.tsx";
 
 export default define.page(function CompliancePage() {
   return (
     <div>
       <Head>
         <title>Compliance — Hearth OS</title>
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
           @media print {
             body { background: white !important; margin: 0; padding: 0; color: black !important; }
             button, nav, .no-print { display: none !important; }
@@ -21,7 +23,9 @@ export default define.page(function CompliancePage() {
             @page { margin: 0.5in; }
             * { transition: none !important; }
           }
-        ` }} />
+        `,
+          }}
+        />
       </Head>
 
       <ArrowComplianceHub />
@@ -30,30 +34,36 @@ export default define.page(function CompliancePage() {
         <section>
           <div class="flex items-center gap-3 mb-4">
             <span class="text-xl">{"\u{1F321}\u{FE0F}"}</span>
-            <h2 class="text-lg font-bold text-stone-800">Equipment Temperatures</h2>
+            <h2 class="text-lg font-bold text-stone-800">
+              Equipment Temperatures
+            </h2>
           </div>
-          <EquipmentPanel />
+          <ArrowEquipmentPanel />
         </section>
         <section>
           <div class="flex items-center gap-3 mb-4">
             <span class="text-xl">{"\u{1F9F9}"}</span>
             <h2 class="text-lg font-bold text-stone-800">Sanitation Log</h2>
           </div>
-          <SanitationLog />
+          <ArrowSanitationLog />
         </section>
         <section>
           <div class="flex items-center gap-3 mb-4">
             <span class="text-xl">{"\u{1FAAA}"}</span>
-            <h2 class="text-lg font-bold text-stone-800">Staff Certifications</h2>
+            <h2 class="text-lg font-bold text-stone-800">
+              Staff Certifications
+            </h2>
           </div>
-          <StaffCertifications />
+          <ArrowStaffCertifications />
         </section>
         <section>
           <div class="flex items-center gap-3 mb-4">
             <span class="text-xl">{"\u{1F4E6}"}</span>
-            <h2 class="text-lg font-bold text-stone-800">Delivery Receiving Log</h2>
+            <h2 class="text-lg font-bold text-stone-800">
+              Delivery Receiving Log
+            </h2>
           </div>
-          <DeliveryLog />
+          <ArrowDeliveryLog />
         </section>
       </div>
     </div>

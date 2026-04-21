@@ -79,7 +79,7 @@ export default function ArrowComplianceHub() {
             class="no-print bg-stone-800 hover:bg-stone-900 text-white text-sm font-bold py-2.5 px-5 rounded-lg shadow-md transition flex items-center gap-2"
             @click="${() => globalThis.print()}"
           >
-            \u{1F5A8}\u{FE0F} Print for Inspector
+            \\u{1F5A8}\\u{FE0F} Print for Inspector
           </button>
         </div>
 

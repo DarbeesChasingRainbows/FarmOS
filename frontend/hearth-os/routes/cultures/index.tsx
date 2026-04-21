@@ -11,8 +11,12 @@ export default define.page(function CulturesPage() {
       </Head>
       <header class="flex items-center justify-between mb-8">
         <div>
-          <h1 class="text-3xl font-extrabold text-stone-800 tracking-tight">Living Cultures</h1>
-          <p class="text-stone-500 mt-1">Click any culture to view details, feed, or split it.</p>
+          <h1 class="text-3xl font-extrabold text-stone-800 tracking-tight">
+            Living Cultures
+          </h1>
+          <p class="text-stone-500 mt-1">
+            Click any culture to view details, feed, or split it.
+          </p>
         </div>
         <ArrowCreateCultureForm />
       </header>

@@ -11,10 +11,25 @@ import {
 
 const markedColors = [
   { value: 0, label: "White", css: "bg-white border-stone-300", years: "1, 6" },
-  { value: 1, label: "Yellow", css: "bg-yellow-300 border-yellow-400", years: "2, 7" },
+  {
+    value: 1,
+    label: "Yellow",
+    css: "bg-yellow-300 border-yellow-400",
+    years: "2, 7",
+  },
   { value: 2, label: "Red", css: "bg-red-400 border-red-500", years: "3, 8" },
-  { value: 3, label: "Green", css: "bg-green-400 border-green-500", years: "4, 9" },
-  { value: 4, label: "Blue", css: "bg-blue-400 border-blue-500", years: "5, 0" },
+  {
+    value: 3,
+    label: "Green",
+    css: "bg-green-400 border-green-500",
+    years: "4, 9",
+  },
+  {
+    value: 4,
+    label: "Blue",
+    css: "bg-blue-400 border-blue-500",
+    years: "5, 0",
+  },
 ];
 
 const queenOrigins = [
@@ -70,7 +85,11 @@ export default function QueenForm(
 
     if (!result.success) {
       errors.value = extractErrors(result);
-      showToast("error", "Validation failed", "Please fix the highlighted fields.");
+      showToast(
+        "error",
+        "Validation failed",
+        "Please fix the highlighted fields.",
+      );
       return;
     }
 
@@ -99,7 +118,11 @@ export default function QueenForm(
       }
       resetForm();
     } catch (err: unknown) {
-      showToast("error", "Failed", err instanceof Error ? err.message : "Unknown error");
+      showToast(
+        "error",
+        "Failed",
+        err instanceof Error ? err.message : "Unknown error",
+      );
     } finally {
       isSubmitting.value = false;
     }
@@ -114,7 +137,11 @@ export default function QueenForm(
 
     if (!result.success) {
       errors.value = extractErrors(result);
-      showToast("error", "Validation failed", "Please fix the highlighted fields.");
+      showToast(
+        "error",
+        "Validation failed",
+        "Please fix the highlighted fields.",
+      );
       return;
     }
 
@@ -124,10 +151,18 @@ export default function QueenForm(
     try {
       const { ApiaryAPI } = await import("../utils/farmos-client.ts");
       await ApiaryAPI.markQueenLost(hiveId, result.data);
-      showToast("success", "Queen marked lost", `${hiveName} is now queenless.`);
+      showToast(
+        "success",
+        "Queen marked lost",
+        `${hiveName} is now queenless.`,
+      );
       resetForm();
     } catch (err: unknown) {
-      showToast("error", "Failed", err instanceof Error ? err.message : "Unknown error");
+      showToast(
+        "error",
+        "Failed",
+        err instanceof Error ? err.message : "Unknown error",
+      );
     } finally {
       isSubmitting.value = false;
     }
@@ -178,7 +213,8 @@ export default function QueenForm(
               class={inputClass("reason")}
               placeholder="e.g. Swarmed, supersedure, dead"
               value={reason.value}
-              onInput={(e) => reason.value = (e.target as HTMLInputElement).value}
+              onInput={(e) =>
+                reason.value = (e.target as HTMLInputElement).value}
             />
           </FormField>
 
@@ -187,7 +223,8 @@ export default function QueenForm(
               type="date"
               class={inputClass("date")}
               value={lostDate.value}
-              onInput={(e) => lostDate.value = (e.target as HTMLInputElement).value}
+              onInput={(e) =>
+                lostDate.value = (e.target as HTMLInputElement).value}
             />
           </FormField>
 
@@ -216,7 +253,8 @@ export default function QueenForm(
   return (
     <div class="mt-4 pt-4 border-t border-stone-100">
       <h4 class="text-sm font-bold text-stone-700 mb-3">
-        {mode.value === "introduce" ? "Introduce" : "Replace"} Queen — {hiveName}
+        {mode.value === "introduce" ? "Introduce" : "Replace"} Queen —{" "}
+        {hiveName}
       </h4>
       <form onSubmit={onSubmitQueen} class="flex flex-col gap-3">
         <div class="flex flex-col gap-1">

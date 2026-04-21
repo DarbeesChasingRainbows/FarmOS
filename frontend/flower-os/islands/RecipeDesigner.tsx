@@ -28,7 +28,9 @@ export default function RecipeDesigner() {
       const result = await FloraAPI.getRecipes();
       recipes.value = result ?? [];
     } catch (err) {
-      error.value = err instanceof Error ? err.message : "Failed to load recipes";
+      error.value = err instanceof Error
+        ? err.message
+        : "Failed to load recipes";
     } finally {
       loading.value = false;
     }
@@ -40,7 +42,9 @@ export default function RecipeDesigner() {
       const detail = await FloraAPI.getRecipe(id);
       selectedRecipe.value = detail;
     } catch (err) {
-      error.value = err instanceof Error ? err.message : "Failed to load recipe";
+      error.value = err instanceof Error
+        ? err.message
+        : "Failed to load recipe";
     }
   };
 
@@ -48,12 +52,17 @@ export default function RecipeDesigner() {
     if (!newName.value.trim()) return;
     try {
       const { FloraAPI } = await import("../utils/farmos-client.ts");
-      await FloraAPI.createRecipe({ name: newName.value, category: newCategory.value });
+      await FloraAPI.createRecipe({
+        name: newName.value,
+        category: newCategory.value,
+      });
       showCreateForm.value = false;
       newName.value = "";
       await loadRecipes();
     } catch (err) {
-      error.value = err instanceof Error ? err.message : "Failed to create recipe";
+      error.value = err instanceof Error
+        ? err.message
+        : "Failed to create recipe";
     }
   };
 
@@ -66,7 +75,12 @@ export default function RecipeDesigner() {
       {error.value && (
         <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
           {error.value}
-          <button onClick={() => (error.value = "")} class="ml-2 text-red-500 hover:text-red-700">✕</button>
+          <button
+            onClick={() => (error.value = "")}
+            class="ml-2 text-red-500 hover:text-red-700"
+          >
+            ✕
+          </button>
         </div>
       )}
 
@@ -74,7 +88,9 @@ export default function RecipeDesigner() {
         {/* Recipe List */}
         <div class="w-80 flex-shrink-0">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-semibold text-stone-500 uppercase tracking-wide">Recipes</h3>
+            <h3 class="text-sm font-semibold text-stone-500 uppercase tracking-wide">
+              Recipes
+            </h3>
             <button
               onClick={() => (showCreateForm.value = !showCreateForm.value)}
               class="px-3 py-1.5 text-sm font-medium bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors"
@@ -89,12 +105,17 @@ export default function RecipeDesigner() {
                 type="text"
                 placeholder="Recipe name"
                 value={newName.value}
-                onInput={(e) => (newName.value = (e.target as HTMLInputElement).value)}
+                onInput={(
+                  e,
+                ) => (newName.value = (e.target as HTMLInputElement).value)}
                 class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500"
               />
               <select
                 value={newCategory.value}
-                onChange={(e) => (newCategory.value = (e.target as HTMLSelectElement).value)}
+                onChange={(
+                  e,
+                ) => (newCategory.value =
+                  (e.target as HTMLSelectElement).value)}
                 class="w-full px-3 py-2 text-sm border border-stone-300 rounded-lg"
               >
                 <option value="market">Farmers Market</option>
@@ -103,10 +124,16 @@ export default function RecipeDesigner() {
                 <option value="wholesale">Wholesale</option>
               </select>
               <div class="flex gap-2">
-                <button onClick={createRecipe} class="flex-1 px-3 py-2 text-sm font-medium bg-rose-600 text-white rounded-lg hover:bg-rose-700">
+                <button
+                  onClick={createRecipe}
+                  class="flex-1 px-3 py-2 text-sm font-medium bg-rose-600 text-white rounded-lg hover:bg-rose-700"
+                >
                   Create
                 </button>
-                <button onClick={() => (showCreateForm.value = false)} class="px-3 py-2 text-sm text-stone-500 hover:text-stone-700">
+                <button
+                  onClick={() => (showCreateForm.value = false)}
+                  class="px-3 py-2 text-sm text-stone-500 hover:text-stone-700"
+                >
                   Cancel
                 </button>
               </div>
@@ -114,7 +141,11 @@ export default function RecipeDesigner() {
           )}
 
           {loading.value
-            ? <div class="text-center py-8 text-stone-400">Loading recipes...</div>
+            ? (
+              <div class="text-center py-8 text-stone-400">
+                Loading recipes...
+              </div>
+            )
             : recipes.value.length === 0
             ? (
               <div class="text-center py-8 text-stone-400">
@@ -135,11 +166,15 @@ export default function RecipeDesigner() {
                     }`}
                   >
                     <div class="flex items-center justify-between">
-                      <span class="font-semibold text-stone-800">{recipe.name}</span>
+                      <span class="font-semibold text-stone-800">
+                        {recipe.name}
+                      </span>
                       <StatusBadge status="active" label={recipe.category} />
                     </div>
                     <div class="text-sm text-stone-500 mt-1">
-                      {recipe.itemCount} items · {recipe.totalStemsPerBouquet} stems/bouquet
+                      {recipe.itemCount} items · {recipe.totalStemsPerBouquet}
+                      {" "}
+                      stems/bouquet
                     </div>
                   </button>
                 ))}
@@ -164,14 +199,21 @@ export default function RecipeDesigner() {
 
 function RecipeDetailView({ recipe }: { recipe: RecipeDetail }) {
   return (
-    <div class="bg-white rounded-xl border border-stone-200 p-6" style="animation: slideIn 0.2s ease-out">
+    <div
+      class="bg-white rounded-xl border border-stone-200 p-6"
+      style="animation: slideIn 0.2s ease-out"
+    >
       <div class="flex items-center justify-between mb-6">
         <div>
           <h2 class="text-2xl font-bold text-stone-800">{recipe.name}</h2>
-          <p class="text-stone-500 text-sm">{recipe.category} · {recipe.totalStemsPerBouquet} stems per bouquet</p>
+          <p class="text-stone-500 text-sm">
+            {recipe.category} · {recipe.totalStemsPerBouquet} stems per bouquet
+          </p>
         </div>
         <div class="text-right">
-          <div class="text-2xl font-bold text-rose-600">{recipe.totalBouquetsMade}</div>
+          <div class="text-2xl font-bold text-rose-600">
+            {recipe.totalBouquetsMade}
+          </div>
           <div class="text-xs text-stone-400">bouquets made</div>
         </div>
       </div>
@@ -183,24 +225,40 @@ function RecipeDetailView({ recipe }: { recipe: RecipeDetail }) {
       {recipe.items.length === 0
         ? (
           <div class="text-center py-6 text-stone-400 border border-dashed border-stone-200 rounded-lg">
-            Add focal, filler, greenery, and accent stems to complete this recipe.
+            Add focal, filler, greenery, and accent stems to complete this
+            recipe.
           </div>
         )
         : (
           <div class="space-y-2">
             {recipe.items.map((item, i) => (
-              <div key={i} class="flex items-center justify-between p-3 bg-stone-50 rounded-lg border border-stone-100">
+              <div
+                key={i}
+                class="flex items-center justify-between p-3 bg-stone-50 rounded-lg border border-stone-100"
+              >
                 <div class="flex items-center gap-3">
-                  <span class={`px-2 py-0.5 rounded text-xs font-medium ${ROLE_COLORS[item.role] ?? "bg-stone-100 text-stone-600"}`}>
+                  <span
+                    class={`px-2 py-0.5 rounded text-xs font-medium ${
+                      ROLE_COLORS[item.role] ?? "bg-stone-100 text-stone-600"
+                    }`}
+                  >
                     {item.role}
                   </span>
                   <div>
-                    <span class="font-medium text-stone-800">{item.species}</span>
+                    <span class="font-medium text-stone-800">
+                      {item.species}
+                    </span>
                     <span class="text-stone-500 ml-1">'{item.cultivar}'</span>
-                    {item.color && <span class="text-xs text-stone-400 ml-1">({item.color})</span>}
+                    {item.color && (
+                      <span class="text-xs text-stone-400 ml-1">
+                        ({item.color})
+                      </span>
+                    )}
                   </div>
                 </div>
-                <span class="text-sm font-semibold text-stone-700">{item.stemCount} stems</span>
+                <span class="text-sm font-semibold text-stone-700">
+                  {item.stemCount} stems
+                </span>
               </div>
             ))}
           </div>

@@ -40,3 +40,21 @@ ha-config/*.log
 build.log
 iot_logs.txt
 **/build_error.log
+build_output.txt
+git_log.txt
+git_status.txt
+
+# Arrow.js build artifacts
+.arrow-js/
+
+# IDE
+.cursorrules
+.windsurf/
+.claude/
+
+# Vite build artifacts
+**/.vite/
+
+# Temporary files
+global.json
+tools/

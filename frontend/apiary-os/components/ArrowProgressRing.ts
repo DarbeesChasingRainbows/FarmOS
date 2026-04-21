@@ -40,30 +40,31 @@ export function ArrowProgressRing(props: ArrowProgressRingProps) {
           stroke-linecap="round"
           stroke-dasharray="${circumference}"
           stroke-dashoffset="${() => {
-            const pct =
-              typeof props.percent === "function"
-                ? props.percent()
-                : props.percent;
+            const pct = typeof props.percent === "function"
+              ? props.percent()
+              : props.percent;
             return circumference - (pct / 100) * circumference;
           }}"
           class="transition-all duration-500"
         />
       </svg>
-      <span class="text-xs font-bold text-stone-700"
-        >${() => {
-          const pct =
-            typeof props.percent === "function"
-              ? props.percent()
-              : props.percent;
-          return Math.round(pct) + "%";
-        }}</span
-      >
+      <span class="text-xs font-bold text-stone-700">${() => {
+        const pct = typeof props.percent === "function"
+          ? props.percent()
+          : props.percent;
+        return Math.round(pct) + "%";
+      }}</span>
       ${() => {
-        const l =
-          typeof props.label === "function" ? props.label() : props.label;
+        const l = typeof props.label === "function"
+          ? props.label()
+          : props.label;
         return l
-          ? html`<span class="text-xs text-stone-400">${l}</span>`
-          : html``;
+          ? html`
+            <span class="text-xs text-stone-400">${l}</span>
+          `
+          : html`
+
+          `;
       }}
     </div>
   `;

@@ -9,10 +9,9 @@ export interface ArrowTooltipProps {
 
 export function ArrowTooltip(props: ArrowTooltipProps) {
   const isTop = () => {
-    const pos =
-      typeof props.position === "function"
-        ? props.position()
-        : props.position || "top";
+    const pos = typeof props.position === "function"
+      ? props.position()
+      : props.position || "top";
     return pos === "top";
   };
 
